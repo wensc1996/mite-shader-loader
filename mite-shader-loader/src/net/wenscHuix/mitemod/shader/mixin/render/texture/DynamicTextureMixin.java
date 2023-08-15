@@ -1,4 +1,4 @@
-package net.wenscHuix.mitemod.shader.mixin.render;
+package net.wenscHuix.mitemod.shader.mixin.render.texture;
 
 import net.minecraft.bia;
 import net.minecraft.bib;
@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(bib.class)
-public class MixinDynamicTexture extends bia {
+public class DynamicTextureMixin extends bia {
     @Shadow
     @Final
     private int[] b;

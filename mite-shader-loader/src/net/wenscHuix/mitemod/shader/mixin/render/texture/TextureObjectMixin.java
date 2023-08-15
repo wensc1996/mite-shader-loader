@@ -1,10 +1,10 @@
-package net.wenscHuix.mitemod.shader.mixin.render;
+package net.wenscHuix.mitemod.shader.mixin.render.texture;
 
 import net.minecraft.bio;
 import net.wenscHuix.mitemod.shader.client.MultiTexID;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(bio.class)
-public interface MixinTextureObject {
+public interface TextureObjectMixin {
     MultiTexID getMultiTexID();
 }

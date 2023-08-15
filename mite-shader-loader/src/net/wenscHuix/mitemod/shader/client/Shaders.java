@@ -2156,12 +2156,12 @@ public class Shaders {
 
     public static void preSkyList() {
         bfq tess = bfq.instance;
-        float top = 16.0F;
-        float bot = -64.0F;
-        float xzm = -384.0F;
-        float xzn = -256.0F;
-        float xzp = 256.0F;
-        float xzq = 384.0F;
+//        float top = 16.0F;
+//        float bot = -64.0F;
+//        float xzm = -384.0F;
+//        float xzn = -256.0F;
+//        float xzp = 256.0F;
+//        float xzq = 384.0F;
         tess.startDrawingQuads();
         tess.addVertex(-256.0, -64.0, -384.0);
         tess.addVertex(-256.0, 16.0, -384.0);

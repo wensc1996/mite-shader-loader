@@ -1,7 +1,7 @@
 package net.wenscHuix.mitemod.shader;
 
 
-import net.wenscHuix.mitemod.shader.mixin.TransMarker;
+import net.wenscHuix.mitemod.shader.mixin.MinecraftMixin;
 import net.xiaoyu233.fml.AbstractMod;
 
 
@@ -21,7 +21,7 @@ public class MITEShaderLoader extends AbstractMod {
 
     @Override
     public InjectionConfig getInjectionConfig() {
-        return InjectionConfig.Builder.of("mite-shader-loader", TransMarker.class.getPackage(), MixinEnvironment.Phase.INIT).setRequired().build();
+        return InjectionConfig.Builder.of("mite-shader-loader", MinecraftMixin.class.getPackage(), MixinEnvironment.Phase.INIT).setRequired().build();
     }
 
 
