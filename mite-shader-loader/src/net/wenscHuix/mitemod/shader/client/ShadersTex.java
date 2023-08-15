@@ -763,7 +763,7 @@ public class ShadersTex {
 
                     for(int var8 = 0; var8 < tas.frameBuffers.length; ++var8) {
                         int[] var10 = tas.getFrameTextureData(var8);
-                        IntBuffer buf1 = GLAllocation.createDirectIntBuffer(var10.length);
+                        IntBuffer buf1 = atu.createDirectIntBuffer(var10.length);
                         buf1.put(var10);
                         buf1.clear();
                         tas.frameBuffers[var8] = buf1;

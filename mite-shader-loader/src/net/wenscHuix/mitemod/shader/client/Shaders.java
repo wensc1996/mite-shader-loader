@@ -5,8 +5,7 @@
 
 package net.wenscHuix.mitemod.shader.client;
 
-import net.minecraft.Minecraft;
-import net.minecraft.bio;
+import net.minecraft.*;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.*;
 import org.lwjgl.util.glu.GLU;
@@ -460,7 +459,7 @@ public class Shaders {
     }
 
     private static String printChatAndLogError(String str) {
-        mc.ingameGUI.getChatGUI().printChatMessage(str);
+        mc.r.b().a(str);
         System.err.println(str);
         return str;
     }
@@ -507,7 +506,7 @@ public class Shaders {
             }
 
             if (!capabilities.OpenGL20 || !capabilities.GL_EXT_framebuffer_object) {
-                System.out.println("[Shaders] Your GPU is not compatible with the Shaders mod.");
+                System.out.println("[Shaders] Your GPU is not compatible with bio Shaders mod.");
                 System.exit(-1);
             }
 
@@ -668,7 +667,7 @@ public class Shaders {
             isInitialized = true;
             resetDisplayList();
             if (notFirstInit) {
-                mc.ingameGUI.getChatGUI().printChatMessage("Shaders initialized.");
+                mc.r.b().a("Shaders initialized.");
             }
 
             checkGLError("Shaders.init");
@@ -679,34 +678,34 @@ public class Shaders {
     public static void resetDisplayList() {
         System.out.println("Reset model renderers");
         if (useMidTexCoordAttrib || useMultiTexCoord3Attrib) {
-            Iterator<Render> it = RenderManager.instance.entityRenderMap.values().iterator();
+            Iterator<bgm> it = bgl.a.q.values().iterator();
 
             while(it.hasNext()) {
-                Render ren = (Render)it.next();
-                if (ren instanceof RendererLivingEntity) {
-                    RendererLivingEntity rle = (RendererLivingEntity)ren;
-                    resetDisplayListModel(rle.mainModel);
-                    resetDisplayListModel(rle.renderPassModel);
+                bgm ren = (bgm)it.next();
+                if (ren instanceof bhb) {
+                    bhb rle = (bhb)ren;
+                    resetDisplayListModel(rle.i);
+                    resetDisplayListModel(rle.j);
                 }
             }
         }
 
         System.out.println("Reset world renderers");
-        mc.renderGlobal.loadRenderers();
+        mc.g.a();
     }
 
-    public static void resetDisplayListModel(ModelBase mbase) {
+    public static void resetDisplayListModel(bbo mbase) {
         if (mbase != null) {
-            Iterator it = mbase.boxList.iterator();
+            Iterator it = mbase.r.iterator();
 
             while(it.hasNext()) {
                 Object obj = it.next();
-                if (obj instanceof ModelRenderer) {
-                    ModelRenderer mrr = (ModelRenderer)obj;
-                    if (mrr.compiled) {
-                        GLAllocation.deleteDisplayLists(mrr.displayList);
-                        mrr.displayList = 0;
-                        mrr.compiled = false;
+                if (obj instanceof bcu) {
+                    bcu mrr = (bcu)obj;
+                    if (mrr.t) {
+                        atu.b(mrr.u);
+                        mrr.u = 0;
+                        mrr.t = false;
                     }
                 }
             }
@@ -1214,7 +1213,7 @@ public class Shaders {
                         normalMapEnabled = false;
                 }
 
-                ItemStack stack = mc.thePlayer.inventory.getCurrentItemStack();
+                ItemStack stack = mc.h.inventory.getCurrentItemStack();
                 setProgramUniform1i("heldItemId", stack == null ? -1 : stack.itemID);
                 setProgramUniform1i("heldBlockLightValue", stack != null && stack.itemID < 1024 ? Block.lightValue[stack.itemID] : 0);
                 setProgramUniform1i("fogMode", fogEnabled ? fogMode : 0);
@@ -1654,7 +1653,7 @@ public class Shaders {
             float temp2 = (float)Math.exp(Math.log(0.5) * (double)fadeScalar / (double)eyeBrightnessHalflife);
             eyeBrightnessFadeX = eyeBrightnessFadeX * temp2 + (float)(eyeBrightness & '\uffff') * (1.0F - temp2);
             eyeBrightnessFadeY = eyeBrightnessFadeY * temp2 + (float)(eyeBrightness >> 16) * (1.0F - temp2);
-            isEyeInWater = mc.gameSettings.thirdPersonView == 0 && !mc.renderViewEntity.isPlayerSleeping() && mc.thePlayer.isInsideOfMaterial(Material.water) ? 1 : 0;
+            isEyeInWater = mc.gameSettings.thirdPersonView == 0 && !mc.renderViewEntity.isPlayerSleeping() && mc.h.isInsideOfMaterial(Material.water) ? 1 : 0;
             Vec3 skyColorV = mc.theWorld.getSkyColor(mc.renderViewEntity, f);
             skyColorR = (float)skyColorV.xCoord;
             skyColorG = (float)skyColorV.yCoord;
