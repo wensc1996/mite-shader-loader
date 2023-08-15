@@ -5,17 +5,8 @@
 
 package net.wenscHuix.mitemod.shader.client;
 
-import net.minecraft.src.*;
-import net.minecraft.src.block.Block;
-import net.minecraft.src.entity.EntityLivingBase;
-import net.minecraft.src.entity.EntityRenderer;
-import net.minecraft.src.item.ItemStack;
-import net.minecraft.src.model.ModelBase;
-import net.minecraft.src.model.ModelRenderer;
-import net.minecraft.src.render.Render;
-import net.minecraft.src.render.RenderManager;
-import net.minecraft.src.render.RendererLivingEntity;
-import net.minecraft.src.shader.client.*;
+import net.minecraft.Minecraft;
+import net.minecraft.bio;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.*;
 import org.lwjgl.util.glu.GLU;
@@ -170,7 +161,7 @@ public class Shaders {
     private static int activeCompositeMipmapSetting = 0;
     public static Properties loadedShaders = null;
     public static Properties shadersConfig = null;
-    public static TextureObject defaultTexture = null;
+    public static bio defaultTexture = null;
     public static boolean normalMapEnabled = false;
     public static boolean shadowMipmapEnabled = false;
     public static boolean shadowHardwareFilteringEnabled = false;
@@ -499,7 +490,7 @@ public class Shaders {
 
     public static void init() {
         if (!isInitialized) {
-            mc = Minecraft.getMinecraft();
+            mc = Minecraft.w();
             checkGLError("Shaders.init pre");
             ContextCapabilities capabilities = GLContext.getCapabilities();
             System.out.println("[Shaders] OpenGL 2.0 = " + toStringYN(capabilities.OpenGL20) + "    2.1 = " + toStringYN(capabilities.OpenGL21) + "    3.0 = " + toStringYN(capabilities.OpenGL30) + "    3.2 = " + toStringYN(capabilities.OpenGL32));
@@ -2161,11 +2152,11 @@ public class Shaders {
     }
 
     public static void drawHorizon() {
-        Tessellator tess = Tessellator.instance;
+        bfq tess = bfq.instance;
     }
 
     public static void preSkyList() {
-        Tessellator tess = Tessellator.instance;
+        bfq tess = bfq.instance;
         float top = 16.0F;
         float bot = -64.0F;
         float xzm = -384.0F;
@@ -2374,17 +2365,17 @@ public class Shaders {
     }
 
     public static void beginLitParticles() {
-        Tessellator.instance.setNormal(0.0F, 0.0F, 0.0F);
+        bfq.instance.setNormal(0.0F, 0.0F, 0.0F);
         useProgram(3);
     }
 
     public static void beginParticles() {
-        Tessellator.instance.setNormal(0.0F, 0.0F, 0.0F);
+        bfq.instance.setNormal(0.0F, 0.0F, 0.0F);
         useProgram(2);
     }
 
     public static void endParticles() {
-        Tessellator.instance.setNormal(0.0F, 0.0F, 0.0F);
+        bfq.instance.setNormal(0.0F, 0.0F, 0.0F);
         useProgram(3);
     }
 
@@ -2630,9 +2621,9 @@ public class Shaders {
     }
 
     static {
-        shadersdir = new File(Minecraft.getMinecraft().mcDataDir, "shaders");
-        shaderpacksdir = new File(Minecraft.getMinecraft().mcDataDir, shaderpacksdirname);
-        configFile = new File(Minecraft.getMinecraft().mcDataDir, optionsfilename);
+        shadersdir = new File(Minecraft.w().mcDataDir, "shaders");
+        shaderpacksdir = new File(Minecraft.w().mcDataDir, shaderpacksdirname);
+        configFile = new File(Minecraft.w().mcDataDir, optionsfilename);
         blockLightLevel05 = Shaders.isActiveShader ? 0.5F : 1.0F;
         blockLightLevel06 = Shaders.isActiveShader ? 0.6F : 1.0F;
         blockLightLevel08 = Shaders.isActiveShader ? 0.8F : 1.0F;

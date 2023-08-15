@@ -4,8 +4,8 @@ package net.wenscHuix.mitemod.shader.client;//
 //
 
 
-import net.minecraft.src.OpenGlHelper;
-import net.minecraft.src.Tessellator;
+
+import net.minecraft.bfq;
 import org.lwjgl.opengl.ARBVertexBufferObject;
 import org.lwjgl.opengl.ARBVertexShader;
 import org.lwjgl.opengl.GL11;
@@ -21,7 +21,7 @@ public class ShadersTess {
     public ShadersTess() {
     }
 
-    public static int draw(Tessellator tess) {
+    public static int draw(bfq tess) {
         if (!tess.isDrawing) {
             throw new IllegalStateException("Not tesselating!");
         } else {
@@ -31,7 +31,7 @@ public class ShadersTess {
             int vtc;
             while(offs < tess.vertexCount) {
                 int realDrawMode;
-                if (tess.drawMode == 7 && Tessellator.convertQuadsToTriangles) {
+                if (tess.drawMode == 7 && bfq.convertQuadsToTriangles) {
                     vtc = Math.min(tess.vertexCount - offs, tess.byteBuffer.capacity() / 96);
                     realDrawMode = 4;
                 } else {
@@ -45,8 +45,8 @@ public class ShadersTess {
                 tess.byteBuffer.limit(vtc * 64);
                 offs += vtc;
                 if (tess.useVBO) {
-                    tess.vboIndex = (tess.vboIndex + 1) % Tessellator.vboCount;
-                    ARBVertexBufferObject.glBindBufferARB(34962, Tessellator.vertexBuffers.get(tess.vboIndex));
+                    tess.vboIndex = (tess.vboIndex + 1) % bfq.vboCount;
+                    ARBVertexBufferObject.glBindBufferARB(34962, bfq.vertexBuffers.get(tess.vboIndex));
                     ARBVertexBufferObject.glBufferDataARB(34962, tess.byteBuffer, 35040);
                     if (tess.hasTexture) {
                         GL11.glTexCoordPointer(2, 5126, 64, 12L);
@@ -135,7 +135,7 @@ public class ShadersTess {
         }
     }
 
-    public static void preDrawArray(Tessellator tess) {
+    public static void preDrawArray(bfq tess) {
         if (Shaders.useMultiTexCoord3Attrib && tess.hasTexture) {
             GL13.glClientActiveTexture(33987);
             GL11.glTexCoordPointer(2, 64, (FloatBuffer)tess.floatBuffer.position(11));
@@ -155,7 +155,7 @@ public class ShadersTess {
 
     }
 
-    public static void preDrawArrayVBO(Tessellator tess) {
+    public static void preDrawArrayVBO(bfq tess) {
         if (Shaders.useMultiTexCoord3Attrib && tess.hasTexture) {
             GL13.glClientActiveTexture(33987);
             GL11.glTexCoordPointer(2, 5126, 64, 44L);
@@ -175,7 +175,7 @@ public class ShadersTess {
 
     }
 
-    public static void postDrawArray(Tessellator tess) {
+    public static void postDrawArray(bfq tess) {
         if (Shaders.useEntityAttrib) {
             ARBVertexShader.glDisableVertexAttribArrayARB(Shaders.entityAttrib);
         }
@@ -192,7 +192,7 @@ public class ShadersTess {
 
     }
 
-    public static void addVertex(Tessellator tess, double parx, double pary, double parz) {
+    public static void addVertex(bfq tess, double parx, double pary, double parz) {
         int[] rawBuffer = tess.rawBuffer;
         int rbi = tess.rawBufferIndex;
         float fx = (float)(parx + tess.xOffset);
@@ -240,7 +240,7 @@ public class ShadersTess {
                 tess.midTextureV = (Float.intBitsToFloat(rawBuffer[rbi + -44]) + Float.intBitsToFloat(rawBuffer[rbi + -28]) + Float.intBitsToFloat(rawBuffer[rbi + -12]) + (float)tess.textureV) / 4.0F;
                 rawBuffer[rbi + -37] = rawBuffer[rbi + -21] = rawBuffer[rbi + -5] = Float.floatToRawIntBits(tess.midTextureU);
                 rawBuffer[rbi + -36] = rawBuffer[rbi + -20] = rawBuffer[rbi + -4] = Float.floatToRawIntBits(tess.midTextureV);
-                if (Tessellator.convertQuadsToTriangles) {
+                if (bfq.convertQuadsToTriangles) {
                     System.arraycopy(rawBuffer, rbi - 48, rawBuffer, rbi, 16);
                     System.arraycopy(rawBuffer, rbi - 16, rawBuffer, rbi + 16, 16);
                     rbi += 32;

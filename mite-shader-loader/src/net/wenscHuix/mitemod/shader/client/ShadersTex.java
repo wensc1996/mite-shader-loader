@@ -1,6 +1,6 @@
 package net.wenscHuix.mitemod.shader.client;
 
-import net.minecraft.src.*;
+import net.minecraft.*;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
@@ -25,8 +25,8 @@ public class ShadersTex {
     public static MultiTexID updatingTex;
     public static MultiTexID boundTex;
     public static int updatingPage;
-    static ResourceManager resManager;
-    static ResourceLocation resLocation;
+    static bjp resManager;
+    static bjo resLocation;
     static int imageSize;
 
     public ShadersTex() {
@@ -85,7 +85,7 @@ public class ShadersTex {
         return aint;
     }
 
-    public static MultiTexID getMultiTexID(AbstractTexture tex) {
+    public static MultiTexID getMultiTexID(bia tex) {
         MultiTexID multiTex = tex.multiTex;
         if (multiTex == null) {
             int baseTex = tex.getGlTextureId();
@@ -101,7 +101,7 @@ public class ShadersTex {
         return multiTex;
     }
 
-    public static void deleteTextures(AbstractTexture atex) {
+    public static void deleteTextures(bia atex) {
         int texid = atex.glTextureId;
         GL11.glDeleteTextures(texid);
         atex.glTextureId = 0;
@@ -119,9 +119,9 @@ public class ShadersTex {
 
     }
 
-    public static int deleteMultiTex(TextureObject tex) {
-        if (tex instanceof AbstractTexture) {
-            deleteTextures((AbstractTexture)tex);
+    public static int deleteMultiTex(bio tex) {
+        if (tex instanceof bia) {
+            deleteTextures((bia)tex);
         } else {
             GL11.glDeleteTextures(tex.getGlTextureId());
         }
@@ -157,10 +157,10 @@ public class ShadersTex {
         bindTextures(multiTex.base, multiTex.norm, multiTex.spec);
     }
 
-    public static void bindTexture(TextureObject tex) {
-        if (tex instanceof TextureMap) {
-            Shaders.atlasSizeX = ((TextureMap)tex).atlasWidth;
-            Shaders.atlasSizeY = ((TextureMap)tex).atlasHeight;
+    public static void bindTexture(bio tex) {
+        if (tex instanceof bik) {
+            Shaders.atlasSizeX = ((bik)tex).atlasWidth;
+            Shaders.atlasSizeY = ((bik)tex).atlasHeight;
         } else {
             Shaders.atlasSizeX = 0;
             Shaders.atlasSizeY = 0;
@@ -193,7 +193,7 @@ public class ShadersTex {
         Shaders.checkGLError("allocTexStorage");
     }
 
-    public static void initDynamicTexture(int texID, int width, int height, DynamicTexture tex) {
+    public static void initDynamicTexture(int texID, int width, int height, bib tex) {
         MultiTexID multiTex = tex.getMultiTexID();
         int[] aint = tex.getTextureData();
         int size = width * height;
@@ -223,18 +223,18 @@ public class ShadersTex {
         GL11.glBindTexture(3553, multiTex.base);
     }
 
-    public static TextureObject createDefaultTexture() {
-        DynamicTexture tex = new DynamicTexture(1, 1);
+    public static bio createDefaultTexture() {
+        bib tex = new bib(1, 1);
         tex.getTextureData()[0] = -1;
         tex.updateDynamicTexture();
         return tex;
     }
 
-    public static void setupTextureMap(int texID, int width, int height, Stitcher stitcher, TextureMap tex) {
+    public static void setupTextureMap(int texID, int width, int height, big stitcher, bik tex) {
         MultiTexID multiTex = getMultiTexID(tex);
         tex.atlasWidth = width;
         tex.atlasHeight = height;
-        List<TextureAtlasSprite> spriteList = stitcher.getStichSlots();
+        List<bil> spriteList = stitcher.getStichSlots();
         GL11.glDeleteTextures(multiTex.base);
         GL11.glBindTexture(3553, multiTex.base);
         allocTexStorage(width, height);
@@ -243,11 +243,11 @@ public class ShadersTex {
         GL11.glTexParameteri(3553, 10242, 10497);
         GL11.glTexParameteri(3553, 10243, 10497);
         GL11.glTexParameteri(3553, 33083, 4);
-        Iterator<TextureAtlasSprite> iterator = spriteList.iterator();
+        Iterator<bil> iterator = spriteList.iterator();
 
-        TextureAtlasSprite sprite;
+        bil sprite;
         while(iterator.hasNext()) {
-            sprite = (TextureAtlasSprite)iterator.next();
+            sprite = (bil)iterator.next();
             updateSubImage1(sprite.getFrameTextureData(0), sprite.getIconWidth(), sprite.getIconHeight(), sprite.getOriginX(), sprite.getOriginY(), 0, 0);
         }
 
@@ -262,7 +262,7 @@ public class ShadersTex {
         iterator = spriteList.iterator();
 
         while(iterator.hasNext()) {
-            sprite = (TextureAtlasSprite)iterator.next();
+            sprite = (bil)iterator.next();
             updateSubImage1(sprite.getFrameTextureData(0), sprite.getIconWidth(), sprite.getIconHeight(), sprite.getOriginX(), sprite.getOriginY(), 1, -8421377);
         }
 
@@ -277,7 +277,7 @@ public class ShadersTex {
         iterator = spriteList.iterator();
 
         while(iterator.hasNext()) {
-            sprite = (TextureAtlasSprite)iterator.next();
+            sprite = (bil)iterator.next();
             updateSubImage1(sprite.getFrameTextureData(0), sprite.getIconWidth(), sprite.getIconHeight(), sprite.getOriginX(), sprite.getOriginY(), 2, 0);
         }
 
@@ -481,10 +481,10 @@ public class ShadersTex {
 
     }
 
-    public static void setupTextureMipmap(TextureMap tex) {
+    public static void setupTextureMipmap(bik tex) {
     }
 
-    public static void updateDynamicTexture(int texID, int[] src, int width, int height, DynamicTexture tex) {
+    public static void updateDynamicTexture(int texID, int[] src, int width, int height, bib tex) {
         MultiTexID multiTex = tex.getMultiTexID();
         GL11.glBindTexture(3553, multiTex.norm);
         updateSubImage1(src, width, height, 0, 0, 1, -8421377);
@@ -506,14 +506,14 @@ public class ShadersTex {
         updateSubImage1(src, width, height, posX, posY, 0, 0);
     }
 
-    public static void updateAnimationTextureMap(TextureMap tex, List tasList) {
+    public static void updateAnimationTextureMap(bik tex, List tasList) {
         MultiTexID multiTex = tex.getMultiTexID();
         GL11.glBindTexture(3553, multiTex.norm);
-        Iterator<TextureAtlasSprite> iterator = tasList.iterator();
+        Iterator<bil> iterator = tasList.iterator();
 
-        TextureAtlasSprite tas;
+        bil tas;
         while(iterator.hasNext()) {
-            tas = (TextureAtlasSprite)iterator.next();
+            tas = (bil)iterator.next();
             tas.updateAnimation();
         }
 
@@ -521,7 +521,7 @@ public class ShadersTex {
         iterator = tasList.iterator();
 
         while(iterator.hasNext()) {
-            tas = (TextureAtlasSprite)iterator.next();
+            tas = (bil)iterator.next();
             tas.updateAnimation();
         }
 
@@ -529,7 +529,7 @@ public class ShadersTex {
         iterator = tasList.iterator();
 
         while(iterator.hasNext()) {
-            tas = (TextureAtlasSprite)iterator.next();
+            tas = (bil)iterator.next();
             tas.updateAnimation();
         }
 
@@ -604,23 +604,23 @@ public class ShadersTex {
         GL13.glActiveTexture(33984);
     }
 
-    public static ResourceLocation getNSMapLocation(ResourceLocation location, String mapName) {
+    public static bjo getNSMapLocation(bjo location, String mapName) {
         String basename = location.getResourcePath();
         String[] basenameParts = basename.split(".png");
         String basenameNoFileType = basenameParts[0];
-        return new ResourceLocation(location.getResourceDomain(), basenameNoFileType + "_" + mapName + ".png");
+        return new bjo(location.getResourceDomain(), basenameNoFileType + "_" + mapName + ".png");
     }
 
-    public static void loadNSMap(ResourceManager manager, ResourceLocation location, int width, int height, int[] aint) {
+    public static void loadNSMap(bjp manager, bjo location, int width, int height, int[] aint) {
         loadNSMap1(manager, getNSMapLocation(location, "n"), width, height, aint, width * height, -8421377);
         loadNSMap1(manager, getNSMapLocation(location, "s"), width, height, aint, width * height * 2, 0);
     }
 
-    public static void loadNSMap1(ResourceManager manager, ResourceLocation location, int width, int height, int[] aint, int offset, int defaultColor) {
+    public static void loadNSMap1(bjp manager, bjo location, int width, int height, int[] aint, int offset, int defaultColor) {
         boolean good = false;
 
         try {
-            Resource res = manager.getResource(location);
+            bjn res = manager.getResource(location);
             BufferedImage bufferedimage = ImageIO.read(res.getInputStream());
             if (bufferedimage.getWidth() == width && bufferedimage.getHeight() == height) {
                 bufferedimage.getRGB(0, 0, width, height, aint, offset, width);
@@ -635,7 +635,7 @@ public class ShadersTex {
 
     }
 
-    public static int loadSimpleTexture(int textureID, BufferedImage bufferedimage, boolean linear, boolean clamp, ResourceManager resourceManager, ResourceLocation location, MultiTexID multiTex) {
+    public static int loadSimpleTexture(int textureID, BufferedImage bufferedimage, boolean linear, boolean clamp, bjp resourceManager, bjo location, MultiTexID multiTex) {
         int width = bufferedimage.getWidth();
         int height = bufferedimage.getHeight();
         int size = width * height;
@@ -654,7 +654,7 @@ public class ShadersTex {
         return ((color1 >>> 24 & 255) * factor1 + (color2 >>> 24 & 255) * factor2) / 255 << 24 | ((color1 >>> 16 & 255) * factor1 + (color2 >>> 16 & 255) * factor2) / 255 << 16 | ((color1 >>> 8 & 255) * factor1 + (color2 >>> 8 & 255) * factor2) / 255 << 8 | ((color1 >>> 0 & 255) * factor1 + (color2 >>> 0 & 255) * factor2) / 255 << 0;
     }
 
-    public static void loadLayeredTexture(LayeredTexture tex, ResourceManager manager, List list) {
+    public static void loadLayeredTexture(bie tex, bjp manager, List list) {
         int width = 0;
         int height = 0;
         int size = 0;
@@ -673,7 +673,7 @@ public class ShadersTex {
             } while(s == null);
 
             try {
-                ResourceLocation location = new ResourceLocation(s);
+                bjo location = new bjo(s);
                 InputStream inputstream = manager.getResource(location).getInputStream();
                 BufferedImage bufimg = ImageIO.read(inputstream);
                 if (size == 0) {
@@ -700,8 +700,8 @@ public class ShadersTex {
     }
 
     static void updateTextureMinMagFilter() {
-        TextureManager texman = Minecraft.getMinecraft().getTextureManager();
-        TextureObject texObj = texman.getTexture(TextureMap.locationBlocksTexture);
+        TextureManager texman = Minecraft.w().getTextureManager();
+        bio texObj = texman.getTexture(bik.locationBlocksTexture);
         if (texObj != null) {
             MultiTexID multiTex = texObj.getMultiTexID();
             GL11.glBindTexture(3553, multiTex.base);
@@ -718,7 +718,7 @@ public class ShadersTex {
 
     }
 
-    public static Resource loadResource(ResourceManager manager, ResourceLocation location) throws IOException {
+    public static bjn loadResource(bjp manager, bjo location) throws IOException {
         resManager = manager;
         resLocation = location;
         return manager.getResource(location);
@@ -747,7 +747,7 @@ public class ShadersTex {
         return dst;
     }
 
-    public static void uploadFrameTexture(TextureAtlasSprite tas, int frameIndex, int xPos, int yPos) {
+    public static void uploadFrameTexture(bil tas, int frameIndex, int xPos, int yPos) {
         int frameCount = tas.getFrameCount();
         if (frameIndex >= 0 && frameIndex < frameCount) {
             if (frameCount <= 1) {
@@ -782,7 +782,7 @@ public class ShadersTex {
 
     }
 
-    public static void fixTransparentColor(TextureAtlasSprite tas, int[] aint) {
+    public static void fixTransparentColor(bil tas, int[] aint) {
     }
 
     static {
