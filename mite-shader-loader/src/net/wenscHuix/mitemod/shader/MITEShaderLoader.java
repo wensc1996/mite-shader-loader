@@ -1,7 +1,7 @@
 package net.wenscHuix.mitemod.shader;
 
 
-import net.wenscHuix.mitemod.shader.trans.TransMarker;
+import net.wenscHuix.mitemod.shader.mixin.TransMarker;
 import net.xiaoyu233.fml.AbstractMod;
 
 

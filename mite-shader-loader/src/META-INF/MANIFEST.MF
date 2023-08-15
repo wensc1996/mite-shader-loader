@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Main-Class: 
+Class-Path: gson-2.2.2.jar guava-14.0.jar guava-28.0.jar lwjgl-2.9.0.jar
+  jinput-2.0.5.jar jutils-1.0.0.jar commons-io-2.4.jar argo-2.25_fixed.j
+ ar jopt-simple-4.5.jar lwjgl_util-2.9.0.jar codecwav-20101023.jar commo
+ ns-lang3-3.1.jar bcprov-jdk15on-1.47.jar llvmpipe-loader-1.0.jar codecj
+ orbis-20101023.jar FishModLoader-v1.4.2.jar soundsystem-20120107.jar li
+ braryjavasound-20101123.jar librarylwjglopenal-20100824.jar mesa-loader
+ -windows-0.2.0-x64.jar lwjgl-platform-2.9.0-natives-windows.jar jinput-
+ platform-2.0.5-natives-windows.jar
+

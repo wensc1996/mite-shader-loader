@@ -1,4 +1,4 @@
-package net.wenscHuix.mitemod.shader.trans.render;
+package net.wenscHuix.mitemod.shader.mixin.render;
 
 import net.minecraft.bio;
 import net.wenscHuix.mitemod.shader.client.MultiTexID;

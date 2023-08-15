@@ -3,7 +3,7 @@
 // (powered by FernFlower decompiler)
 //
 
-package net.wenscHuix.mitemod.shader.trans;
+package net.wenscHuix.mitemod.shader.mixin;
 
 public class TransMarker {
     public TransMarker() {

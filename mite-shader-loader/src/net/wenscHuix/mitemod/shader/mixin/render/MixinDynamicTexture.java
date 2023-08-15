@@ -1,0 +1,51 @@
+package net.wenscHuix.mitemod.shader.mixin.render;
+
+import net.minecraft.bia;
+import net.minecraft.bib;
+import net.minecraft.bip;
+import net.minecraft.bjp;
+import net.wenscHuix.mitemod.shader.client.Shaders;
+import net.wenscHuix.mitemod.shader.client.ShadersTex;
+import net.xiaoyu233.fml.util.ReflectHelper;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Redirect;
+
+@Mixin(bib.class)
+public class MixinDynamicTexture extends bia {
+    @Shadow
+    @Final
+    private int[] b;
+    @Shadow
+    @Final
+    private int c;
+    @Shadow
+    @Final
+    private int d;
+
+    @Shadow
+    public void a(bjp bjp) {
+    }
+
+    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/bip;a(III)V"), method = "<init>(II)V")
+    private void redirectInit(int id, int par1, int par2){
+        if(Shaders.isActiveShader) {
+            ShadersTex.initDynamicTexture(this.b(), par1, par2, ReflectHelper.dyCast(this));
+        } else {
+            bip.a(this.b(), par1, par2);
+        }
+    }
+
+    @Overwrite
+    public void a() {
+        if(Shaders.isActiveShader) {
+            ShadersTex.updateDynamicTexture(this.b(), this.b, this.c, this.d, ReflectHelper.dyCast(this));
+        } else {
+            bip.a(this.b(), this.b, this.c, this.d);
+        }
+    }
+
+}
