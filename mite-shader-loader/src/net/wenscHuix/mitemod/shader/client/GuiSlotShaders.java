@@ -1,7 +1,7 @@
 package net.wenscHuix.mitemod.shader.client;
 
-import net.minecraft.src.Tessellator;
-import net.minecraft.src.gui.GuiSlot;
+import net.minecraft.bfq;
+import net.minecraft.GuiSlot;
 
 import java.util.ArrayList;
 
@@ -11,8 +11,8 @@ public class GuiSlotShaders extends GuiSlot {
     final GuiShaders shadersGui;
 
     public GuiSlotShaders(GuiShaders par1GuiShaders) {
-        super(par1GuiShaders.getMc(), par1GuiShaders.width / 2 + 20, par1GuiShaders.height, 40, par1GuiShaders.height - 70, 16);
-        this.scrollBarX = par1GuiShaders.width / 2 + 14;
+        super(par1GuiShaders.getMc(), par1GuiShaders.g / 2 + 20, par1GuiShaders.h, 40, par1GuiShaders.h - 70, 16);
+        this.scrollBarX = par1GuiShaders.g / 2 + 14;
         this.shadersGui = par1GuiShaders;
         this.shaderslist = Shaders.listofShaders();
     }
@@ -21,40 +21,57 @@ public class GuiSlotShaders extends GuiSlot {
         this.shaderslist = Shaders.listofShaders();
     }
 
-    public int getSize() {
-        return this.shaderslist.size();
-    }
-
-    public void elementClicked(int par1, boolean par2) {
-        Shaders.setShaderPack((String)this.shaderslist.get(par1));
-        this.shadersGui.needReinit = false;
-        Shaders.loadShaderPack();
-        Shaders.uninit();
-    }
-
-    public boolean isSelected(int par1) {
-        return ((String)this.shaderslist.get(par1)).equals(Shaders.currentshadername);
-    }
-
     public int getScrollBarX() {
         return this.scrollBarX;
     }
 
-    public int getContentHeight() {
-        return this.getSize() * 18;
-    }
 
-    public void drawBackground() {
-        this.shadersGui.drawDefaultBackground();
+    //getContentHeight
+    @Override
+    protected int d() {
+        return this.a() * 18;
     }
 
     public void overlayBackground(int par1, int par2, int par3, int par4) {
     }
 
-    public void drawContainerBackground(Tessellator tess) {
+    public void drawContainerBackground(bfq tess) {
     }
 
-    public void drawSlot(int par1, int par2, int par3, int par4, Tessellator par5Tessellator) {
-        this.shadersGui.drawCenteredString((String)this.shaderslist.get(par1), this.scrollBarX / 2, par3 + 1, 16777215);
+
+    //getsize()
+    @Override
+    protected int a() {
+        return this.shaderslist.size();
     }
+
+    //elementClicked
+    @Override
+    protected void a(int i, boolean b) {
+        Shaders.setShaderPack((String)this.shaderslist.get(i));
+        this.shadersGui.needReinit = false;
+        Shaders.loadShaderPack();
+        Shaders.uninit();
+    }
+
+    //isSelected
+    @Override
+    protected boolean a(int i) {
+        return this.shaderslist.get(i).equals(Shaders.currentshadername);
+    }
+
+    //drawBackground
+    @Override
+    protected void b() {
+        //drawDefaultBackground
+        this.shadersGui.e();
+    }
+
+
+    //drawSlot
+    @Override
+    protected void a(int i, int i1, int i2, int i3, bfq bfq) {
+        this.shadersGui.a((String)this.shaderslist.get(i), this.scrollBarX / 2, i2 + 1, 16777215);
+    }
+
 }
