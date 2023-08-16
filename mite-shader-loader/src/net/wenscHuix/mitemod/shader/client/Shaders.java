@@ -20,9 +20,6 @@ import java.util.regex.Pattern;
 
 public class Shaders {
     public static boolean isActiveShader = true;
-    public static final String versionString = "2.2.1";
-    public static final int versionNumber = 131584;
-    public static final int buildNumber = 33;
     public static boolean isInitialized = false;
     private static boolean notFirstInit = false;
     private static int renderDisplayWidth = 0;
