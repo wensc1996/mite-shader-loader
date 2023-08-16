@@ -645,6 +645,7 @@ public class Shaders {
             for(p = 0; p < 21; ++p) {
                 int n;
                 for(n = p; programsID[n] == 0 && programBackups[n] != n; n = programBackups[n]) {
+
                 }
 
                 if (n != p && p != 20) {
