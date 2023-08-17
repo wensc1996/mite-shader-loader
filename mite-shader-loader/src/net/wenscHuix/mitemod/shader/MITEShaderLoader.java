@@ -35,10 +35,10 @@ public class MITEShaderLoader extends AbstractMod {
     }
 
     public int modVerNum() {
-        return 1;
+        return 2;
     }
 
     public String modVerStr() {
-        return "0.0.1";
+        return "0.0.2";
     }
 }

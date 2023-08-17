@@ -612,8 +612,8 @@ public class ShadersTex {
     }
 
     public static void loadNSMap(bjp manager, bjo location, int width, int height, int[] aint) {
-//        loadNSMap1(manager, getNSMapLocation(location, "n"), width, height, aint, width * height, -8421377);
-//        loadNSMap1(manager, getNSMapLocation(location, "s"), width, height, aint, width * height * 2, 0);
+        loadNSMap1(manager, getNSMapLocation(location, "n"), width, height, aint, width * height, -8421377);
+        loadNSMap1(manager, getNSMapLocation(location, "s"), width, height, aint, width * height * 2, 0);
     }
 
     public static void loadNSMap1(bjp manager, bjo location, int width, int height, int[] aint, int offset, int defaultColor) {
