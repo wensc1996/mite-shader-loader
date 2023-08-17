@@ -752,11 +752,11 @@ public class ShadersTex {
         if (frameIndex >= 0 && frameIndex < frameCount) {
             if (frameCount <= 1) {
                 int[] buf = tas.a(frameIndex);
-                IntBuffer data = getIntBuffer(Utils.get(tas, "c", Integer.class) * Utils.get(tas, "d", Integer.class));
+                IntBuffer data = getIntBuffer(Utils.get(tas, "c", int.class) * Utils.get(tas, "d", int.class));
                 data.clear();
-                data.put(buf, 0, Utils.get(tas, "c", Integer.class) * Utils.get(tas, "d", Integer.class));
+                data.put(buf, 0, Utils.get(tas, "c", int.class) * Utils.get(tas, "d", int.class));
                 data.clear();
-                GL11.glTexSubImage2D(3553, 0, xPos, yPos, Utils.get(tas, "c", Integer.class), Utils.get(tas, "d", Integer.class), 32993, 33639, data);
+                GL11.glTexSubImage2D(3553, 0, xPos, yPos, Utils.get(tas, "c", int.class), Utils.get(tas, "d", int.class), 32993, 33639, data);
             } else {
                 if (tas.frameBuffers == null) {
                     tas.frameBuffers = new IntBuffer[frameCount];

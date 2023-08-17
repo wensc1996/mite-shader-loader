@@ -699,8 +699,8 @@ public class Shaders {
                 Object obj = it.next();
                 if (obj instanceof bcu) {
                     bcu mrr = (bcu)obj;
-                    if (Utils.get(mrr, "t", Boolean.class)) {
-                        atu.b(Utils.get(mrr, "u", Integer.class));
+                    if (Utils.get(mrr, "t", boolean.class)) {
+                        atu.b(Utils.get(mrr, "u", int.class));
                         Utils.set(mrr, "u", 0);
                         Utils.set(mrr, "t", false);
                     }
@@ -1225,7 +1225,7 @@ public class Shaders {
                 setProgramUniform1f("viewWidth", (float)renderWidth);
                 setProgramUniform1f("viewHeight", (float)renderHeight);
                 setProgramUniform1f("near", 0.05F);
-                setProgramUniform1f("far", (float)(32 << 3 - Utils.get(mc.u,"e", Integer.class)));
+                setProgramUniform1f("far", (float)(32 << 3 - Utils.get(mc.u,"e", int.class)));
                 setProgramUniform3f("sunPosition", sunPosition[0], sunPosition[1], sunPosition[2]);
                 setProgramUniform3f("moonPosition", moonPosition[0], moonPosition[1], moonPosition[2]);
                 setProgramUniform3f("upPosition", upPosition[0], upPosition[1], upPosition[2]);

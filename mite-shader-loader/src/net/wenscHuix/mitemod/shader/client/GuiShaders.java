@@ -28,8 +28,8 @@ public class GuiShaders extends awe {
         if (Shaders.shadersConfig == null) {
             Shaders.loadConfig();
         }
-        this.i.add(new aut(17, this.g * 3 / 4 - 60 + 80, 30, 80, 18, "开启光影: " + Shaders.isActiveShader));
-        this.i.add(new aut(9, this.g * 3 / 4 - 60, 30, 80, 18, "云的光影效果: " + Shaders.configCloudShadow));
+//        this.i.add(new aut(17, this.g * 3 / 4 - 60 + 80, 30, 80, 18, "开启光影: " + Shaders.isActiveShader));
+        this.i.add(new aut(9, this.g * 3 / 4 - 60, 30, 160, 18, "云的光影效果: " + Shaders.configCloudShadow));
         this.i.add(new aut(4, this.g * 3 / 4 - 60, 50, 160, 18, "新的方块光影效果: " + Shaders.dtweak));
         this.i.add(new aut(10, this.g * 3 / 4 - 60, 70, 160, 18, "手臂进入方块的范围: " + String.format("%.4f", Shaders.configHandDepthMul)));
         this.i.add(new aut(15, this.g * 3 / 4 - 60, 90, 160, 18, "画面渲染: " + String.format("%.4f", Shaders.configRenderResMul)));
@@ -226,7 +226,7 @@ public class GuiShaders extends awe {
         }
 
         this.a(this.o, "光影配置文件列表", this.g / 2, 16, 16777215);
-        this.a(this.o, " v2.2.1", this.g - 40, 10, 8421504);
+        this.a(this.o, " v2.2.1(by wensc,Huix)", this.g - 40, 10, 8421504);
         super.a(par1, par2, par3);
     }
 

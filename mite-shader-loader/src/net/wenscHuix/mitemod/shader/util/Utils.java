@@ -18,7 +18,7 @@ public class Utils {
 
             return (F) field.get(instance);
         } catch (NoSuchFieldException | IllegalAccessException e) {
-            Minecraft.setErrorMessage("获取${instance.toString()}私有变量$name 失败 ${e.getMessage()}");
+//            Minecraft.setErrorMessage("获取${"+instance.toString()+"}私有变量"+name+" 失败 {"+e.getMessage()+"}");
         }
         return null;
     }
@@ -29,9 +29,13 @@ public class Utils {
      */
     public static void set(Object instance, String fileName, Object value) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 
-        Field field = instance.getClass().getDeclaredField(fileName);
-        field.setAccessible(true);
-        field.set(instance, value);
+        try {
+            Field field = instance.getClass().getDeclaredField(fileName);
+            field.setAccessible(true);
+            field.set(instance, value);
+        } catch (NoSuchFieldException | IllegalAccessException e){
+//            System.out.println(instance.toString() + " " + fileName + " " + value);
+        }
     }
 
     /***
@@ -60,7 +64,7 @@ public class Utils {
                     return (F) field.get(c);
             }
         } catch (Exception e) {
-            Minecraft.setErrorMessage("获取${c.name}私有变量$name 失败 ${e.getMessage()}");
+//            Minecraft.setErrorMessage("获取${c.name}私有变量$name 失败 ${e.getMessage()}");
         }
         return null;
     }
@@ -94,7 +98,7 @@ public class Utils {
             method.setAccessible(true);
             return (F) method.invoke(null, params);
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            Minecraft.setErrorMessage("执行${c.name}私有方法$name 失败,参数 ${e.getMessage()}");
+//            Minecraft.setErrorMessage("执行${c.name}私有方法$name 失败,参数 ${e.getMessage()}");
         }
         return null;
     }
