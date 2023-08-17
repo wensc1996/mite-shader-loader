@@ -18,6 +18,10 @@ public class TessellatorMixin {
     public float normalY;
     public float normalZ;
 
+    public float midTextureU;
+    public float midTextureV;
+    public float[] vertexPos;
+
     @Overwrite
     public final void b(float par1, float par2, float par3) {
         if(Shaders.isActiveShader) {

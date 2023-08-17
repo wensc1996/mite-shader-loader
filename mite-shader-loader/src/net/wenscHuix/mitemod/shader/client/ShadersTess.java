@@ -189,7 +189,7 @@ public class ShadersTess {
 
     }
 
-    public static void a(bfq tess, double parx, double pary, double parz) {
+    public static void a(bfq tess, double parx, double pary, double parz) throws NoSuchFieldException, IllegalAccessException {
         int[] rawBuffer = tess.h;
         int rbi = tess.r;
         float fx = (float)(parx + tess.v);
@@ -203,16 +203,18 @@ public class ShadersTess {
                 }
             } else if (tess.E > 0) {
 //                tess.E *= 2;
+                Utils.set(tess, "E", Utils.get(tess, "E", Integer.class) * 2);
                 tess.h = rawBuffer = Arrays.copyOf(tess.h, tess.E);
                 System.out.format("Expand tesselator buffer %d\n", tess.E);
             } else {
 //                tess.E = 65536;
+                Utils.set(tess, "E", 65536);
                 tess.h = rawBuffer = new int[tess.E];
             }
         }
 
-//        if (tess.u == 7) {
-//            int i = tess.s % 4;
+        if (tess.u == 7) {
+            int i = tess.s % 4;
 //            float[] vertexPos = tess.vertexPos;
 //            vertexPos[i * 4 + 0] = fx;
 //            vertexPos[i * 4 + 1] = fy;
@@ -245,7 +247,7 @@ public class ShadersTess {
 //                    tess.i += 2;
 //                }
 //            }
-//        }
+        }
 
         ++tess.s;
         rawBuffer[rbi + 0] = Float.floatToRawIntBits(fx);

@@ -46,7 +46,7 @@ public class TextureAtlasSpriteMixin {
             method = "a(Lnet/minecraft/bjn;)V")
     private void injectLoadSprite0(CallbackInfo callbackInfo){
         if(Shaders.isActiveShader) {
-            ShadersTex.loadAtlasSprite(var4, 0, 0, this.width, this.height, var5, 0, this.width);
+//            ShadersTex.loadAtlasSprite(var4, 0, 0, this.width, this.height, var5, 0, this.width);
         }
     }
 

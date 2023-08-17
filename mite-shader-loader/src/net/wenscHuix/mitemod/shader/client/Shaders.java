@@ -593,7 +593,7 @@ public class Shaders {
                                 int ca = str.charAt(i) - 48;
                                 if (p != 20) {
                                     if (ca >= 0 && ca <= 7) {
-                                        d = ca + '賠';
+                                        d = ca + 36064;
                                         if (ca > usedColorAttachs) {
                                             usedColorAttachs = ca;
                                         }
@@ -603,7 +603,7 @@ public class Shaders {
                                         }
                                     }
                                 } else if (ca >= 0 && ca <= 1) {
-                                    d = ca + '賠';
+                                    d = ca + 36064;
                                     if (ca > usedShadowColorBuffers) {
                                         usedShadowColorBuffers = ca;
                                     }
@@ -628,7 +628,7 @@ public class Shaders {
             dfbColorTextures.position(0).limit(usedColorBuffers);
 
             for(p = 0; p < usedDrawBuffers; ++p) {
-                dfbDrawBuffers.put(p, '賠' + p);
+                dfbDrawBuffers.put(p, 36064 + p);
             }
 
             if (usedDrawBuffers > maxDrawBuffers) {
@@ -638,7 +638,7 @@ public class Shaders {
             sfbDrawBuffers.position(0).limit(usedShadowColorBuffers);
 
             for(p = 0; p < usedShadowColorBuffers; ++p) {
-                sfbDrawBuffers.put(p, '賠' + p);
+                sfbDrawBuffers.put(p, 36064 + p);
             }
 
             for(p = 0; p < 21; ++p) {
@@ -1368,7 +1368,7 @@ public class Shaders {
         } else if (par.matches("[ \t]*RGB32F[ \t]*")) {
             return 34837;
         } else {
-            return par.matches("[ \t]*RGBA32F[ \t]*") ? '蠔' : 0;
+            return par.matches("[ \t]*RGBA32F[ \t]*") ? 34836 : 0;
         }
     }
 
@@ -1523,7 +1523,7 @@ public class Shaders {
             GL11.glTexParameteri(3553, 10241, 9729);
             GL11.glTexParameteri(3553, 10240, 9729);
             GL11.glTexImage2D(3553, 0, gbuffersFormat[status], renderWidth, renderHeight, 0, 32993, 33639, (ByteBuffer)null);
-            EXTFramebufferObject.glFramebufferTexture2DEXT(36160, '賠' + status, 3553, dfbColorTextures.get(status), 0);
+            EXTFramebufferObject.glFramebufferTexture2DEXT(36160, 36064 + status, 3553, dfbColorTextures.get(status), 0);
             checkGLError("FT c");
         }
 
@@ -1534,7 +1534,7 @@ public class Shaders {
             for(int i = 0; i < usedColorBuffers; ++i) {
                 GL11.glBindTexture(3553, dfbColorTextures.get(i));
                 GL11.glTexImage2D(3553, 0, 6408, renderWidth, renderHeight, 0, 32993, 33639, (ByteBuffer)null);
-                EXTFramebufferObject.glFramebufferTexture2DEXT(36160, '賠' + i, 3553, dfbColorTextures.get(i), 0);
+                EXTFramebufferObject.glFramebufferTexture2DEXT(36160, 36064 + i, 3553, dfbColorTextures.get(i), 0);
                 checkGLError("FT c");
             }
 
@@ -1594,7 +1594,7 @@ public class Shaders {
                 GL11.glTexParameteri(3553, 10241, 9729);
                 GL11.glTexParameteri(3553, 10240, 9729);
                 GL11.glTexImage2D(3553, 0, 6408, shadowMapWidth, shadowMapHeight, 0, 32993, 33639, (ByteBuffer)null);
-                EXTFramebufferObject.glFramebufferTexture2DEXT(36160, '賠' + status, 3553, sfbColorTextures.get(status), 0);
+                EXTFramebufferObject.glFramebufferTexture2DEXT(36160, 36064 + status, 3553, sfbColorTextures.get(status), 0);
                 checkGLError("FT sc");
             }
 
@@ -1671,7 +1671,7 @@ public class Shaders {
 
             int i;
             for(i = 0; i < 4 && 4 + i < usedColorBuffers; ++i) {
-                GL13.glActiveTexture('蓇' + i);
+                GL13.glActiveTexture(33991 + i);
                 GL11.glBindTexture(3553, dfbColorTextures.get(4 + i));
             }
 
@@ -1687,12 +1687,12 @@ public class Shaders {
             }
 
             for(i = 0; i < usedShadowColorBuffers; ++i) {
-                GL13.glActiveTexture('蓍' + i);
+                GL13.glActiveTexture(33997 + i);
                 GL11.glBindTexture(3553, sfbColorTextures.get(i));
             }
 
             if (noiseTextureEnabled) {
-                GL13.glActiveTexture('蓀' + noiseTexture.textureUnit);
+                GL13.glActiveTexture(33984 + noiseTexture.textureUnit);
                 GL11.glBindTexture(3553, noiseTexture.getID());
                 GL11.glTexParameteri(3553, 10242, 10497);
                 GL11.glTexParameteri(3553, 10243, 10497);
@@ -1714,7 +1714,8 @@ public class Shaders {
             previousModelView.put(modelView);
             previousModelView.position(0);
             modelView.position(0);
-            EntityRenderer.b = 0;
+//            EntityRenderer.b = 0;
+            Utils.set(EntityRenderer.class, "b", 0);
             if (usedShadowDepthBuffers > 0 && --shadowPassCounter <= 0) {
                 mc.C.endStartSection("shadow pass");
                 preShadowPassThirdPersonView = mc.u.aa;
@@ -1801,7 +1802,7 @@ public class Shaders {
             GL11.glClear(16384);
 
             for(int i = 2; i < usedColorBuffers; ++i) {
-                GL20.glDrawBuffers('賠' + i);
+                GL20.glDrawBuffers(36064 + i);
                 GL11.glClearColor(0.0F, 0.0F, 0.0F, 0.0F);
                 GL11.glClear(16384);
             }
@@ -1979,7 +1980,7 @@ public class Shaders {
 
         for(int i = 0; i < 4 && 4 + i < usedColorBuffers; ++i) {
             if ((activeCompositeMipmapSetting & 16 << i) != 0) {
-                GL13.glActiveTexture('蓇' + i);
+                GL13.glActiveTexture(33991 + i);
                 GL11.glTexParameteri(3553, 10241, 9987);
                 GL30.glGenerateMipmap(3553);
             }
@@ -2037,7 +2038,7 @@ public class Shaders {
 
             int i;
             for(i = 0; i < 4 && 4 + i < usedColorBuffers; ++i) {
-                GL13.glActiveTexture('蓇' + i);
+                GL13.glActiveTexture(33991 + i);
                 GL11.glBindTexture(3553, dfbColorTextures.get(4 + i));
             }
 
@@ -2053,12 +2054,12 @@ public class Shaders {
             }
 
             for(i = 0; i < usedShadowColorBuffers; ++i) {
-                GL13.glActiveTexture('蓍' + i);
+                GL13.glActiveTexture(33997 + i);
                 GL11.glBindTexture(3553, sfbColorTextures.get(i));
             }
 
             if (noiseTextureEnabled) {
-                GL13.glActiveTexture('蓀' + noiseTexture.textureUnit);
+                GL13.glActiveTexture(33984 + noiseTexture.textureUnit);
                 GL11.glBindTexture(3553, noiseTexture.getID());
                 GL11.glTexParameteri(3553, 10242, 10497);
                 GL11.glTexParameteri(3553, 10243, 10497);
@@ -2087,7 +2088,7 @@ public class Shaders {
             EXTFramebufferObject.glBindFramebufferEXT(36160, 0);
             GL11.glViewport(0, 0, mc.d, mc.e);
             if (EntityRenderer.a) {
-                boolean maskR = EntityRenderer.b != 0;
+                boolean maskR = Utils.get(EntityRenderer.class, "b", Integer.class) != 0;
                 GL11.glColorMask(maskR, !maskR, !maskR, true);
             }
 
