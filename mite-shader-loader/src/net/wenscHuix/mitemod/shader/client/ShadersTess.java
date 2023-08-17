@@ -2,6 +2,7 @@ package net.wenscHuix.mitemod.shader.client;
 
 import net.minecraft.bfq;
 import net.minecraft.bma;
+import net.wenscHuix.mitemod.shader.mixin.render.TessellatorAccessor;
 import net.wenscHuix.mitemod.shader.util.Common;
 import net.wenscHuix.mitemod.shader.util.TessellatorExtra;
 import net.wenscHuix.mitemod.shader.util.Utils;
@@ -30,7 +31,7 @@ public class ShadersTess {
             int vtc;
             while(offs < tess.i) {
                 int realDrawMode;
-                if (tess.u == 7 && Utils.get(bfq.class, "b", Boolean.class)) {
+                if (tess.u == 7 && Utils.get(bfq.class, "b", boolean.class)) {
                     vtc = Math.min(tess.i - offs, tess.d.capacity() / 96);
                     realDrawMode = 4;
                 } else {
@@ -43,10 +44,10 @@ public class ShadersTess {
                 tess.d.position(0);
                 tess.d.limit(vtc * 64);
                 offs += vtc;
-                if (Utils.get(tess, "A", Boolean.class)) {
-                    Utils.set(tess, "C", (Utils.get(tess, "C", Integer.class) + 1) % 10);
+                if (TessellatorAccessor.gettryVBO()) {
+                    Utils.set(tess, "C", (Utils.get(tess, "C", int.class) + 1) % Common.vboCount);
 //                    ARBVertexBufferObject.glBindBufferARB(34962, bfq.B.get(tess.C));
-                    ARBVertexBufferObject.glBindBufferARB(34962, Common.vertexBuffers.get(Utils.get(tess, "C", Integer.class)));
+                    ARBVertexBufferObject.glBindBufferARB(34962, Common.vertexBuffers.get(Utils.get(tess, "C", int.class)));
                     ARBVertexBufferObject.glBufferDataARB(34962, tess.d, 35040);
                     if (tess.o) {
                         GL11.glTexCoordPointer(2, 5126, 64, 12L);
@@ -242,7 +243,7 @@ public class ShadersTess {
                 tess.midTextureV = (Float.intBitsToFloat(rawBuffer[rbi + -44]) + Float.intBitsToFloat(rawBuffer[rbi + -28]) + Float.intBitsToFloat(rawBuffer[rbi + -12]) + (float)tess.k) / 4.0F;
                 rawBuffer[rbi + -37] = rawBuffer[rbi + -21] = rawBuffer[rbi + -5] = Float.floatToRawIntBits(tess.midTextureU);
                 rawBuffer[rbi + -36] = rawBuffer[rbi + -20] = rawBuffer[rbi + -4] = Float.floatToRawIntBits(tess.midTextureV);
-                if (Utils.get(bfq.class, "b", Boolean.class)) {
+                if (Utils.get(bfq.class, "b", boolean.class)) {
                     System.arraycopy(rawBuffer, rbi - 48, rawBuffer, rbi, 16);
                     System.arraycopy(rawBuffer, rbi - 16, rawBuffer, rbi + 16, 16);
                     rbi += 32;

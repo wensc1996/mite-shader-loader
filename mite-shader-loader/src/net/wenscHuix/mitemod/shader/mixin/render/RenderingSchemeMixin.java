@@ -4,6 +4,7 @@ import net.minecraft.Minecraft;
 import net.minecraft.RenderingScheme;
 import net.minecraft.TessellatorMITE;
 import net.minecraft.bfq;
+import net.wenscHuix.mitemod.shader.client.Shaders;
 import net.wenscHuix.mitemod.shader.util.TessellatorExtra;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -24,7 +25,12 @@ public class RenderingSchemeMixin {
             Minecraft.O.getLogAgent().logInfo("Rendering scheme: " + getSchemeDescriptor(scheme_index));
         }
 
-        current = scheme_index;
+        if(Shaders.isActiveShader) {
+            current = 0;
+        } else {
+            current = scheme_index;
+        }
+
         bfq.a = current == 0 ? new TessellatorExtra(2097152) : new TessellatorMITE();
     }
     @Shadow

@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -22,7 +23,6 @@ import java.util.Random;
 
 @Mixin(EntityRenderer.class)
 public class EntityRendererMixin {
-
     @Inject(at = @At(value = "RETURN"), method = "a(D)V")
     private void injectDisableLightmap(CallbackInfo callbackInfo){
         if(Shaders.isActiveShader) {

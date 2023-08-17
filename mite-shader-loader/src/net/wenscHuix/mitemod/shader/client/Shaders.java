@@ -1,6 +1,7 @@
 package net.wenscHuix.mitemod.shader.client;
 
 import net.minecraft.*;
+import net.wenscHuix.mitemod.shader.mixin.render.EntityRendererAccessor;
 import net.wenscHuix.mitemod.shader.util.Utils;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.*;
@@ -1710,7 +1711,8 @@ public class Shaders {
             previousModelView.position(0);
             modelView.position(0);
 //            EntityRenderer.b = 0;
-            Utils.set(EntityRenderer.class, "b", 0);
+            EntityRendererAccessor.setAnaglyphField(0);
+//            Utils.set(EntityRenderer.class, "b", 0);
             if (usedShadowDepthBuffers > 0 && --shadowPassCounter <= 0) {
                 mc.C.endStartSection("shadow pass");
                 preShadowPassThirdPersonView = mc.u.aa;
@@ -1721,7 +1723,7 @@ public class Shaders {
                 EXTFramebufferObject.glBindFramebufferEXT(36160, sfb);
                 GL20.glDrawBuffers(programsDrawBuffers[20]);
                 useProgram(20);
-                Utils.call(mc.p, "b", EntityRenderer.class, new Class[]{Float.class, Long.class}, new Object[]{f, l});
+                Utils.call(mc.p, "a", EntityRenderer.class, new Class[]{float.class, long.class}, new Object[]{f, l});
                 GL11.glFlush();
                 isShadowPass = false;
                 mc.u.h = preShadowPassAdvancedOpengl;
@@ -2083,7 +2085,7 @@ public class Shaders {
             EXTFramebufferObject.glBindFramebufferEXT(36160, 0);
             GL11.glViewport(0, 0, mc.d, mc.e);
             if (EntityRenderer.a) {
-                boolean maskR = Utils.get(EntityRenderer.class, "b", Integer.class) != 0;
+                boolean maskR = EntityRendererAccessor.getAnaglyphField() != 0;
                 GL11.glColorMask(maskR, !maskR, !maskR, true);
             }
 
