@@ -90,8 +90,8 @@ public class ShadersTex {
     public static MultiTexID getMultiTexID(bia tex) {
         MultiTexID multiTex = tex.multiTex;
         if (multiTex == null) {
-            int baseTex = 123;
-            multiTex = tex.getMultiTexID();
+            int baseTex = tex.b();
+            multiTex = multiTexMap.get(baseTex);
             if (multiTex == null) {
                 multiTex = new MultiTexID(baseTex, GL11.glGenTextures(), GL11.glGenTextures());
                 multiTexMap.put(baseTex, multiTex);
