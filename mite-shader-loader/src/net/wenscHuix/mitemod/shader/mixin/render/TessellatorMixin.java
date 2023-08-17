@@ -9,11 +9,11 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(bfq.class)
 public class TessellatorMixin {
+
     @Shadow
     public boolean q;
     @Shadow
     public int y;
-
     public float normalX;
     public float normalY;
     public float normalZ;

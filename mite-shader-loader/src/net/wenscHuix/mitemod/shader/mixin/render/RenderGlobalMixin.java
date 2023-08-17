@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(bfl.class)
@@ -188,14 +189,78 @@ public class RenderGlobalMixin implements IWorldAccess {
         }
     }
 
-    @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", shift = At.Shift.AFTER),
+    @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 0, shift = At.Shift.AFTER),
             method = "compileCloudsFancy")
     private void injectCompileCloudsFancy0(CallbackInfo callbackInfo){
+        if(Shaders.isActiveShader) {
+            Shaders.disableFog();
+        }
+    }
+
+    @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 2, shift = At.Shift.AFTER),
+            method = "compileCloudsFancy")
+    private void injectCompileCloudsFancy1(CallbackInfo callbackInfo){
+        if(Shaders.isActiveShader) {
+            Shaders.disableTexture2D();
+        }
+    }
+
+    @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 1, shift = At.Shift.AFTER),
+            method = "compileCloudsFancy")
+    private void injectCompileCloudsFancy2(CallbackInfo callbackInfo){
+        if(Shaders.isActiveShader) {
+            Shaders.enableFog();
+        }
+    }
+
+    @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 3, shift = At.Shift.AFTER),
+            method = "compileCloudsFancy")
+    private void injectCompileCloudsFancy3(CallbackInfo callbackInfo){
         if(Shaders.isActiveShader) {
             Shaders.enableTexture2D();
         }
     }
 
+    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/bfl;renderCloudsFancy_MITE(F)V"), method = "b(F)V")
+    private void redirectRenderClouds(float par1){
+        if(Shaders.isActiveShader){
+            this.c(par1);
+        } else {
+            this.renderCloudsFancy_MITE(par1);
+        }
+    }
+
+    @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glBlendFunc(II)V", shift = At.Shift.AFTER),
+            method = "a(Lnet/minecraft/bfq;Lnet/minecraft/EntityPlayer;F)V")
+    private void injectDrawBlockDamageTexture0(CallbackInfo callbackInfo){
+        if(Shaders.isActiveShader) {
+            Shaders.beginBlockDestroyProgress();
+        }
+    }
+
+    @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glPopMatrix()V", shift = At.Shift.AFTER),
+            method = "a(Lnet/minecraft/bfq;Lnet/minecraft/EntityPlayer;F)V")
+    private void injectDrawBlockDamageTexture1(CallbackInfo callbackInfo){
+        if(Shaders.isActiveShader) {
+            Shaders.endBlockDestroyProgress();
+        }
+    }
+
+    @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 0, shift = At.Shift.AFTER),
+            method = "drawSelectionBox")
+    private void injectDrawSelectionBox0(CallbackInfo callbackInfo){
+        if(Shaders.isActiveShader) {
+            Shaders.disableTexture2D();
+        }
+    }
+
+    @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 1, shift = At.Shift.AFTER),
+            method = "drawSelectionBox")
+    private void injectDrawSelectionBox1(CallbackInfo callbackInfo){
+        if(Shaders.isActiveShader) {
+            Shaders.enableTexture2D();
+        }
+    }
 
 
     @Shadow
@@ -203,10 +268,17 @@ public class RenderGlobalMixin implements IWorldAccess {
     @Shadow
     private Minecraft t;
     @Shadow
+    public void c(float par1) {
+
+    }
+    @Shadow
+    public void renderCloudsFancy_MITE(float par1) {
+
+    }
+    @Shadow
     public void markBlockForUpdate(int i, int i1, int i2) {
 
     }
-
     @Shadow
     public void markBlockForRenderUpdate(int i, int i1, int i2) {
 
