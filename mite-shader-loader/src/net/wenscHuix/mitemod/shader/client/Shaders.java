@@ -6,6 +6,7 @@
 package net.wenscHuix.mitemod.shader.client;
 
 import net.minecraft.*;
+import net.wenscHuix.mitemod.shader.util.Utils;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.*;
 import org.lwjgl.util.glu.GLU;
@@ -676,14 +677,14 @@ public class Shaders {
     public static void resetDisplayList() {
         System.out.println("Reset model renderers");
         if (useMidTexCoordAttrib || useMultiTexCoord3Attrib) {
-            Iterator<bgm> it = bgl.a.q.values().iterator();
+            Iterator<bgm> it = Utils.get(bgl.a, "q", Map.class).values().iterator();
 
             while(it.hasNext()) {
                 bgm ren = (bgm)it.next();
                 if (ren instanceof bhb) {
                     bhb rle = (bhb)ren;
-                    resetDisplayListModel(rle.i);
-                    resetDisplayListModel(rle.j);
+                    resetDisplayListModel(Utils.get(rle,"i", bbo.class));
+                    resetDisplayListModel(Utils.get(rle,"j", bbo.class));
                 }
             }
         }
