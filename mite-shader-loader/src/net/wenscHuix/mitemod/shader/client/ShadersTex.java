@@ -1,6 +1,7 @@
 package net.wenscHuix.mitemod.shader.client;
 
 import net.minecraft.*;
+import net.wenscHuix.mitemod.shader.util.Utils;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
@@ -752,12 +753,12 @@ public class ShadersTex {
         int frameCount = tas.k();
         if (frameIndex >= 0 && frameIndex < frameCount) {
             if (frameCount <= 1) {
-//                int[] buf = tas.a(frameIndex);
-//                IntBuffer data = getIntBuffer(tas.c * tas.d);
-//                data.clear();
-//                data.put(buf, 0, tas.c * tas.d);
-//                data.clear();
-//                GL11.glTexSubImage2D(3553, 0, xPos, yPos, tas.c, tas.d, 32993, 33639, data);
+                int[] buf = tas.a(frameIndex);
+                IntBuffer data = getIntBuffer(Utils.get(tas, "c", Integer.class) * Utils.get(tas, "d", Integer.class));
+                data.clear();
+                data.put(buf, 0, Utils.get(tas, "c", Integer.class) * Utils.get(tas, "d", Integer.class));
+                data.clear();
+                GL11.glTexSubImage2D(3553, 0, xPos, yPos, Utils.get(tas, "c", Integer.class), Utils.get(tas, "d", Integer.class), 32993, 33639, data);
             } else {
 //                if (tas.frameBuffers == null) {
 //                    tas.frameBuffers = new IntBuffer[frameCount];

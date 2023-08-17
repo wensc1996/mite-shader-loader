@@ -37,9 +37,9 @@ public class TextureMapMixin extends bia {
 
             try {
                 if(Shaders.isActiveShader) {
-                    if (!var17.load(par1ResourceManager, var8)) {
-                        continue;
-                    }
+//                    if (!var17.load(par1ResourceManager, var8)) {
+//                        continue;
+//                    }
                 } else {
                     var17.a(par1ResourceManager.a(var8));
                 }
@@ -112,9 +112,9 @@ public class TextureMapMixin extends bia {
     @Overwrite
     public void c() {
         if(Shaders.isActiveShader) {
-            ShadersTex.updatingTex = this.getMultiTexID();
+//            ShadersTex.updatingTex = this.getMultiTexID();
         }
-        bip.b(this.b());
+//        bip.b(this.b());
         Iterator var1 = this.d.iterator();
 
         while(var1.hasNext()) {

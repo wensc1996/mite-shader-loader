@@ -19,7 +19,7 @@ public class SimpleTextureMixin extends bia {
     private bjo b;
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/bip;a(ILjava/awt/image/BufferedImage;ZZ)I"), method = "a")
-    private int redirectRenderLivingLabel0(bjp par1ResourceManager, int var0, BufferedImage var1, boolean var2, boolean var3) {
+    private int redirectRenderLivingLabel0(int var0, BufferedImage var1, boolean var2, boolean var3, bjp par1ResourceManager) {
         return 0;
 //        if(Shaders.isActiveShader) {
 //            return ShadersTex.loadSimpleTexture(var0, var1, var2, var3, par1ResourceManager, this.b, this.getMultiTexID());

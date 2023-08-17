@@ -8,6 +8,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(bfl.class)
 public class RenderGlobalMixin implements IWorldAccess {
@@ -39,7 +41,7 @@ public class RenderGlobalMixin implements IWorldAccess {
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 0, shift = At.Shift.AFTER),
             method = "a(Lnet/minecraft/EntityLiving;ID)I")
-    private void injectSortAndRender0(CallbackInfo callbackInfo){
+    private void injectSortAndRender0(CallbackInfoReturnable<Integer> callbackInfoReturnable){
         if(Shaders.isActiveShader) {
             Shaders.disableTexture2D();
         }
@@ -47,7 +49,7 @@ public class RenderGlobalMixin implements IWorldAccess {
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 3, shift = At.Shift.AFTER),
             method = "a(Lnet/minecraft/EntityLiving;ID)I")
-    private void injectSortAndRender1(CallbackInfo callbackInfo){
+    private void injectSortAndRender1(CallbackInfoReturnable<Integer> callbackInfoReturnable){
         if(Shaders.isActiveShader) {
             Shaders.disableFog();
         }
@@ -55,7 +57,7 @@ public class RenderGlobalMixin implements IWorldAccess {
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 0, shift = At.Shift.AFTER),
             method = "a(Lnet/minecraft/EntityLiving;ID)I")
-    private void injectSortAndRender2(CallbackInfo callbackInfo){
+    private void injectSortAndRender2(CallbackInfoReturnable<Integer> callbackInfoReturnable){
         if(Shaders.isActiveShader) {
             Shaders.enableTexture2D();
         }
@@ -63,7 +65,7 @@ public class RenderGlobalMixin implements IWorldAccess {
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 2, shift = At.Shift.AFTER),
             method = "a(Lnet/minecraft/EntityLiving;ID)I")
-    private void injectSortAndRender3(CallbackInfo callbackInfo){
+    private void injectSortAndRender3(CallbackInfoReturnable<Integer> callbackInfoReturnable){
         if(Shaders.isActiveShader) {
             Shaders.enableFog();
         }
@@ -93,11 +95,11 @@ public class RenderGlobalMixin implements IWorldAccess {
         }
     }
 
-    @Inject(at = @At(value = "FIELD", target = "Lnet/minecraft/bfl;k:Lnet/minecraft/bdd;", ordinal = 0, shift = At.Shift.AFTER),
+    @Inject(locals = LocalCapture.CAPTURE_FAILHARD, at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/bdd;a(Lnet/minecraft/Entity;F)Lnet/minecraft/Vec3D;"),
             method = "a(F)V")
-    private void injectRenderSky3(Vec3D par1, CallbackInfo callbackInfo){
+    private void injectRenderSky3(float par1, CallbackInfo ci, Vec3D var2){
         if(Shaders.isActiveShader) {
-            Shaders.setSkyColor(par1);
+            Shaders.setSkyColor(var2);
         }
     }
 

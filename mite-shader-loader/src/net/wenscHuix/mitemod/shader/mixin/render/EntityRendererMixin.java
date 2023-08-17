@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.nio.FloatBuffer;
@@ -102,7 +103,7 @@ public class EntityRendererMixin {
 //    }
 
     @Inject(at = @At(value = "HEAD"), method = "a(FFFF)Ljava/nio/FloatBuffer;")
-    private void injectSetFogColorBuffer(float par1, float par2, float par3, float par4, CallbackInfo callbackInfo){
+    private void injectSetFogColorBuffer(float par1, float par2, float par3, float par4, CallbackInfoReturnable<FloatBuffer> callbackInfoReturnable){
         if(Shaders.isActiveShader) {
             Shaders.setFogColor(par1, par2, par3);
         }

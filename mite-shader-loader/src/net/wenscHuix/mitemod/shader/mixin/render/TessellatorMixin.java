@@ -7,6 +7,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
+import java.nio.IntBuffer;
+
 @Mixin(bfq.class)
 public class TessellatorMixin {
 
@@ -21,7 +23,6 @@ public class TessellatorMixin {
     public float midTextureU;
     public float midTextureV;
     public float[] vertexPos;
-
     @Overwrite
     public final void b(float par1, float par2, float par3) {
         if(Shaders.isActiveShader) {

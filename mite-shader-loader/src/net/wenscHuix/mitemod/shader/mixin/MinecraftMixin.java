@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
 
-    @Inject(at = @At(value = "HEAD"), method = "<init>")
+    @Inject(at = @At(value = "RETURN"), method = "<init>")
     private void injectEnableLightmap(CallbackInfo callbackInfo){
         Shaders.startup(ReflectHelper.dyCast(this));
     }

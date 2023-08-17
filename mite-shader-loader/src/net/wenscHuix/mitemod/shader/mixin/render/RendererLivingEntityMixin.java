@@ -11,7 +11,57 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(bhb.class)
-public class RendererLivingEntityMixin extends bgm {
+public abstract class RendererLivingEntityMixin extends bgm {
+
+    @Shadow
+    @Final
+    private static bjo a;
+    @Shadow
+    protected bbo i;
+    @Shadow
+    protected bbo j;
+
+    @Shadow
+    public void a(bbo par1ModelBase) {
+        this.j = par1ModelBase;
+    }
+
+    @Shadow
+    private float a(float par1, float par2, float par3) {
+        return 0f;
+    }
+    @Shadow
+    protected void a(EntityLiving par1EntityLivingBase, float par2, float par3, float par4, float par5, float par6, float par7) {}
+    @Shadow
+    protected void a(EntityLiving par1EntityLivingBase, double par2, double par4, double par6) {}
+
+    @Shadow
+    protected void a(EntityLiving par1EntityLivingBase, float par2, float par3, float par4) {}
+
+    @Shadow
+    protected float d(EntityLiving par1EntityLivingBase, float par2){return 0f;}
+
+    @Shadow
+    protected float b(EntityLiving par1EntityLivingBase, float par2) {return 0f;}
+    @Shadow
+    protected void c(EntityLiving par1EntityLivingBase, float par2) {}
+
+    @Shadow
+    protected int b(EntityLiving par1EntityLivingBase, int par2, float par3) {return 0;}
+    @Shadow
+    protected int a(EntityLiving par1EntityLivingBase, int par2, float par3) {
+        return -1;
+    }
+    @Shadow
+
+    protected int a(EntityLiving par1EntityLivingBase, float par2, float par3) {
+        return 0;
+    }
+    @Shadow
+    protected void a(EntityLiving par1EntityLivingBase, float par2) {
+    }
+    @Shadow
+    protected void b(EntityLiving par1EntityLivingBase, double par2, double par4, double par6) {}
 
 
     @Redirect(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 2), method = "a(Lnet/minecraft/EntityLiving;Ljava/lang/String;DDDI)V")
@@ -124,7 +174,7 @@ public class RendererLivingEntityMixin extends bgm {
                     this.j.a(par1EntityLivingBase, var16, var15, par9);
                     this.j.a(par1EntityLivingBase, var16, var15, var13, var11 - var10, var26, var14);
                     if ((var18 & 240) == 16) {
-                        this.c(par1EntityLivingBase, var17, par9);
+//                        this.c(par1EntityLivingBase, var17, par9);
                         this.j.a(par1EntityLivingBase, var16, var15, var13, var11 - var10, var26, var14);
                     }
 
@@ -172,7 +222,7 @@ public class RendererLivingEntityMixin extends bgm {
             if(Shaders.isActiveShader) {
                 Shaders.resetEntityHurtFlash();
             }
-            this.c(par1EntityLivingBase, par9);
+//            this.c(par1EntityLivingBase, par9);
             if (Shaders.isActiveShader ? !Shaders.useEntityHurtFlash : true) {
                 float var27 = par1EntityLivingBase.getBrightness(par9);
                 var18 = this.a(par1EntityLivingBase, var27, par9);
@@ -249,70 +299,5 @@ public class RendererLivingEntityMixin extends bgm {
         GL11.glEnable(2884);
         GL11.glPopMatrix();
         this.b(par1EntityLivingBase, par2, par4, par6);
-    }
-
-    @Shadow
-    @Final
-    private static bjo a;
-    @Shadow
-    protected bbo i;
-    @Shadow
-    protected bbo j;
-    @Shadow
-    protected float d(EntityLiving par1EntityLivingBase, float par2) {
-        return 0;
-    }
-    @Shadow
-    private float a(float par1, float par2, float par3) {
-        return 0;
-    }
-    @Shadow
-    protected void a(EntityLiving par1EntityLivingBase, double par2, double par4, double par6) {
-
-    }
-    @Shadow
-    protected float b(EntityLiving par1EntityLivingBase, float par2) {
-        return 0;
-    }
-    @Shadow
-    protected void c(EntityLiving par1EntityLivingBase, float par2) {
-
-    }
-    @Shadow
-    protected void b(EntityLiving par1EntityLivingBase, double par2, double par4, double par6) {
-
-    }
-    @Shadow
-    protected int a(EntityLiving par1EntityLivingBase, float par2, float par3) {
-        return 0;
-    }
-    @Shadow
-    protected int b(EntityLiving par1EntityLivingBase, int par2, float par3) {
-        return 0;
-    }
-    @Shadow
-    protected void c(EntityLiving par1EntityLivingBase, int par2, float par3) {
-
-    }
-    @Shadow
-    protected int a(EntityLiving par1EntityLivingBase, int par2, float par3) {
-        return 0;
-    }
-    @Shadow
-    protected void a(EntityLiving par1EntityLivingBase, float par2, float par3, float par4, float par5, float par6, float par7) {
-
-    }
-    @Shadow
-    protected void a(EntityLiving par1EntityLivingBase, float par2) {
-
-    }
-    @Shadow
-    public void a(Entity entity, double v, double v1, double v2, float v3, float v4) {
-
-    }
-
-    @Shadow
-    protected bjo a(Entity entity) {
-        return null;
     }
 }

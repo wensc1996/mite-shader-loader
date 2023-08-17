@@ -34,7 +34,7 @@ public class TextureManagerMixin {
         if (Shaders.isActiveShader) {
             ShadersTex.bindTexture((bio) var2);
         } else {
-            bip.b(((bio) var2).b());
+//            bip.b(((bio) var2).b());
         }
     }
 
