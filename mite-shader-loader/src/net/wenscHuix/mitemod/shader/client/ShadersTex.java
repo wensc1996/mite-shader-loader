@@ -86,36 +86,37 @@ public class ShadersTex {
     }
 
     public static MultiTexID getMultiTexID(bia tex) {
-        MultiTexID multiTex = tex.multiTex;
-        if (multiTex == null) {
-            int baseTex = tex.getGlTextureId();
-            multiTex = (MultiTexID)multiTexMap.get(baseTex);
-            if (multiTex == null) {
-                multiTex = new MultiTexID(baseTex, GL11.glGenTextures(), GL11.glGenTextures());
-                multiTexMap.put(baseTex, multiTex);
-            }
-
-            tex.multiTex = multiTex;
-        }
-
-        return multiTex;
+//        MultiTexID multiTex = tex.multiTex;
+//        if (multiTex == null) {
+//            int baseTex = tex.b();
+//            multiTex = (MultiTexID)multiTexMap.get(baseTex);
+//            if (multiTex == null) {
+//                multiTex = new MultiTexID(baseTex, GL11.glGenTextures(), GL11.glGenTextures());
+//                multiTexMap.put(baseTex, multiTex);
+//            }
+//
+//            tex.multiTex = multiTex;
+//        }
+//
+//        return multiTex;
+        return null;
     }
 
     public static void deleteTextures(bia atex) {
-        int texid = atex.glTextureId;
-        GL11.glDeleteTextures(texid);
-        atex.glTextureId = 0;
-        MultiTexID multiTex = atex.multiTex;
-        if (multiTex != null) {
-            atex.multiTex = null;
-            multiTexMap.remove(multiTex.base);
-            GL11.glDeleteTextures(multiTex.norm);
-            GL11.glDeleteTextures(multiTex.spec);
-            if (multiTex.base != texid) {
-                System.err.println("Error : MultiTexID.base mismatch.");
-                GL11.glDeleteTextures(multiTex.base);
-            }
-        }
+//        int texid = atex.a;
+//        GL11.glDeleteTextures(texid);
+//        atex.a = 0;
+//        MultiTexID multiTex = atex.multiTex;
+//        if (multiTex != null) {
+//            atex.multiTex = null;
+//            multiTexMap.remove(multiTex.base);
+//            GL11.glDeleteTextures(multiTex.norm);
+//            GL11.glDeleteTextures(multiTex.spec);
+//            if (multiTex.base != texid) {
+//                System.err.println("Error : MultiTexID.base mismatch.");
+//                GL11.glDeleteTextures(multiTex.base);
+//            }
+//        }
 
     }
 
@@ -123,32 +124,32 @@ public class ShadersTex {
         if (tex instanceof bia) {
             deleteTextures((bia)tex);
         } else {
-            GL11.glDeleteTextures(tex.getGlTextureId());
+            GL11.glDeleteTextures(tex.b());
         }
 
         return 0;
     }
 
     public static void bindTextures(int baseTex, int normTex, int specTex) {
-        if (Shaders.isRenderingWorld && OpenGlHelper.activeTexUnit == 33984) {
-            GL13.glActiveTexture(33986);
-            GL11.glBindTexture(3553, normTex);
-            GL13.glActiveTexture(33987);
-            GL11.glBindTexture(3553, specTex);
-            GL13.glActiveTexture(33984);
-        }
-
-        GL11.glBindTexture(3553, baseTex);
+//        if (Shaders.isRenderingWorld && bma.activeTexUnit == 33984) {
+//            GL13.glActiveTexture(33986);
+//            GL11.glBindTexture(3553, normTex);
+//            GL13.glActiveTexture(33987);
+//            GL11.glBindTexture(3553, specTex);
+//            GL13.glActiveTexture(33984);
+//        }
+//
+//        GL11.glBindTexture(3553, baseTex);
     }
 
     public static void bindNSTextures(int normTex, int specTex) {
-        if (Shaders.isRenderingWorld && OpenGlHelper.activeTexUnit == 33984) {
-            GL13.glActiveTexture(33986);
-            GL11.glBindTexture(3553, normTex);
-            GL13.glActiveTexture(33987);
-            GL11.glBindTexture(3553, specTex);
-            GL13.glActiveTexture(33984);
-        }
+//        if (Shaders.isRenderingWorld && bma.activeTexUnit == 33984) {
+//            GL13.glActiveTexture(33986);
+//            GL11.glBindTexture(3553, normTex);
+//            GL13.glActiveTexture(33987);
+//            GL11.glBindTexture(3553, specTex);
+//            GL13.glActiveTexture(33984);
+//        }
 
     }
 
@@ -158,15 +159,15 @@ public class ShadersTex {
     }
 
     public static void bindTexture(bio tex) {
-        if (tex instanceof bik) {
-            Shaders.atlasSizeX = ((bik)tex).atlasWidth;
-            Shaders.atlasSizeY = ((bik)tex).atlasHeight;
-        } else {
-            Shaders.atlasSizeX = 0;
-            Shaders.atlasSizeY = 0;
-        }
-
-        bindTextures(tex.getMultiTexID());
+//        if (tex instanceof bik) {
+//            Shaders.atlasSizeX = ((bik)tex).atlasWidth;
+//            Shaders.atlasSizeY = ((bik)tex).atlasHeight;
+//        } else {
+//            Shaders.atlasSizeX = 0;
+//            Shaders.atlasSizeY = 0;
+//        }
+//
+//        bindTextures(tex.getMultiTexID());
     }
 
     public static void bindNSTextures(MultiTexID multiTex) {
@@ -194,94 +195,94 @@ public class ShadersTex {
     }
 
     public static void initDynamicTexture(int texID, int width, int height, bib tex) {
-        MultiTexID multiTex = tex.getMultiTexID();
-        int[] aint = tex.getTextureData();
-        int size = width * height;
-        Arrays.fill(aint, size, size * 2, -8421377);
-        Arrays.fill(aint, size * 2, size * 3, 0);
-        GL11.glDeleteTextures(multiTex.base);
-        GL11.glBindTexture(3553, multiTex.base);
-        allocTexStorage(width, height);
-        GL11.glTexParameteri(3553, 10241, 9728);
-        GL11.glTexParameteri(3553, 10240, 9728);
-        GL11.glTexParameteri(3553, 10242, 10497);
-        GL11.glTexParameteri(3553, 10243, 10497);
-        GL11.glDeleteTextures(multiTex.norm);
-        GL11.glBindTexture(3553, multiTex.norm);
-        allocTexStorage(width, height);
-        GL11.glTexParameteri(3553, 10241, 9728);
-        GL11.glTexParameteri(3553, 10240, 9728);
-        GL11.glTexParameteri(3553, 10242, 10497);
-        GL11.glTexParameteri(3553, 10243, 10497);
-        GL11.glDeleteTextures(multiTex.spec);
-        GL11.glBindTexture(3553, multiTex.spec);
-        allocTexStorage(width, height);
-        GL11.glTexParameteri(3553, 10241, 9728);
-        GL11.glTexParameteri(3553, 10240, 9728);
-        GL11.glTexParameteri(3553, 10242, 10497);
-        GL11.glTexParameteri(3553, 10243, 10497);
-        GL11.glBindTexture(3553, multiTex.base);
+//        MultiTexID multiTex = tex.getMultiTexID();
+//        int[] aint = tex.c();
+//        int size = width * height;
+//        Arrays.fill(aint, size, size * 2, -8421377);
+//        Arrays.fill(aint, size * 2, size * 3, 0);
+//        GL11.glDeleteTextures(multiTex.base);
+//        GL11.glBindTexture(3553, multiTex.base);
+//        allocTexStorage(width, height);
+//        GL11.glTexParameteri(3553, 10241, 9728);
+//        GL11.glTexParameteri(3553, 10240, 9728);
+//        GL11.glTexParameteri(3553, 10242, 10497);
+//        GL11.glTexParameteri(3553, 10243, 10497);
+//        GL11.glDeleteTextures(multiTex.norm);
+//        GL11.glBindTexture(3553, multiTex.norm);
+//        allocTexStorage(width, height);
+//        GL11.glTexParameteri(3553, 10241, 9728);
+//        GL11.glTexParameteri(3553, 10240, 9728);
+//        GL11.glTexParameteri(3553, 10242, 10497);
+//        GL11.glTexParameteri(3553, 10243, 10497);
+//        GL11.glDeleteTextures(multiTex.spec);
+//        GL11.glBindTexture(3553, multiTex.spec);
+//        allocTexStorage(width, height);
+//        GL11.glTexParameteri(3553, 10241, 9728);
+//        GL11.glTexParameteri(3553, 10240, 9728);
+//        GL11.glTexParameteri(3553, 10242, 10497);
+//        GL11.glTexParameteri(3553, 10243, 10497);
+//        GL11.glBindTexture(3553, multiTex.base);
     }
 
     public static bio createDefaultTexture() {
         bib tex = new bib(1, 1);
-        tex.getTextureData()[0] = -1;
-        tex.updateDynamicTexture();
+        tex.c()[0] = -1;
+        tex.a();
         return tex;
     }
 
     public static void setupTextureMap(int texID, int width, int height, big stitcher, bik tex) {
-        MultiTexID multiTex = getMultiTexID(tex);
-        tex.atlasWidth = width;
-        tex.atlasHeight = height;
-        List<bil> spriteList = stitcher.getStichSlots();
-        GL11.glDeleteTextures(multiTex.base);
-        GL11.glBindTexture(3553, multiTex.base);
-        allocTexStorage(width, height);
-        GL11.glTexParameteri(3553, 10241, Shaders.texMinFilValue[Shaders.configTexMinFilB]);
-        GL11.glTexParameteri(3553, 10240, Shaders.texMagFilValue[Shaders.configTexMagFilB]);
-        GL11.glTexParameteri(3553, 10242, 10497);
-        GL11.glTexParameteri(3553, 10243, 10497);
-        GL11.glTexParameteri(3553, 33083, 4);
-        Iterator<bil> iterator = spriteList.iterator();
-
-        bil sprite;
-        while(iterator.hasNext()) {
-            sprite = (bil)iterator.next();
-            updateSubImage1(sprite.getFrameTextureData(0), sprite.getIconWidth(), sprite.getIconHeight(), sprite.getOriginX(), sprite.getOriginY(), 0, 0);
-        }
-
-        GL11.glDeleteTextures(multiTex.norm);
-        GL11.glBindTexture(3553, multiTex.norm);
-        allocTexStorage(width, height);
-        GL11.glTexParameteri(3553, 10241, Shaders.texMinFilValue[Shaders.configTexMinFilN]);
-        GL11.glTexParameteri(3553, 10240, Shaders.texMagFilValue[Shaders.configTexMagFilN]);
-        GL11.glTexParameteri(3553, 10242, 10497);
-        GL11.glTexParameteri(3553, 10243, 10497);
-        GL11.glTexParameteri(3553, 33083, 4);
-        iterator = spriteList.iterator();
-
-        while(iterator.hasNext()) {
-            sprite = (bil)iterator.next();
-            updateSubImage1(sprite.getFrameTextureData(0), sprite.getIconWidth(), sprite.getIconHeight(), sprite.getOriginX(), sprite.getOriginY(), 1, -8421377);
-        }
-
-        GL11.glDeleteTextures(multiTex.spec);
-        GL11.glBindTexture(3553, multiTex.spec);
-        allocTexStorage(width, height);
-        GL11.glTexParameteri(3553, 10241, Shaders.texMinFilValue[Shaders.configTexMinFilS]);
-        GL11.glTexParameteri(3553, 10240, Shaders.texMagFilValue[Shaders.configTexMagFilS]);
-        GL11.glTexParameteri(3553, 10242, 10497);
-        GL11.glTexParameteri(3553, 10243, 10497);
-        GL11.glTexParameteri(3553, 33083, 4);
-        iterator = spriteList.iterator();
-
-        while(iterator.hasNext()) {
-            sprite = (bil)iterator.next();
-            updateSubImage1(sprite.getFrameTextureData(0), sprite.getIconWidth(), sprite.getIconHeight(), sprite.getOriginX(), sprite.getOriginY(), 2, 0);
-        }
-
-        GL11.glBindTexture(3553, multiTex.base);
+//        MultiTexID multiTex = getMultiTexID(tex);
+//        tex.atlasWidth = width;
+//        tex.atlasHeight = height;
+//        List<bil> spriteList = stitcher.d();
+//        GL11.glDeleteTextures(multiTex.base);
+//        GL11.glBindTexture(3553, multiTex.base);
+//        allocTexStorage(width, height);
+//        GL11.glTexParameteri(3553, 10241, Shaders.texMinFilValue[Shaders.configTexMinFilB]);
+//        GL11.glTexParameteri(3553, 10240, Shaders.texMagFilValue[Shaders.configTexMagFilB]);
+//        GL11.glTexParameteri(3553, 10242, 10497);
+//        GL11.glTexParameteri(3553, 10243, 10497);
+//        GL11.glTexParameteri(3553, 33083, 4);
+//        Iterator<bil> iterator = spriteList.iterator();
+//
+//        bil sprite;
+//        while(iterator.hasNext()) {
+//            sprite = (bil)iterator.next();
+//            updateSubImage1(sprite.a(0), sprite.a(), sprite.b(), sprite.h(), sprite.i(), 0, 0);
+//        }
+//
+//        GL11.glDeleteTextures(multiTex.norm);
+//        GL11.glBindTexture(3553, multiTex.norm);
+//        allocTexStorage(width, height);
+//        GL11.glTexParameteri(3553, 10241, Shaders.texMinFilValue[Shaders.configTexMinFilN]);
+//        GL11.glTexParameteri(3553, 10240, Shaders.texMagFilValue[Shaders.configTexMagFilN]);
+//        GL11.glTexParameteri(3553, 10242, 10497);
+//        GL11.glTexParameteri(3553, 10243, 10497);
+//        GL11.glTexParameteri(3553, 33083, 4);
+//        iterator = spriteList.iterator();
+//
+//        while(iterator.hasNext()) {
+//            sprite = (bil)iterator.next();
+//            updateSubImage1(sprite.a(0), sprite.a(), sprite.b(), sprite.h(), sprite.i(), 1, -8421377);
+//        }
+//
+//        GL11.glDeleteTextures(multiTex.spec);
+//        GL11.glBindTexture(3553, multiTex.spec);
+//        allocTexStorage(width, height);
+//        GL11.glTexParameteri(3553, 10241, Shaders.texMinFilValue[Shaders.configTexMinFilS]);
+//        GL11.glTexParameteri(3553, 10240, Shaders.texMagFilValue[Shaders.configTexMagFilS]);
+//        GL11.glTexParameteri(3553, 10242, 10497);
+//        GL11.glTexParameteri(3553, 10243, 10497);
+//        GL11.glTexParameteri(3553, 33083, 4);
+//        iterator = spriteList.iterator();
+//
+//        while(iterator.hasNext()) {
+//            sprite = (bil)iterator.next();
+//            updateSubImage1(sprite.a(0), sprite.a(), sprite.b(), sprite.h(), sprite.i(), 2, 0);
+//        }
+//
+//        GL11.glBindTexture(3553, multiTex.base);
     }
 
     public static void updateTextureMap(int[] par0ArrayOfInteger, int par1, int par2, int par3, int par4, boolean par5, boolean par6) {
@@ -485,13 +486,13 @@ public class ShadersTex {
     }
 
     public static void updateDynamicTexture(int texID, int[] src, int width, int height, bib tex) {
-        MultiTexID multiTex = tex.getMultiTexID();
-        GL11.glBindTexture(3553, multiTex.norm);
-        updateSubImage1(src, width, height, 0, 0, 1, -8421377);
-        GL11.glBindTexture(3553, multiTex.spec);
-        updateSubImage1(src, width, height, 0, 0, 2, 0);
-        GL11.glBindTexture(3553, multiTex.base);
-        updateSubImage1(src, width, height, 0, 0, 0, 0);
+//        MultiTexID multiTex = tex.getMultiTexID();
+//        GL11.glBindTexture(3553, multiTex.norm);
+//        updateSubImage1(src, width, height, 0, 0, 1, -8421377);
+//        GL11.glBindTexture(3553, multiTex.spec);
+//        updateSubImage1(src, width, height, 0, 0, 2, 0);
+//        GL11.glBindTexture(3553, multiTex.base);
+//        updateSubImage1(src, width, height, 0, 0, 0, 0);
     }
 
     public static void updateSubImage(int[] src, int width, int height, int posX, int posY, boolean linear, boolean clamp) {
@@ -507,31 +508,31 @@ public class ShadersTex {
     }
 
     public static void updateAnimationTextureMap(bik tex, List tasList) {
-        MultiTexID multiTex = tex.getMultiTexID();
-        GL11.glBindTexture(3553, multiTex.norm);
-        Iterator<bil> iterator = tasList.iterator();
-
-        bil tas;
-        while(iterator.hasNext()) {
-            tas = (bil)iterator.next();
-            tas.updateAnimation();
-        }
-
-        GL11.glBindTexture(3553, multiTex.norm);
-        iterator = tasList.iterator();
-
-        while(iterator.hasNext()) {
-            tas = (bil)iterator.next();
-            tas.updateAnimation();
-        }
-
-        GL11.glBindTexture(3553, multiTex.norm);
-        iterator = tasList.iterator();
-
-        while(iterator.hasNext()) {
-            tas = (bil)iterator.next();
-            tas.updateAnimation();
-        }
+//        MultiTexID multiTex = tex.getMultiTexID();
+//        GL11.glBindTexture(3553, multiTex.norm);
+//        Iterator<bil> iterator = tasList.iterator();
+//
+//        bil tas;
+//        while(iterator.hasNext()) {
+//            tas = (bil)iterator.next();
+//            tas.a();
+//        }
+//
+//        GL11.glBindTexture(3553, multiTex.norm);
+//        iterator = tasList.iterator();
+//
+//        while(iterator.hasNext()) {
+//            tas = (bil)iterator.next();
+//            tas.a();
+//        }
+//
+//        GL11.glBindTexture(3553, multiTex.norm);
+//        iterator = tasList.iterator();
+//
+//        while(iterator.hasNext()) {
+//            tas = (bil)iterator.next();
+//            tas.a();
+//        }
 
     }
 
@@ -605,10 +606,10 @@ public class ShadersTex {
     }
 
     public static bjo getNSMapLocation(bjo location, String mapName) {
-        String basename = location.getResourcePath();
+        String basename = location.a();
         String[] basenameParts = basename.split(".png");
         String basenameNoFileType = basenameParts[0];
-        return new bjo(location.getResourceDomain(), basenameNoFileType + "_" + mapName + ".png");
+        return new bjo(location.b(), basenameNoFileType + "_" + mapName + ".png");
     }
 
     public static void loadNSMap(bjp manager, bjo location, int width, int height, int[] aint) {
@@ -620,8 +621,8 @@ public class ShadersTex {
         boolean good = false;
 
         try {
-            bjn res = manager.getResource(location);
-            BufferedImage bufferedimage = ImageIO.read(res.getInputStream());
+            bjn res = manager.a(location);
+            BufferedImage bufferedimage = ImageIO.read(res.b());
             if (bufferedimage.getWidth() == width && bufferedimage.getHeight() == height) {
                 bufferedimage.getRGB(0, 0, width, height, aint, offset, width);
                 good = true;
@@ -665,7 +666,7 @@ public class ShadersTex {
             String s;
             do {
                 if (!iterator.hasNext()) {
-                    setupTexture(tex.getMultiTexID(), image, width, height, false, false);
+//                    setupTexture(tex.getMultiTexID(), image, width, height, false, false);
                     return;
                 }
 
@@ -674,7 +675,7 @@ public class ShadersTex {
 
             try {
                 bjo location = new bjo(s);
-                InputStream inputstream = manager.getResource(location).getInputStream();
+                InputStream inputstream = manager.a(location).b();
                 BufferedImage bufimg = ImageIO.read(inputstream);
                 if (size == 0) {
                     width = bufimg.getWidth();
@@ -700,20 +701,20 @@ public class ShadersTex {
     }
 
     static void updateTextureMinMagFilter() {
-        TextureManager texman = Minecraft.w().getTextureManager();
-        bio texObj = texman.getTexture(bik.locationBlocksTexture);
+        bim texman = Minecraft.w().J();
+        bio texObj = texman.b(bik.b);
         if (texObj != null) {
-            MultiTexID multiTex = texObj.getMultiTexID();
-            GL11.glBindTexture(3553, multiTex.base);
-            GL11.glTexParameteri(3553, 10241, Shaders.texMinFilValue[Shaders.configTexMinFilB]);
-            GL11.glTexParameteri(3553, 10240, Shaders.texMagFilValue[Shaders.configTexMagFilB]);
-            GL11.glBindTexture(3553, multiTex.norm);
-            GL11.glTexParameteri(3553, 10241, Shaders.texMinFilValue[Shaders.configTexMinFilN]);
-            GL11.glTexParameteri(3553, 10240, Shaders.texMagFilValue[Shaders.configTexMagFilN]);
-            GL11.glBindTexture(3553, multiTex.spec);
-            GL11.glTexParameteri(3553, 10241, Shaders.texMinFilValue[Shaders.configTexMinFilS]);
-            GL11.glTexParameteri(3553, 10240, Shaders.texMagFilValue[Shaders.configTexMagFilS]);
-            GL11.glBindTexture(3553, 0);
+//            MultiTexID multiTex = texObj.getMultiTexID();
+//            GL11.glBindTexture(3553, multiTex.base);
+//            GL11.glTexParameteri(3553, 10241, Shaders.texMinFilValue[Shaders.configTexMinFilB]);
+//            GL11.glTexParameteri(3553, 10240, Shaders.texMagFilValue[Shaders.configTexMagFilB]);
+//            GL11.glBindTexture(3553, multiTex.norm);
+//            GL11.glTexParameteri(3553, 10241, Shaders.texMinFilValue[Shaders.configTexMinFilN]);
+//            GL11.glTexParameteri(3553, 10240, Shaders.texMagFilValue[Shaders.configTexMagFilN]);
+//            GL11.glBindTexture(3553, multiTex.spec);
+//            GL11.glTexParameteri(3553, 10241, Shaders.texMinFilValue[Shaders.configTexMinFilS]);
+//            GL11.glTexParameteri(3553, 10240, Shaders.texMagFilValue[Shaders.configTexMagFilS]);
+//            GL11.glBindTexture(3553, 0);
         }
 
     }
@@ -721,7 +722,7 @@ public class ShadersTex {
     public static bjn loadResource(bjp manager, bjo location) throws IOException {
         resManager = manager;
         resLocation = location;
-        return manager.getResource(location);
+        return manager.a(location);
     }
 
     public static int[] loadAtlasSprite(BufferedImage bufferedimage, int startX, int startY, int w, int h, int[] aint, int offset, int scansize) {
@@ -748,36 +749,36 @@ public class ShadersTex {
     }
 
     public static void uploadFrameTexture(bil tas, int frameIndex, int xPos, int yPos) {
-        int frameCount = tas.getFrameCount();
+        int frameCount = tas.k();
         if (frameIndex >= 0 && frameIndex < frameCount) {
             if (frameCount <= 1) {
-                int[] buf = tas.getFrameTextureData(frameIndex);
-                IntBuffer data = getIntBuffer(tas.width * tas.height);
-                data.clear();
-                data.put(buf, 0, tas.width * tas.height);
-                data.clear();
-                GL11.glTexSubImage2D(3553, 0, xPos, yPos, tas.width, tas.height, 32993, 33639, data);
+//                int[] buf = tas.a(frameIndex);
+//                IntBuffer data = getIntBuffer(tas.c * tas.d);
+//                data.clear();
+//                data.put(buf, 0, tas.c * tas.d);
+//                data.clear();
+//                GL11.glTexSubImage2D(3553, 0, xPos, yPos, tas.c, tas.d, 32993, 33639, data);
             } else {
-                if (tas.frameBuffers == null) {
-                    tas.frameBuffers = new IntBuffer[frameCount];
-
-                    for(int var8 = 0; var8 < tas.frameBuffers.length; ++var8) {
-                        int[] var10 = tas.getFrameTextureData(var8);
-                        IntBuffer buf1 = atu.createDirectIntBuffer(var10.length);
-                        buf1.put(var10);
-                        buf1.clear();
-                        tas.frameBuffers[var8] = buf1;
-                    }
-                }
-
-                IntBuffer var9 = tas.frameBuffers[frameIndex];
-                var9.clear();
-                GL11.glTexSubImage2D(3553, 0, xPos, yPos, tas.width, tas.height, 32993, 33639, var9);
+//                if (tas.frameBuffers == null) {
+//                    tas.frameBuffers = new IntBuffer[frameCount];
+//
+//                    for(int var8 = 0; var8 < tas.frameBuffers.length; ++var8) {
+//                        int[] var10 = tas.a(var8);
+//                        IntBuffer buf1 = atu.f(var10.length);
+//                        buf1.put(var10);
+//                        buf1.clear();
+//                        tas.frameBuffers[var8] = buf1;
+//                    }
+//                }
+//
+//                IntBuffer var9 = tas.frameBuffers[frameIndex];
+//                var9.clear();
+//                GL11.glTexSubImage2D(3553, 0, xPos, yPos, tas.c, tas.d, 32993, 33639, var9);
             }
 
-            if (tas.mipmapActive) {
-                tas.uploadFrameMipmaps(frameIndex, xPos, yPos);
-            }
+//            if (tas.mipmapActive) {
+//                tas.uploadFrameMipmaps(frameIndex, xPos, yPos);
+//            }
         }
 
     }

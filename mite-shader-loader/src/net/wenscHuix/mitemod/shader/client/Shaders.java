@@ -2580,19 +2580,17 @@ public class Shaders {
     }
 
     public static void enableLightmap() {
-//        lightmapEnabled = true;
-//        if (activeProgram == 2) {
-//            useProgram(3);
-//        }
-
+        lightmapEnabled = true;
+        if (activeProgram == 2) {
+            useProgram(3);
+        }
     }
 
     public static void disableLightmap() {
-//        lightmapEnabled = false;
-//        if (activeProgram == 3) {
-//            useProgram(2);
-//        }
-
+        lightmapEnabled = false;
+        if (activeProgram == 3) {
+            useProgram(2);
+        }
     }
 
     public static int getEntityData() {
