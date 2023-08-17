@@ -568,7 +568,7 @@ public class EntityRendererMixin {
             GL11.glDepthMask(true);
             if(Shaders.isActiveShader) {
                 Shaders.beginHand();
-                this.a(0, par1);
+                this.b(par1, var13);
                 Shaders.endHand();
                 Shaders.preWater();
             }
