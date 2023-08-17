@@ -15,8 +15,8 @@ public class ThreadDownloadImageDataMixin extends bia {
         if (!this.g) {
             this.b();
         }
-        return null;
-//        return super.getMultiTexID();
+
+        return super.getMultiTexID();
     }
 
     @Shadow

@@ -5,6 +5,8 @@ import com.google.common.collect.Maps;
 import net.minecraft.*;
 import net.wenscHuix.mitemod.shader.client.Shaders;
 import net.wenscHuix.mitemod.shader.client.ShadersTex;
+import net.wenscHuix.mitemod.shader.util.TextureUtilExtra;
+import net.wenscHuix.mitemod.shader.util.Utils;
 import net.xiaoyu233.fml.util.ReflectHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,6 +21,9 @@ import java.util.Map;
 
 @Mixin(bik.class)
 public class TextureMapMixin extends bia {
+
+    public int atlasWidth;
+    public int atlasHeight;
 
     @Overwrite
     public void b(bjp par1ResourceManager) {
@@ -37,9 +42,9 @@ public class TextureMapMixin extends bia {
 
             try {
                 if(Shaders.isActiveShader) {
-//                    if (!var17.load(par1ResourceManager, var8)) {
-//                        continue;
-//                    }
+                    if (!var17.load(par1ResourceManager, var8)) {
+                        continue;
+                    }
                 } else {
                     var17.a(par1ResourceManager.a(var8));
                 }
@@ -112,9 +117,12 @@ public class TextureMapMixin extends bia {
     @Overwrite
     public void c() {
         if(Shaders.isActiveShader) {
-//            ShadersTex.updatingTex = this.getMultiTexID();
+            ShadersTex.updatingTex = this.getMultiTexID();
         }
-//        bip.b(this.b());
+
+//        Utils.call(bip.class, "b", new Class[]{Integer.class}, new Object[]{this.b()});
+
+        TextureUtilExtra.bindTexture(this.b());
         Iterator var1 = this.d.iterator();
 
         while(var1.hasNext()) {

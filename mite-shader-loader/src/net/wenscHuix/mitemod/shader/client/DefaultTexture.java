@@ -11,7 +11,7 @@ public class DefaultTexture extends bia {
 
     public void loadTexture(bjp resourcemanager) {
         int[] aint = ShadersTex.createAIntImage(1, -1);
-        //ShadersTex.setupTexture(this.getMultiTexID(), aint, 1, 1, false, false);
+        ShadersTex.setupTexture(this.getMultiTexID(), aint, 1, 1, false, false);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package net.wenscHuix.mitemod.shader.util;
+package net.wenscHuix.mitemod.shader.util.fix;
 
 
 import net.minecraft.EntityRenderer;

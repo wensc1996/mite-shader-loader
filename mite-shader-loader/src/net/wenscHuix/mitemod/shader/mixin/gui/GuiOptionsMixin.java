@@ -16,15 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Mixin(avw.class)
-public class GuiOptionsMixin {
-    @Shadow
-    protected List i;
-    @Shadow
-    public int g;
-    @Shadow
-    public int h;
-    @Shadow
-    protected Minecraft f;
+public class GuiOptionsMixin extends awe {
     @Shadow
     @Final
     private aul d;

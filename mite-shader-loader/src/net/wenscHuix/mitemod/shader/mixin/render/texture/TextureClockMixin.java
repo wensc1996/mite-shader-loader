@@ -1,4 +1,4 @@
-package net.wenscHuix.mitemod.shader.mixin.render;
+package net.wenscHuix.mitemod.shader.mixin.render.texture;
 
 
 import net.minecraft.bil;

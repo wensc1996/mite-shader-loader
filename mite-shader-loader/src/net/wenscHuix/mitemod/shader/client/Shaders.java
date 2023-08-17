@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package net.wenscHuix.mitemod.shader.client;
 
 import net.minecraft.*;
@@ -2258,7 +2253,7 @@ public class Shaders {
     public static void endTerrain() {
         if (isRenderingWorld) {
             useProgram(lightmapEnabled ? 3 : 2);
-//            ShadersTex.bindNSTextures(defaultTexture.getMultiTexID());
+            ShadersTex.bindNSTextures(defaultTexture.getMultiTexID());
         }
 
     }
@@ -2275,7 +2270,7 @@ public class Shaders {
         if (isRenderingWorld) {
             checkGLError("endTileEntities");
             useProgram(lightmapEnabled ? 3 : 2);
-//            ShadersTex.bindNSTextures(defaultTexture.getMultiTexID());
+            ShadersTex.bindNSTextures(defaultTexture.getMultiTexID());
         }
 
     }

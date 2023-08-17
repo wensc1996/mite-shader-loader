@@ -1,9 +1,10 @@
-package net.wenscHuix.mitemod.shader.mixin.render;
+package net.wenscHuix.mitemod.shader.mixin.render.texture;
 
 
 import net.minecraft.*;
 import net.wenscHuix.mitemod.shader.client.Shaders;
 import net.wenscHuix.mitemod.shader.client.ShadersTex;
+import net.wenscHuix.mitemod.shader.util.TextureUtilExtra;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -34,7 +35,7 @@ public class TextureManagerMixin {
         if (Shaders.isActiveShader) {
             ShadersTex.bindTexture((bio) var2);
         } else {
-//            bip.b(((bio) var2).b());
+            TextureUtilExtra.bindTexture(((bio) var2).b());
         }
     }
 

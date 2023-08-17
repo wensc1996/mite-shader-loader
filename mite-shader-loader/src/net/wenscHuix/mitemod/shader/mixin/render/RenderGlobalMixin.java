@@ -2,7 +2,10 @@ package net.wenscHuix.mitemod.shader.mixin.render;
 
 import net.minecraft.*;
 import net.wenscHuix.mitemod.shader.client.Shaders;
+import org.lwjgl.opengl.GL11;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -223,13 +226,123 @@ public class RenderGlobalMixin implements IWorldAccess {
         }
     }
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/bfl;renderCloudsFancy_MITE(F)V"), method = "b(F)V")
-    private void redirectRenderClouds(float par1){
-        if(Shaders.isActiveShader){
-            this.c(par1);
-        } else {
-            this.renderCloudsFancy_MITE(par1);
+//    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/bfl;renderCloudsFancy_MITE(F)V"), method = "b(F)V")
+//    private void redirectRenderClouds(float par1){
+//        if(Shaders.isActiveShader){
+//            this.c(par1);
+//        } else {
+//            this.renderCloudsFancy_MITE(par1);
+//        }
+//    }
+    @Overwrite
+    public void b(float par1) {
+        if (this.t.f.provider.isSurfaceWorld()) {
+            boolean force_fancy_clouds = true;
+            if (!force_fancy_clouds && !this.t.u.isFancyGraphicsEnabled()) {
+                GL11.glEnable(2884);
+                float var2 = (float)(this.t.i.lastTickPosY + (this.t.i.posY - this.t.i.lastTickPosY) * (double)par1);
+                byte var3 = 32;
+                int var4 = 256 / var3;
+                bfq var5 = bfq.a;
+                this.l.a(i);
+                GL11.glEnable(3042);
+                GL11.glBlendFunc(770, 771);
+                Vec3D var6 = this.k.e(par1);
+                float var7 = (float)var6.xCoord;
+                float var8 = (float)var6.yCoord;
+                float var9 = (float)var6.zCoord;
+                float var10;
+                if (this.t.u.g) {
+                    var10 = (var7 * 30.0F + var8 * 59.0F + var9 * 11.0F) / 100.0F;
+                    float var11 = (var7 * 30.0F + var8 * 70.0F) / 100.0F;
+                    float var12 = (var7 * 30.0F + var9 * 70.0F) / 100.0F;
+                    var7 = var10;
+                    var8 = var11;
+                    var9 = var12;
+                }
+
+                var10 = 4.8828125E-4F;
+                double var24 = (float)this.x + par1;
+                double var13 = this.t.i.prevPosX + (this.t.i.posX - this.t.i.prevPosX) * (double)par1 + var24 * 0.029999999329447746;
+                double var15 = this.t.i.prevPosZ + (this.t.i.posZ - this.t.i.prevPosZ) * (double)par1;
+                int var17 = MathHelper.floor_double(var13 / 2048.0);
+                int var18 = MathHelper.floor_double(var15 / 2048.0);
+                var13 -= var17 * 2048;
+                var15 -= var18 * 2048;
+                float var19 = this.k.provider.f() - var2 + 0.33F;
+                float var20 = (float)(var13 * (double)var10);
+                float var21 = (float)(var15 * (double)var10);
+                boolean player_can_see_cloud_bottoms = var19 > -0.0F;
+                GL11.glCullFace(player_can_see_cloud_bottoms ? 1028 : 1029);
+                var5.b();
+                GL11.glColor4f(var7, var8, var9, 0.8F);
+                var5.o = true;
+                int[] rawBuffer = var5.h;
+                int y0 = Float.floatToRawIntBits(var19);
+
+                for(int var22 = -var3 * var4; var22 < var3 * var4; var22 += var3) {
+                    int u0 = Float.floatToRawIntBits((float)var22 * var10 + var20);
+                    int u1 = Float.floatToRawIntBits((float)(var22 + var3) * var10 + var20);
+                    int x0 = Float.floatToRawIntBits((float)var22);
+                    int x1 = Float.floatToRawIntBits((float)(var22 + var3));
+
+                    for(int var23 = -var3 * var4; var23 < var3 * var4; var23 += var3) {
+                        if (RenderingScheme.current == 0) {
+                            var5.a(var22 + 0, var19, (double)(var23 + var3), (double)((float)(var22 + 0) * var10 + var20), (double)((float)(var23 + var3) * var10 + var21));
+                            var5.a(var22 + var3, var19, (double)(var23 + var3), (double)((float)(var22 + var3) * var10 + var20), (double)((float)(var23 + var3) * var10 + var21));
+                            var5.a(var22 + var3, (double)var19, (double)(var23 + 0), (float)(var22 + var3) * var10 + var20, (double)((float)(var23 + 0) * var10 + var21));
+                            var5.a(var22 + 0, var19, (double)(var23 + 0), (float)(var22 + 0) * var10 + var20, (double)((float)(var23 + 0) * var10 + var21));
+                        } else {
+                            int v0 = Float.floatToRawIntBits((float)(var23 + var3) * var10 + var21);
+                            int v2 = Float.floatToRawIntBits((float)var23 * var10 + var21);
+                            int z0 = Float.floatToRawIntBits((float)(var23 + var3));
+                            int z1 = Float.floatToRawIntBits((float)var23);
+                            rawBuffer[var5.r + 3] = u0;
+                            rawBuffer[var5.r + 11] = u1;
+                            rawBuffer[var5.r + 19] = u1;
+                            rawBuffer[var5.r + 27] = u0;
+                            rawBuffer[var5.r + 4] = v0;
+                            rawBuffer[var5.r + 12] = v0;
+                            rawBuffer[var5.r + 20] = v2;
+                            rawBuffer[var5.r + 28] = v2;
+                            rawBuffer[var5.r + 0] = x0;
+                            rawBuffer[var5.r + 8] = x1;
+                            rawBuffer[var5.r + 16] = x1;
+                            rawBuffer[var5.r + 24] = x0;
+                            rawBuffer[var5.r + 1] = y0;
+                            rawBuffer[var5.r + 9] = y0;
+                            rawBuffer[var5.r + 17] = y0;
+                            rawBuffer[var5.r + 25] = y0;
+                            rawBuffer[var5.r + 2] = z0;
+                            rawBuffer[var5.r + 10] = z0;
+                            rawBuffer[var5.r + 18] = z1;
+                            rawBuffer[var5.r + 26] = z1;
+                            var5.r += 32;
+                            var5.s += 4;
+                            var5.i += 4;
+                            if (var5.r >= 2097120) {
+                                var5.a();
+                                var5.z = true;
+                            }
+                        }
+                    }
+                }
+
+                var5.a();
+                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                GL11.glDisable(3042);
+                GL11.glCullFace(1029);
+            } else if (this.t.u.g) {
+                this.c(par1);
+            } else {
+                if(Shaders.isActiveShader){
+                    this.c(par1);
+                } else {
+                    this.renderCloudsFancy_MITE(par1);
+                }
+            }
         }
+
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glBlendFunc(II)V", shift = At.Shift.AFTER),
@@ -264,7 +377,14 @@ public class RenderGlobalMixin implements IWorldAccess {
         }
     }
 
-
+    @Shadow
+    @Final
+    private bim l;
+    @Shadow
+    @Final
+    private static bjo i;
+    @Shadow
+    private int x;
     @Shadow
     private bdd k;
     @Shadow

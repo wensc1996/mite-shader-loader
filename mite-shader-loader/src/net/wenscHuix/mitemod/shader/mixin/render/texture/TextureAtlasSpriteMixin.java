@@ -1,4 +1,4 @@
-package net.wenscHuix.mitemod.shader.mixin.render;
+package net.wenscHuix.mitemod.shader.mixin.render.texture;
 
 
 import com.google.common.collect.Lists;
@@ -32,13 +32,42 @@ public class TextureAtlasSpriteMixin {
 
     public boolean mipmapActive = false;
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/bip;a([IIIIIZZ)V"), method = "j")
-    private void redirectRenderLivingLabel0(int[] var0, int var1, int var2, int var3, int var4, boolean var5, boolean var6) {
-        if(Shaders.isActiveShader) {
-            ShadersTex.updateSubImage(((int[])this.a.get(var3)), this.e, this.f, this.c, this.d, false, false);
-        } else {
-            bip.a(((int[])this.a.get(var3)), this.e, this.f, this.c, this.d, false, false);
+//    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/bip;a([IIIIIZZ)V"), method = "j")
+//    private void redirectRenderLivingLabel0(int[] var0, int var1, int var2, int var3, int var4, boolean var5, boolean var6) {
+//        if(Shaders.isActiveShader) {
+//            ShadersTex.updateSubImage(((int[])this.a.get(var3)), this.e, this.f, this.c, this.d, false, false);
+//        } else {
+//            bip.a(((int[])this.a.get(var3)), this.e, this.f, this.c, this.d, false, false);
+//        }
+//    }
+
+
+    public int getC() {
+        return c;
+    }
+
+    public int getD() {
+        return d;
+    }
+
+    @Overwrite
+    public void j() {
+        ++this.h;
+        if (this.h >= this.j.a(this.g)) {
+            int var1 = this.j.c(this.g);
+            int var2 = this.j.c() == 0 ? this.a.size() : this.j.c();
+            this.g = (this.g + 1) % var2;
+            this.h = 0;
+            int var3 = this.j.c(this.g);
+            if (var1 != var3 && var3 >= 0 && var3 < this.a.size()) {
+                if(Shaders.isActiveShader) {
+                    ShadersTex.updateSubImage(((int[])this.a.get(var3)), this.e, this.f, this.c, this.d, false, false);
+                } else {
+                    bip.a(((int[])this.a.get(var3)), this.e, this.f, this.c, this.d, false, false);
+                }
+            }
         }
+
     }
 
 //    @Inject(locals = LocalCapture.CAPTURE_FAILHARD, at = @At(value = "INVOKE", target = "Ljava/awt/image/BufferedImage;getRGB(IIII[III)[I", shift = At.Shift.BEFORE),
@@ -48,6 +77,11 @@ public class TextureAtlasSpriteMixin {
 //            ShadersTex.loadAtlasSprite(var4, 0, 0,this.e, this.f, var5, 0, this.e);
 //        }
 //    }
+
+    public void uploadFrameMipmaps(int frameIndex, int xPos, int yPos) {
+
+
+    }
 
     @Overwrite
     public final void a(bjn par1Resource) throws IOException {
@@ -122,6 +156,10 @@ public class TextureAtlasSpriteMixin {
     protected boolean b;
     @Shadow
     protected int c;
+    @Shadow
+    protected int g;
+    @Shadow
+    protected int h;
     @Shadow
     protected int d;
     @Shadow

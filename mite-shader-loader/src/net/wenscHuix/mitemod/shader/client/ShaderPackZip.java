@@ -18,7 +18,8 @@ public class ShaderPackZip implements IShaderPack{
         if (this.packZipFile != null) {
             try {
                 this.packZipFile.close();
-            } catch (Exception var2) {
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
             this.packZipFile = null;
@@ -40,7 +41,8 @@ public class ShaderPackZip implements IShaderPack{
                 if (entry != null) {
                     return this.packZipFile.getInputStream(entry);
                 }
-            } catch (Exception var3) {
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 

@@ -84,12 +84,11 @@ public class Utils {
      * 调用私有static方法
      * @param c
      * @param name
-     * @param r
      * @param parameterTypes
      * @param params
      * @return
      */
-    public static <F> Object call(Class c, String name, Class<F> r, Class[] parameterTypes, Object[] params) {
+    public static <F> Object call(Class c, String name, Class[] parameterTypes, Object[] params) {
         try {
             Method method = c.getMethod(name, parameterTypes);
             method.setAccessible(true);

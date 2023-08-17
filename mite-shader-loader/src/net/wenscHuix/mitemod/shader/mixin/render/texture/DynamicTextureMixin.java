@@ -33,9 +33,9 @@ public class DynamicTextureMixin extends bia {
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/bip;a(III)V"), method = "<init>(II)V")
     private void redirectInit(int id, int par1, int par2){
         if(Shaders.isActiveShader) {
-            ShadersTex.initDynamicTexture(this.b(), par1, par2, ReflectHelper.dyCast(this));
+            ShadersTex.initDynamicTexture(id, par1, par2, ReflectHelper.dyCast(this));
         } else {
-            bip.a(this.b(), par1, par2);
+            bip.a(id, par1, par2);
         }
     }
 
