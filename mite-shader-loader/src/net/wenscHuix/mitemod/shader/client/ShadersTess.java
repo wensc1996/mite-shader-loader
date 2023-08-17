@@ -3,6 +3,7 @@ package net.wenscHuix.mitemod.shader.client;
 import net.minecraft.bfq;
 import net.minecraft.bma;
 import net.wenscHuix.mitemod.shader.util.Common;
+import net.wenscHuix.mitemod.shader.util.TessellatorExtra;
 import net.wenscHuix.mitemod.shader.util.Utils;
 import org.lwjgl.opengl.ARBVertexBufferObject;
 import org.lwjgl.opengl.ARBVertexShader;
@@ -191,27 +192,27 @@ public class ShadersTess {
 
     }
 
-    public static void a(bfq tess, double parx, double pary, double parz) throws NoSuchFieldException, IllegalAccessException {
+    public static void addVertex(bfq tess, double parx, double pary, double parz) {
         int[] rawBuffer = tess.h;
         int rbi = tess.r;
         float fx = (float)(parx + tess.v);
         float fy = (float)(pary + tess.w);
         float fz = (float)(parz + tess.x);
-        if (rbi >= tess.E - 64) {
-            if (tess.E >= 16777216) {
+        if (rbi >= TessellatorExtra.bufferSize - 64) {
+            if (TessellatorExtra.bufferSize >= 16777216) {
                 if (tess.s % 4 == 0) {
                     tess.a();
                     tess.z = true;
                 }
-            } else if (tess.E > 0) {
-//                tess.E *= 2;
-                Utils.set(tess, "E", Utils.get(tess, "E", Integer.class) * 2);
-                tess.h = rawBuffer = Arrays.copyOf(tess.h, tess.E);
-                System.out.format("Expand tesselator buffer %d\n", tess.E);
+            } else if (TessellatorExtra.bufferSize > 0) {
+                TessellatorExtra.bufferSize *= 2;
+                //Utils.set(tess, "E", Utils.get(tess, "E", Integer.class) * 2);
+                tess.h = rawBuffer = Arrays.copyOf(tess.h, TessellatorExtra.bufferSize);
+                System.out.format("Expand tesselator buffer %d\n", TessellatorExtra.bufferSize);
             } else {
-//                tess.E = 65536;
-                Utils.set(tess, "E", 65536);
-                tess.h = rawBuffer = new int[tess.E];
+                TessellatorExtra.bufferSize = 65536;
+                //Utils.set(tess, "E", 65536);
+                tess.h = rawBuffer = new int[TessellatorExtra.bufferSize];
             }
         }
 

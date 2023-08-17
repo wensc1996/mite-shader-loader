@@ -5,6 +5,7 @@ import net.minecraft.atu;
 import net.minecraft.bfq;
 import net.wenscHuix.mitemod.shader.client.Shaders;
 import net.wenscHuix.mitemod.shader.client.ShadersTess;
+import net.xiaoyu233.fml.util.ReflectHelper;
 import org.lwjgl.opengl.ARBVertexBufferObject;
 import org.lwjgl.opengl.GLContext;
 import org.spongepowered.asm.mixin.*;
@@ -47,6 +48,12 @@ public class TessellatorMixin {
         return c;
     }
 
+
+    @Overwrite
+    public void a(double par1, double par3, double par5) {
+        ShadersTess.addVertex(ReflectHelper.dyCast(this), par1, par3, par5);
+    }
+
     @Inject(at = @At(value = "RETURN"), method = "<init>")
     private void injectInit(CallbackInfo callbackInfo){
         this.defaultTexture = false;
@@ -54,6 +61,7 @@ public class TessellatorMixin {
         this.textureID = 0;
         this.setShadersTess(65536);
     }
+
 
     public void setShadersTess(int par1){
         this.defaultTexture = false;

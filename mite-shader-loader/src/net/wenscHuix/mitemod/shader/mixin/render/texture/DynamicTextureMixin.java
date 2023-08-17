@@ -39,13 +39,13 @@ public class DynamicTextureMixin extends bia {
         }
     }
 
-    @Overwrite
-    public void a() {
-        if(Shaders.isActiveShader) {
-            ShadersTex.updateDynamicTexture(this.b(), this.b, this.c, this.d, ReflectHelper.dyCast(this));
-        } else {
-            bip.a(this.b(), this.b, this.c, this.d);
-        }
-    }
+//    @Overwrite
+//    public void a() {
+//        if(Shaders.isActiveShader) {
+//            ShadersTex.updateDynamicTexture(this.b(), this.b, this.c, this.d, ReflectHelper.dyCast(this));
+//        } else {
+//            bip.a(this.b(), this.b, this.c, this.d);
+//        }
+//    }
 
 }
