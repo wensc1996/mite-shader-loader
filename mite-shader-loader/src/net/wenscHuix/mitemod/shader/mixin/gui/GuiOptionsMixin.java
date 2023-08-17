@@ -23,7 +23,9 @@ public class GuiOptionsMixin extends awe {
 
     @Inject(at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", ordinal = 4, shift = At.Shift.AFTER), method = "A_")
     private void injectInit(CallbackInfo callbackInfo){
-        this.i.add(new aut(190, this.g / 2 - 152 + 77, this.h / 6 + 120 - 6, 73, 20, bkb.a("options.shaders")));
+        this.i.add(new aut(190, this.g / 2 - 152 + 77, this.h / 6 + 120 - 6, 73, 20, bkb.a("光影")));
+        this.i.add(new aut(102, this.g / 2 - 152, this.h / 6 + 120 - 6, 150 - 20 - 57, 20, bkb.a("光影")));
+        this.buttonList.add(new GuiButton(, I18n.getString("options.language")));
     }
     @Inject(at = @At(value = "HEAD"), method = "a(Lnet/minecraft/aut;)V")
     private void injectActionPerformed(aut par1GuiButton, CallbackInfo callbackInfo){

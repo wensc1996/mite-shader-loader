@@ -20,9 +20,11 @@ public class GuiShaders extends awe {
 
     public GuiShaders(awe par1GuiScreen, aul par2GameSettings) {
         this.parentGui = par1GuiScreen;
+
     }
 
-    public void initGui() {
+    @Override
+    public void A_() {
         if (Shaders.shadersConfig == null) {
             Shaders.loadConfig();
         }
@@ -215,6 +217,7 @@ public class GuiShaders extends awe {
 
     }
 
+    @Override
     public void a(int par1, int par2, float par3) {
         this.shaderList.a(par1, par2, par3);
         if (this.updateTimer <= 0) {

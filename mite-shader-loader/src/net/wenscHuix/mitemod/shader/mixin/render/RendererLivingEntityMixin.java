@@ -13,56 +13,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(bhb.class)
 public abstract class RendererLivingEntityMixin extends bgm {
 
-    @Shadow
-    @Final
-    private static bjo a;
-    @Shadow
-    protected bbo i;
-    @Shadow
-    protected bbo j;
-
-    @Shadow
-    public void a(bbo par1ModelBase) {
-        this.j = par1ModelBase;
-    }
-
-    @Shadow
-    private float a(float par1, float par2, float par3) {
-        return 0f;
-    }
-    @Shadow
-    protected void a(EntityLiving par1EntityLivingBase, float par2, float par3, float par4, float par5, float par6, float par7) {}
-    @Shadow
-    protected void a(EntityLiving par1EntityLivingBase, double par2, double par4, double par6) {}
-
-    @Shadow
-    protected void a(EntityLiving par1EntityLivingBase, float par2, float par3, float par4) {}
-
-    @Shadow
-    protected float d(EntityLiving par1EntityLivingBase, float par2){return 0f;}
-
-    @Shadow
-    protected float b(EntityLiving par1EntityLivingBase, float par2) {return 0f;}
-    @Shadow
-    protected void c(EntityLiving par1EntityLivingBase, float par2) {}
-
-    @Shadow
-    protected int b(EntityLiving par1EntityLivingBase, int par2, float par3) {return 0;}
-    @Shadow
-    protected int a(EntityLiving par1EntityLivingBase, int par2, float par3) {
-        return -1;
-    }
-    @Shadow
-
-    protected int a(EntityLiving par1EntityLivingBase, float par2, float par3) {
-        return 0;
-    }
-    @Shadow
-    protected void a(EntityLiving par1EntityLivingBase, float par2) {
-    }
-    @Shadow
-    protected void b(EntityLiving par1EntityLivingBase, double par2, double par4, double par6) {}
-
 
     @Redirect(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 2), method = "a(Lnet/minecraft/EntityLiving;Ljava/lang/String;DDDI)V")
     private void redirectRenderLivingLabel0(int cap){
@@ -300,4 +250,46 @@ public abstract class RendererLivingEntityMixin extends bgm {
         GL11.glPopMatrix();
         this.b(par1EntityLivingBase, par2, par4, par6);
     }
+    @Shadow
+    @Final
+    private static bjo a;
+    @Shadow
+    protected bbo i;
+    @Shadow
+    protected bbo j;
+    @Shadow
+    public void a(bbo par1ModelBase) {
+        this.j = par1ModelBase;
+    }
+    @Shadow
+    private float a(float par1, float par2, float par3) {
+        return 0f;
+    }
+    @Shadow
+    protected void a(EntityLiving par1EntityLivingBase, float par2, float par3, float par4, float par5, float par6, float par7) {}
+    @Shadow
+    protected void a(EntityLiving par1EntityLivingBase, double par2, double par4, double par6) {}
+    @Shadow
+    protected void a(EntityLiving par1EntityLivingBase, float par2, float par3, float par4) {}
+    @Shadow
+    protected float d(EntityLiving par1EntityLivingBase, float par2){return 0f;}
+    @Shadow
+    protected float b(EntityLiving par1EntityLivingBase, float par2) {return 0f;}
+    @Shadow
+    protected void c(EntityLiving par1EntityLivingBase, float par2) {}
+    @Shadow
+    protected int b(EntityLiving par1EntityLivingBase, int par2, float par3) {return 0;}
+    @Shadow
+    protected int a(EntityLiving par1EntityLivingBase, int par2, float par3) {
+        return -1;
+    }
+    @Shadow
+    protected int a(EntityLiving par1EntityLivingBase, float par2, float par3) {
+        return 0;
+    }
+    @Shadow
+    protected void a(EntityLiving par1EntityLivingBase, float par2) {
+    }
+    @Shadow
+    protected void b(EntityLiving par1EntityLivingBase, double par2, double par4, double par6) {}
 }
