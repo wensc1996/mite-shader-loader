@@ -11,13 +11,13 @@ public class ShadersRender {
     }
 
     public static void setFrustrumPosition(bfv frustrum, double x, double y, double z) {
-        frustrum.setPosition(x, y, z);
+        frustrum.a(x, y, z);
     }
 
     public static void clipRenderersByFrustrum(bfl renderGlobal, bfv frustrum, float par2) {
         Shaders.checkGLError("pre clip");
         if (!Shaders.isShadowPass || Shaders.configShadowClipFrustrum) {
-            renderGlobal.clipRenderersByFrustum(frustrum, par2);
+            renderGlobal.a(frustrum, par2);
             Shaders.checkGLError("clip");
         }
 
@@ -26,9 +26,9 @@ public class ShadersRender {
     public static void renderItemFP(bfj itemRenderer, float par1) {
         GL11.glDepthFunc(518);
         GL11.glPushMatrix();
-        itemRenderer.renderItemInFirstPerson(par1);
+        itemRenderer.a(par1);
         GL11.glPopMatrix();
         GL11.glDepthFunc(515);
-        itemRenderer.renderItemInFirstPerson(par1);
+        itemRenderer.a(par1);
     }
 }

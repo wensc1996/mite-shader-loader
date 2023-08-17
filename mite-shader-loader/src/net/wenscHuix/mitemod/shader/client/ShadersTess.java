@@ -192,7 +192,7 @@ public class ShadersTess {
 
     }
 
-    public static void addVertex(bfq tess, double parx, double pary, double parz) {
+    public static void a(bfq tess, double parx, double pary, double parz) {
         int[] rawBuffer = tess.rawBuffer;
         int rbi = tess.rawBufferIndex;
         float fx = (float)(parx + tess.xOffset);

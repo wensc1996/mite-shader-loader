@@ -27,7 +27,7 @@ public class Utils {
      * 设置私有成员变量的值
      *
      */
-    static void set(Object instance, String fileName, Object value) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+    public static void set(Object instance, String fileName, Object value) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 
         Field field = instance.getClass().getDeclaredField(fileName);
         field.setAccessible(true);
@@ -38,7 +38,7 @@ public class Utils {
      * 访问私有方法
      *
      */
-    static <F> F call(Object instance, String name, Class<F> r, Class[] parameterTypes, Object[] params) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+    public static <F> F call(Object instance, String name, Class<F> r, Class[] parameterTypes, Object[] params) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         Method method = instance.getClass().getDeclaredMethod(name, parameterTypes);
         method.setAccessible(true);
         return (F) method.invoke(instance, params);
@@ -51,7 +51,7 @@ public class Utils {
      * @param f
      * @return
      */
-    static <F> F get(Class c, String name, Class<F> f) {
+    public static <F> F get(Class c, String name, Class<F> f) {
         Field[] fields = c.getDeclaredFields();
         try {
             for (Field field : fields) {
@@ -71,7 +71,7 @@ public class Utils {
      * @param name
      * @param f
      */
-    static void set(Class c, String name, Object f) throws IllegalAccessException {
+    public static void set(Class c, String name, Object f) throws IllegalAccessException {
         Field[] fields = c.getDeclaredFields();
         for (Field field : fields) {
             field.setAccessible(true);
@@ -89,7 +89,7 @@ public class Utils {
      * @param params
      * @return
      */
-    static <F> Object call(Class c, String name, Class<F> r, Class[] parameterTypes, Object[] params) {
+    public static <F> Object call(Class c, String name, Class<F> r, Class[] parameterTypes, Object[] params) {
         try {
             Method method = c.getMethod(name, parameterTypes);
             method.setAccessible(true);

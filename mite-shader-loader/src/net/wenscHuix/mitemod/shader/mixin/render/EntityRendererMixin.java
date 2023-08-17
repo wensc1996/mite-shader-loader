@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.lang.reflect.InvocationTargetException;
 import java.nio.FloatBuffer;
 import java.util.Random;
 
@@ -355,7 +356,7 @@ public class EntityRendererMixin {
     }
 
     @Overwrite
-    public void a(float par1, long par2) {
+    public void a(float par1, long par2) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         if(Shaders.isActiveShader) {
             Shaders.beginRender(this.q, par1, par2);
         }
