@@ -772,11 +772,11 @@ public class ShadersTex {
 
                 IntBuffer var9 = tas.frameBuffers[frameIndex];
                 var9.clear();
-                //GL11.glTexSubImage2D(3553, 0, xPos, yPos, tas.c, tas.d, 32993, 33639, var9);
+                GL11.glTexSubImage2D(3553, 0, xPos, yPos, tas.getC(), tas.getD(), 32993, 33639, var9);
             }
 
             if (tas.mipmapActive) {
-//                tas.uploadFrameMipmaps(frameIndex, xPos, yPos);
+                tas.uploadFrameMipmaps(frameIndex, xPos, yPos);
             }
         }
 

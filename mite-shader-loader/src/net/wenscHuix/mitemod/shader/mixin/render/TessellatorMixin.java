@@ -56,7 +56,7 @@ public class TessellatorMixin {
     }
 
     @Overwrite
-    public int a() throws NoSuchFieldException, IllegalAccessException {
+    public int a() {
         return ShadersTess.draw(ReflectHelper.dyCast(bfq.class,this));
     }
 

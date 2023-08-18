@@ -21,7 +21,7 @@ public class ShadersTess {
     public ShadersTess() {
     }
 
-    public static int draw(bfq tess) throws NoSuchFieldException, IllegalAccessException {
+    public static int draw(bfq tess) {
         if (!tess.z) {
             throw new IllegalStateException("Not tesselating!");
         } else {
@@ -45,7 +45,8 @@ public class ShadersTess {
                 tess.d.limit(vtc * 64);
                 offs += vtc;
                 if (TessellatorAccessor.gettryVBO()) {
-                    Utils.set(tess, "C", (Utils.get(tess, "C", int.class) + 1) % Common.vboCount);
+                    ((TessellatorAccessor)tess).setVboIndex((((TessellatorAccessor)tess).getVboIndex() + 1) % Common.vboCount);
+//                    Utils.set(tess, "C", (Utils.get(tess, "C", int.class) + 1) % Common.vboCount);
 //                    ARBVertexBufferObject.glBindBufferARB(34962, bfq.B.get(tess.C));
                     ARBVertexBufferObject.glBindBufferARB(34962, Common.vertexBuffers.get(Utils.get(tess, "C", int.class)));
                     ARBVertexBufferObject.glBufferDataARB(34962, tess.d, 35040);

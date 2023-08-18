@@ -16,4 +16,10 @@ public interface TessellatorAccessor {
     public static boolean gettryVBO() {
         throw new AssertionError();
     }
+
+    @Accessor("C")
+    public int getVboIndex();
+
+    @Accessor("C")
+    public void setVboIndex(int vboIndex);
 }
