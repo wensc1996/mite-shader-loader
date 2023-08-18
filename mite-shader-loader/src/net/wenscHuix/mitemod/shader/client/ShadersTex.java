@@ -16,13 +16,13 @@ import java.nio.IntBuffer;
 import java.util.*;
 
 public class ShadersTex {
-    public static final int initialBufferSize = 1048576;
+//    public static final int initialBufferSize = 1048576;
     public static ByteBuffer byteBuffer = BufferUtils.createByteBuffer(4194304);
     public static IntBuffer intBuffer;
     public static int[] intArray;
-    public static final int defBaseTexColor = 0;
-    public static final int defNormTexColor = -8421377;
-    public static final int defSpecTexColor = 0;
+//    public static final int defBaseTexColor = 0;
+//    public static final int defNormTexColor = -8421377;
+//    public static final int defSpecTexColor = 0;
     public static Map<Integer, MultiTexID> multiTexMap;
     public static MultiTexID updatingTex;
     public static MultiTexID boundTex;
@@ -64,8 +64,8 @@ public class ShadersTex {
     }
 
     public static IntBuffer fillIntBuffer(int size, int value) {
-        int[] aint = getIntArray(size);
-        IntBuffer intBuf = getIntBuffer(size);
+//        int[] aint = getIntArray(size);
+//        IntBuffer intBuf = getIntBuffer(size);
         Arrays.fill(intArray, 0, size, value);
         intBuffer.put(intArray, 0, size);
         return intBuffer;
@@ -230,7 +230,8 @@ public class ShadersTex {
         return tex;
     }
 
-    public static void setupTextureMap(int texID, int width, int height, big stitcher, bik tex) {
+    //    public static void setupTextureMap(int texID, int width, int height, big stitcher, bik tex) {
+    public static void setupTextureMap(int width, int height, big stitcher, bik tex) {
         MultiTexID multiTex = getMultiTexID(tex);
         tex.atlasWidth = width;
         tex.atlasHeight = height;
@@ -285,6 +286,7 @@ public class ShadersTex {
     }
 
     public static void updateTextureMap(int[] par0ArrayOfInteger, int par1, int par2, int par3, int par4, boolean par5, boolean par6) {
+
     }
 
     public static int blend4Alpha(int c0, int c1, int c2, int c3) {

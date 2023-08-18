@@ -68,7 +68,7 @@ public class TextureMapMixin extends bia {
         }
 
         if(Shaders.isActiveShader) {
-            ShadersTex.setupTextureMap(this.b(), var3.a(), var3.b(), var3, ReflectHelper.dyCast(this));
+            ShadersTex.setupTextureMap(var3.a(), var3.b(), var3, ReflectHelper.dyCast(this));
         } else {
             bip.a(this.b(), var3.a(), var3.b());
         }
