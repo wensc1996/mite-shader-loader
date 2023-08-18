@@ -21,7 +21,8 @@ public class ShaderPackFolder implements IShaderPack {
             if (resFile != null) {
                 return new BufferedInputStream(new FileInputStream(resFile));
             }
-        } catch (Exception var3) {
+        } catch (Exception ignored) {
+            ignored.printStackTrace();
         }
 
         return null;

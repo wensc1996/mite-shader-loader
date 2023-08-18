@@ -9,7 +9,7 @@ public class DefaultTexture extends bia {
         this.loadTexture((bjp)null);
     }
 
-    public void loadTexture(bjp resourcemanager) {
+    public void loadTexture(bjp resourceManager) {
         int[] aint = ShadersTex.createAIntImage(1, -1);
         ShadersTex.setupTexture(this.getMultiTexID(), aint, 1, 1, false, false);
     }

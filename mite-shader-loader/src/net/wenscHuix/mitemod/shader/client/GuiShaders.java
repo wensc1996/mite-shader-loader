@@ -136,6 +136,7 @@ public class GuiShaders extends awe {
                         }
                     } else {
                         for(i = choices.length - 1; i >= 0 && val <= choices[i]; --i) {
+
                         }
 
                         if (i < 0) {
@@ -172,6 +173,7 @@ public class GuiShaders extends awe {
                     choices = new float[]{0.25F, 0.33333334F, 0.5F, 0.70710677F, 1.0F, 1.4142135F, 2.0F};
                     if (!p()) {
                         for(i = 0; i < choices.length && choices[i] <= val; ++i) {
+
                         }
 
                         if (i == choices.length) {
@@ -179,6 +181,7 @@ public class GuiShaders extends awe {
                         }
                     } else {
                         for(i = choices.length - 1; i >= 0 && val <= choices[i]; --i) {
+
                         }
 
                         if (i < 0) {
@@ -195,6 +198,7 @@ public class GuiShaders extends awe {
                     choices = new float[]{0.25F, 0.33333334F, 0.5F, 0.70710677F, 1.0F, 1.4142135F, 2.0F, 3.0F, 4.0F};
                     if (!p()) {
                         for(i = 0; i < choices.length && choices[i] <= val; ++i) {
+
                         }
 
                         if (i == choices.length) {
@@ -202,6 +206,7 @@ public class GuiShaders extends awe {
                         }
                     } else {
                         for(i = choices.length - 1; i >= 0 && val <= choices[i]; --i) {
+
                         }
 
                         if (i < 0) {

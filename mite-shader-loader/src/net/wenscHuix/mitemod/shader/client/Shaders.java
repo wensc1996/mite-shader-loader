@@ -52,15 +52,15 @@ public class Shaders {
     private static long systemTime = 0L;
     private static long lastSystemTime = 0L;
     private static long diffSystemTime = 0L;
-    private static int frameCounter = 0;
+//    private static int frameCounter = 0;
     private static float frameTimeCounter = 0.0F;
-    private static int systemTimeInt32 = 0;
+//    private static int systemTimeInt32 = 0;
     private static float rainStrength = 0.0F;
     private static float wetness = 0.0F;
     public static float wetnessHalfLife = 600.0F;
     public static float drynessHalfLife = 200.0F;
     public static float eyeBrightnessHalflife = 10.0F;
-    private static boolean usewetness = false;
+//    private static boolean usewetness = false;
     private static int isEyeInWater = 0;
     private static int eyeBrightness = 0;
     private static float eyeBrightnessFadeX = 0.0F;
@@ -101,11 +101,11 @@ public class Shaders {
     private static int preShadowPassThirdPersonView;
     public static boolean shouldSkipDefaultShadow = false;
     private static boolean waterShadowEnabled = false;
-    private static final int MaxDrawBuffers = 8;
-    private static final int MaxColorBuffers = 8;
-    private static final int MaxDepthBuffers = 3;
-    private static final int MaxShadowColorBuffers = 8;
-    private static final int MaxShadowDepthBuffers = 2;
+//    private static final int MaxDrawBuffers = 8;
+//    private static final int MaxColorBuffers = 8;
+//    private static final int MaxDepthBuffers = 3;
+//    private static final int MaxShadowColorBuffers = 8;
+//    private static final int MaxShadowDepthBuffers = 2;
     private static int usedColorBuffers = 0;
     private static int usedDepthBuffers = 0;
     private static int usedShadowColorBuffers = 0;
@@ -116,45 +116,45 @@ public class Shaders {
     private static int sfb = 0;
     private static int[] gbuffersFormat = new int[8];
     public static int activeProgram = 0;
-    public static final int ProgramNone = 0;
-    public static final int ProgramBasic = 1;
-    public static final int ProgramTextured = 2;
-    public static final int ProgramTexturedLit = 3;
-    public static final int ProgramSkyBasic = 4;
-    public static final int ProgramSkyTextured = 5;
-    public static final int ProgramTerrain = 6;
-    public static final int ProgramWater = 7;
-    public static final int ProgramEntities = 8;
-    public static final int ProgramHand = 9;
-    public static final int ProgramWeather = 10;
-    public static final int ProgramComposite = 11;
-    public static final int ProgramComposite1 = 12;
-    public static final int ProgramComposite2 = 13;
-    public static final int ProgramComposite3 = 14;
-    public static final int ProgramComposite4 = 15;
-    public static final int ProgramComposite5 = 16;
-    public static final int ProgramComposite6 = 17;
-    public static final int ProgramComposite7 = 18;
-    public static final int ProgramFinal = 19;
-    public static final int ProgramShadow = 20;
-    public static final int ProgramCount = 21;
-    public static final int MaxCompositePasses = 8;
+//    public static final int ProgramNone = 0;
+//    public static final int ProgramBasic = 1;
+//    public static final int ProgramTextured = 2;
+//    public static final int ProgramTexturedLit = 3;
+//    public static final int ProgramSkyBasic = 4;
+//    public static final int ProgramSkyTextured = 5;
+//    public static final int ProgramTerrain = 6;
+//    public static final int ProgramWater = 7;
+//    public static final int ProgramEntities = 8;
+//    public static final int ProgramHand = 9;
+//    public static final int ProgramWeather = 10;
+//    public static final int ProgramComposite = 11;
+//    public static final int ProgramComposite1 = 12;
+//    public static final int ProgramComposite2 = 13;
+//    public static final int ProgramComposite3 = 14;
+//    public static final int ProgramComposite4 = 15;
+//    public static final int ProgramComposite5 = 16;
+//    public static final int ProgramComposite6 = 17;
+//    public static final int ProgramComposite7 = 18;
+//    public static final int ProgramFinal = 19;
+//    public static final int ProgramShadow = 20;
+//    public static final int ProgramCount = 21;
+//    public static final int MaxCompositePasses = 8;
     private static final String[] programNames = new String[]{"", "gbuffers_basic", "gbuffers_textured", "gbuffers_textured_lit", "gbuffers_skybasic", "gbuffers_skytextured", "gbuffers_terrain", "gbuffers_water", "gbuffers_entities", "gbuffers_hand", "gbuffers_weather", "composite", "composite1", "composite2", "composite3", "composite4", "composite5", "composite6", "composite7", "final", "shadow"};
     private static final int[] programBackups = new int[]{0, 0, 1, 2, 1, 2, 3, 6, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private static int[] programsID = new int[21];
     private static int[] programsRef = new int[21];
-    private static int programIDCopyDepth = 0;
+//    private static int programIDCopyDepth = 0;
     private static String[] programsDrawBufSettings = new String[21];
     private static String newDrawBufSetting = null;
     private static IntBuffer[] programsDrawBuffers = new IntBuffer[21];
     private static IntBuffer activeDrawBuffers = null;
     private static String[] programsColorAtmSettings = new String[21];
     private static String newColorAtmSetting = null;
-    private static String activeColorAtmSettings = null;
+//    private static String activeColorAtmSettings = null;
     private static int[] programsCompositeMipmapSetting = new int[21];
     private static int newCompositeMipmapSetting = 0;
     private static int activeCompositeMipmapSetting = 0;
-    public static Properties loadedShaders = null;
+//    public static Properties loadedShaders = null;
     public static Properties shadersConfig = null;
     public static bio defaultTexture = null;
     public static boolean normalMapEnabled = false;
@@ -172,14 +172,14 @@ public class Shaders {
     public static int configTexMagFilN = 0;
     public static int configTexMagFilS = 0;
     public static boolean configShadowClipFrustrum = true;
-    public static final int texMinFilRange = 3;
-    public static final int texMagFilRange = 2;
+//    public static final int texMinFilRange = 3;
+//    public static final int texMagFilRange = 2;
     public static final String[] texMinFilDesc = new String[]{"近的", "中等", "远的"};
     public static final String[] texMagFilDesc = new String[]{"近的", "线性"};
     public static final int[] texMinFilValue = new int[]{9728, 9984, 9986};
     public static final int[] texMagFilValue = new int[]{9728, 9729};
     static IShaderPack shaderPack = null;
-    static File currentshader;
+//    static File currentshader;
     static String currentshadername;
     static String packNameNone = "(无)";
     static String packNameDefault = "(默认)";
@@ -188,9 +188,9 @@ public class Shaders {
     static File shadersdir;
     public static File shaderpacksdir;
     public static File configFile;
-    public static final boolean enableShadersOption = true;
-    private static final boolean enableShadersDebug = true;
-    public static final boolean blockLightingFixEnabled = true;
+//    public static final boolean enableShadersOption = true;
+//    private static final boolean enableShadersDebug = true;
+//    public static final boolean blockLightingFixEnabled = true;
     public static float blockLightLevel05;
     public static float blockLightLevel06;
     public static float blockLightLevel08;
@@ -243,6 +243,7 @@ public class Shaders {
     public static int entityDataIndex;
 
     private Shaders() {
+
     }
 
     private static ByteBuffer nextByteBuffer(int size) {
@@ -277,14 +278,14 @@ public class Shaders {
     }
 
     public static void loadConfig() {
-        System.out.println("[Shaders] Loading configuration.");
+        System.out.println("[MITE Shaders] 加载配置");
 
         try {
             if (!shaderpacksdir.exists()) {
                 shaderpacksdir.mkdir();
             }
         } catch (Exception var3) {
-            System.err.println("[Shaders] Failed openning shaderpacks directory.");
+            System.err.println("[Shaders] 打开光影目录失败");
         }
 
         shadersConfig = new Properties();
@@ -295,18 +296,20 @@ public class Shaders {
                 value = new FileReader(configFile);
                 shadersConfig.load(value);
                 value.close();
-            } catch (Exception var2) {
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
         if (!configFile.exists()) {
             try {
                 storeConfig();
-            } catch (Exception var1) {
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
-        value = null;
+//        value = null;
         isActiveShader = Boolean.parseBoolean(shadersConfig.getProperty("isActiveShader", "true"));
         dtweak = Boolean.parseBoolean(shadersConfig.getProperty("dtweak", "false"));
         configCloudShadow = Boolean.parseBoolean(shadersConfig.getProperty("cloudShadow", "true"));
@@ -325,7 +328,7 @@ public class Shaders {
     }
 
     public static void storeConfig() {
-        System.out.println("[Shaders] Save configuration.");
+        System.out.println("[Shaders] 保存配置");
         shadersConfig.setProperty("isActiveShader", Boolean.toString(isActiveShader));
         shadersConfig.setProperty("dtweak", Boolean.toString(dtweak));
         shadersConfig.setProperty("cloudShadow", Boolean.toString(configCloudShadow));
@@ -342,9 +345,10 @@ public class Shaders {
 
         try {
             FileWriter writer = new FileWriter(configFile);
-            shadersConfig.store(writer, (String)null);
+            shadersConfig.store(writer, null);
             writer.close();
-        } catch (Exception var1) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -372,15 +376,16 @@ public class Shaders {
                     } else if (packFile.isFile() && packName.toLowerCase().endsWith(".zip")) {
                         shaderPack = new ShaderPackZip(packName, packFile);
                     }
-                } catch (Exception var2) {
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }
 
         if (shaderPack != null) {
-            System.out.println("[Shaders] Loaded shaderpack.");
+            System.out.println("[Shaders] 加载光影");
         } else {
-            System.out.println("[Shaders] Did not load shaderpack.");
+            System.out.println("[Shaders] 未加载光影");
             shaderPack = new ShaderPackNone();
         }
 
@@ -398,14 +403,14 @@ public class Shaders {
 
             File[] listOfFiles = shaderpacksdir.listFiles();
 
-            for(int i = 0; i < listOfFiles.length; ++i) {
-                File file = listOfFiles[i];
+            for (File file : listOfFiles) {
                 String name = file.getName();
                 if (file.isDirectory() || file.isFile() && name.toLowerCase().endsWith(".zip")) {
                     list.add(name);
                 }
             }
-        } catch (Exception var5) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return list;
@@ -422,7 +427,7 @@ public class Shaders {
     public static int checkFramebufferStatus(String location) {
         int status = EXTFramebufferObject.glCheckFramebufferStatusEXT(36160);
         if (status != 36053) {
-            System.err.format("FramebufferStatus 0x%04X at %s\n", status, location);
+            System.err.format("帧缓冲状态 0x%04X at %s\n", status, location);
         }
 
         return status;
@@ -475,7 +480,7 @@ public class Shaders {
 
     public static void startup(Minecraft mc) {
         Shaders.mc = mc;
-        System.out.println("ShadersMod version 2.2.1");
+        System.out.println("MITE ShadersMod version 0.0.3");
         loadConfig();
     }
 

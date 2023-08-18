@@ -31,7 +31,8 @@ public class ShaderPackZip implements IShaderPack{
         if (this.packZipFile == null) {
             try {
                 this.packZipFile = new ZipFile(this.packFile);
-            } catch (Exception var4) {
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
