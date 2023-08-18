@@ -9,7 +9,13 @@ import org.spongepowered.asm.mixin.MixinEnvironment;
 
 @Mod(MixinEnvironment.Side.CLIENT)
 public class MITEShaderLoader extends AbstractMod {
-    public static final String VERSION = "v0.0.3";
+
+    @Override
+    public int modVerNum() {
+        return 4;
+    }
+    public static final String VERSION = "v0.0.4";
+
 
     public MITEShaderLoader() {
     }
@@ -34,10 +40,6 @@ public class MITEShaderLoader extends AbstractMod {
         return "mite-shader-loader";
     }
 
-    @Override
-    public int modVerNum() {
-        return 3;
-    }
 
     @Override
     public String modVerStr() {

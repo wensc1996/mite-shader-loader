@@ -63,13 +63,6 @@ public class TextureAtlasSpriteMixin {
 
     }
 
-//    @Inject(locals = LocalCapture.CAPTURE_FAILHARD, at = @At(value = "INVOKE", target = "Ljava/awt/image/BufferedImage;getRGB(IIII[III)[I", shift = At.Shift.BEFORE),
-//            method = "a(Lnet/minecraft/bjn;)V")
-//    private void injectLoadSprite0(CallbackInfo callbackInfo, BufferedImage var4, int[] var5){
-//        if(Shaders.isActiveShader) {
-//            ShadersTex.loadAtlasSprite(var4, 0, 0,this.e, this.f, var5, 0, this.e);
-//        }
-//    }
 
     public void uploadFrameMipmaps(int frameIndex, int xPos, int yPos) {
 

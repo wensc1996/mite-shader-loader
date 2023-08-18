@@ -54,33 +54,6 @@ public class TessellatorMixin {
         return ShadersTess.draw(ReflectHelper.dyCast(bfq.class,this));
     }
 
-//    @Inject(at = @At(value = "RETURN"), method = "<init>")
-//    private void injectInit(CallbackInfo callbackInfo){
-//        this.defaultTexture = false;
-//        this.rawBufferSize = 0;
-//        this.textureID = 0;
-//        this.setShadersTess(65536);
-//    }
-
-
-//    public void setShadersTess(int par1){
-//        this.defaultTexture = false;
-//        this.rawBufferSize = 0;
-//        this.textureID = 0;
-//        this.d = atu.c(par1 * 4);
-//        this.e = this.d.asIntBuffer();
-//        this.f = this.d.asFloatBuffer();
-//        this.g = this.d.asShortBuffer();
-//        this.h = new int[par1];
-//        this.setUseVBO(tryVBO() && GLContext.getCapabilities().GL_ARB_vertex_buffer_object);
-//        if (this.isUseVBO()) {
-//            this.B = atu.f(this.getVboCount());
-//            ARBVertexBufferObject.glGenBuffersARB(this.B);
-//        }
-//
-//        this.shadersTess = new ShadersTess();
-//        this.vertexPos = new float[par1];
-//    }
 
     @Overwrite
     public final void b(float par1, float par2, float par3) {

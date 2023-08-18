@@ -17,14 +17,11 @@ public class OpenGlHelperMixin {
     @Overwrite
     public static void a(int par0) {
         OpenGlHelperExtra.activeTexUnit = par0;
-//        System.out.println("==============");
-//        System.out.println(par0);
         if (c) {
             ARBMultitexture.glActiveTextureARB(par0);
         } else {
             GL13.glActiveTexture(par0);
         }
-
     }
 
 }

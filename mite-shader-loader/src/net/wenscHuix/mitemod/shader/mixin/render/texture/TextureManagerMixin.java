@@ -18,14 +18,6 @@ import java.util.Map;
 @Mixin(bim.class)
 public class TextureManagerMixin {
 
-//    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/bio;b()I"), method = "a(Lnet/minecraft/bjo;)V")
-//    private void redirectUpdateCompass(int var0) {
-//        if(Shaders.isActiveShader) {
-//            ShadersTex.bindTexture((TextureObject)var2);
-//        } else {
-//            bip.b(var0);
-//        }
-//    }
     @Overwrite
     public void a(bjo par1ResourceLocation) {
         Object var2 = this.a.get(par1ResourceLocation);

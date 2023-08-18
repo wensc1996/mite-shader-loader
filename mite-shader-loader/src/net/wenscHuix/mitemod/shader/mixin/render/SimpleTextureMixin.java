@@ -19,14 +19,6 @@ public class SimpleTextureMixin extends bia {
     @Final
     private bjo b;
 
-//    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/bip;a(ILjava/awt/image/BufferedImage;ZZ)I"), method = "a")
-//    private int redirectLoadTexture(int var0, BufferedImage var1, boolean var2, boolean var3, bjp par1ResourceManager) {
-//            if(Shaders.isActiveShader) {
-//        //ShadersTex.loadSimpleTexture(this.b(), var4, var5, var6, par1ResourceManager, this.b, this.getMultiTexID());
-//    } else {
-//        bip.a(this.b(), var4, var5, var6);
-//    }
-//    }
 
     @Overwrite
     public void a(bjp par1ResourceManager) throws IOException {

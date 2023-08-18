@@ -25,16 +25,6 @@ public class LayeredTextureMixin extends bia {
     @Final
     public List b;
 
-//    @Redirect(locals = LocalCapture.CAPTURE_FAILHARD, at = @At(value = "INVOKE", target = "Lnet/minecraft/bip;a(ILjava/awt/image/BufferedImage;)I")
-//            , method = "a")
-//    private int redirectLoadTexture(int var0, BufferedImage var1, bjp par1ResourceManager){
-//        if(Shaders.isActiveShader) {
-//            ShadersTex.loadLayeredTexture(ReflectHelper.dyCast(this), par1ResourceManager, this.b);
-//        } else {
-//            return bip.a(var0, var1);
-//        }
-//    }
-
     @Overwrite
     public void a(bjp var1) {
         BufferedImage var2 = null;

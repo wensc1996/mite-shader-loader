@@ -35,71 +35,6 @@ public class EntityRendererMixin {
             Shaders.enableLightmap();
         }
     }
-//    @Redirect(at = @At(value = "INVOKE", target = "Lorg/lwjgl/util/glu/Project;gluPerspective(FFFF)V"), method = "b(FI)V")
-//    private void redirectRenderHand0(float fovy, float aspect, float zNear, float zFar){
-//        if(Shaders.isActiveShader) {
-//            Shaders.applyHandDepth();
-//            Project.gluPerspective(fovy, aspect, 0.05F, zFar);
-//        } else {
-//            Project.gluPerspective(fovy, aspect, zNear, zFar);
-//        }
-//    }
-//    @Inject(at = @At(value = "HEAD"), method = "a(FJ)V")
-//    private void injectRenderWorld0(float par1, long par2, CallbackInfo callbackInfo){
-//        if(Shaders.isActiveShader) {
-//            Shaders.beginRender(this.q, par1, par2);
-//        }
-//    }
-//
-//    @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 2, shift = At.Shift.BEFORE),  method = "a(FJ)V")
-//    private void injectRenderWorld1(CallbackInfo callbackInfo){
-//        if(Shaders.isActiveShader) {
-//            Shaders.clearRenderBuffer();
-//        }
-//    }
-//
-//    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/EntityRenderer;setupCameraTransform(FIZ)V", shift = At.Shift.AFTER),  method = "a(FJ)V")
-//    private void injectRenderWorld2(float par1, long par2, CallbackInfo callbackInfo){
-//        if(Shaders.isActiveShader) {
-//            Shaders.setCamera(par1);
-//        }
-//    }
-//
-////    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/aul;getRenderDistance()I", shift = At.Shift.BEFORE),  method = "a(FJ)V")
-////    private void injectRenderWorld3(float par1, long par2, CallbackInfo callbackInfo){
-////        if (Shaders.isActiveShader && !Shaders.isShadowPass) {
-////            Shaders.beginSky();
-////            Shaders.endSky();
-////        }
-////    }
-//
-//    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/bfl;a(F)V", shift = At.Shift.BEFORE),  method = "a(FJ)V")
-//    private void injectRenderWorld3(float par1, long par2, CallbackInfo callbackInfo){
-//        if (Shaders.isActiveShader && !Shaders.isShadowPass) {
-//            Shaders.beginSky();
-//        }
-//    }
-//
-//    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/bfl;a(F)V", shift = At.Shift.AFTER),  method = "a(FJ)V")
-//    private void injectRenderWorld4(float par1, long par2, CallbackInfo callbackInfo){
-//        if (Shaders.isActiveShader && !Shaders.isShadowPass) {
-//            Shaders.endSky();
-//        }
-//    }
-//
-//    @Redirect(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glViewport(IIII)V"), method = "a(FJ)V")
-//    private void redirectRenderWorld0(int x, int y, int width, int height){
-//        if(Shaders.isActiveShader) {
-//            Shaders.setViewport(x, y, width, height);
-//        } else {
-//            GL11.glViewport(x, y, width, height);
-//        }
-//    }
-//
-//    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/aul;getRenderDistance()I"), method = "a(FJ)V")
-//    private int redirectRenderWorld1(){
-//        return Shaders.isActiveShader && !Shaders.isShadowPass ? 3 : this.q.u.getRenderDistance();
-//    }
 
     @Inject(at = @At(value = "HEAD"), method = "a(FFFF)Ljava/nio/FloatBuffer;")
     private void injectSetFogColorBuffer(float par1, float par2, float par3, float par4, CallbackInfoReturnable<FloatBuffer> callbackInfoReturnable){
@@ -704,10 +639,16 @@ public class EntityRendererMixin {
             }
 
             if (Shaders.isActiveShader) {
+                float var10000 = this.a(par1, false);
+                float var10001 = (float)this.q.d / (float)this.q.e;
+                float var10003 = this.r * 2.0F;
                 Shaders.applyHandDepth();
+                Project.gluPerspective(var10000, var10001, 0.05F, var10003);
+            } else {
+                Project.gluPerspective(this.a(par1, false), (float) this.q.d / (float) this.q.e, 0.05F, this.r * 2.0F);
             }
 
-            Project.gluPerspective(this.a(par1, false), (float) this.q.d / (float) this.q.e, 0.05F, this.r * 2.0F);
+
             if (this.q.c.a()) {
                 float var4 = 0.6666667F;
                 GL11.glScalef(1.0F, var4, 1.0F);
@@ -725,7 +666,7 @@ public class EntityRendererMixin {
                     if (this.q.u.f) {
                         this.f(par1);
                     }
-                    if (this.q.u.aa == 0 && !this.q.i.inBed() && this.q.u.gui_mode != 2 && !this.q.c.a()) {
+                    if (this.q.u.aa == 0 && !this.q.i.inBed() && !this.q.c.a()) {
                         this.b(par1);
                         this.c.a(par1);
                         this.a(par1);
@@ -739,7 +680,7 @@ public class EntityRendererMixin {
                     this.f(par1);
                 }
 
-                if (this.q.u.aa == 0 && !this.q.i.inBed() && this.q.u.gui_mode != 2 && !this.q.c.a()) {
+                if (this.q.u.aa == 0 && !this.q.i.inBed() && !this.q.c.a()) {
                     this.b(par1);
                     this.c.a(par1);
                     this.a(par1);

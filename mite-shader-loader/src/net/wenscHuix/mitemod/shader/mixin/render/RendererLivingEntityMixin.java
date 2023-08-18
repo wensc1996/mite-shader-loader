@@ -13,6 +13,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(bhb.class)
 public abstract class RendererLivingEntityMixin extends bgm {
 
+    @Shadow
+    protected void c(EntityLiving par1EntityLivingBase, int par2, float par3) {
+    }
 
     @Redirect(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 2), method = "a(Lnet/minecraft/EntityLiving;Ljava/lang/String;DDDI)V")
     private void redirectRenderLivingLabel0(int cap){
@@ -124,7 +127,7 @@ public abstract class RendererLivingEntityMixin extends bgm {
                     this.j.a(par1EntityLivingBase, var16, var15, par9);
                     this.j.a(par1EntityLivingBase, var16, var15, var13, var11 - var10, var26, var14);
                     if ((var18 & 240) == 16) {
-//                        this.c(par1EntityLivingBase, var17, par9);
+                        this.c(par1EntityLivingBase, var17, par9);
                         this.j.a(par1EntityLivingBase, var16, var15, var13, var11 - var10, var26, var14);
                     }
 
@@ -172,7 +175,7 @@ public abstract class RendererLivingEntityMixin extends bgm {
             if(Shaders.isActiveShader) {
                 Shaders.resetEntityHurtFlash();
             }
-//            this.c(par1EntityLivingBase, par9);
+            this.c(par1EntityLivingBase, par9);
             if (Shaders.isActiveShader ? !Shaders.useEntityHurtFlash : true) {
                 float var27 = par1EntityLivingBase.getBrightness(par9);
                 var18 = this.a(par1EntityLivingBase, var27, par9);

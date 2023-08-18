@@ -12,9 +12,6 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(Block.class)
 public class BlockMixin {
-//    @Shadow
-//    @Final
-//    public static boolean[] is_normal_cube_lookup;
     @Shadow
     public static Block getBlock(int block_id) {
         return null;
@@ -52,19 +49,7 @@ public class BlockMixin {
                     }
                 }
             }
-//            return var5 == 0 ? 1.0F : (is_normal_cube_lookup[var5] ? 0.2F : (getBlock(var5).is_tree_leaves ? 0.4F : 1.0F));
         }
-
-//        int block_id = par1IBlockAccess.getBlockId(par2, par3, par4);
-//        if (block_id == 0) {
-//            return 1.0F;
-//        } else if (is_normal_cube_lookup[block_id]) {
-//            return 0.2F;
-//        } else {
-//            Block block = getBlock(block_id);
-//            if(block)
-//            return getBlock(block_id).is_tree_leaves ? 0.4F : 1.0F;
-//        }
     }
 
 }

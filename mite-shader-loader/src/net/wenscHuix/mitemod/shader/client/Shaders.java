@@ -668,7 +668,7 @@ public class Shaders {
             isInitialized = true;
             resetDisplayList();
             if (notFirstInit) {
-                mc.r.b().a("Shaders initialized.");
+                mc.r.b().a("光影加载完成");
             }
 
             checkGLError("Shaders.init");
@@ -1255,7 +1255,7 @@ public class Shaders {
                 setProgramUniform2i("terrainTextureSize", terrainTextureSize[0], terrainTextureSize[1]);
                 setProgramUniform1i("terrainIconSize", terrainIconSize);
                 setProgramUniform1i("isEyeInWater", isEyeInWater);
-                setProgramUniform1i("hideGUI", mc.u.gui_mode != 2 ? 1 : 0);
+                setProgramUniform1i("hideGUI", 0);
                 setProgramUniform1f("centerDepthSmooth", centerDepthSmooth);
                 setProgramUniform2i("atlasSize", atlasSizeX, atlasSizeY);
                 checkGLError("useProgram ", programNames[program]);
