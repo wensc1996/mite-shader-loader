@@ -10,7 +10,6 @@ import org.lwjgl.opengl.GLContext;
 public class TessellatorExtra extends bfq {
     public static int bufferSize = 2097152;
     public TessellatorExtra(int par1){
-
         this.defaultTexture = false;
         this.rawBufferSize = 0;
         this.textureID = 0;

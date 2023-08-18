@@ -24,23 +24,23 @@ import java.util.Random;
 public class EntityRendererMixin {
     @Inject(at = @At(value = "RETURN"), method = "a(D)V")
     private void injectDisableLightmap(CallbackInfo callbackInfo){
-        if(Shaders.isActiveShader) {
+        //if(Shaders.isActiveShader) {
             Shaders.disableLightmap();
-        }
+            //}
     }
 
     @Inject(at = @At(value = "RETURN"), method = "b(D)V")
     private void injectEnableLightmap(CallbackInfo callbackInfo){
-        if(Shaders.isActiveShader) {
+        //if(Shaders.isActiveShader) {
             Shaders.enableLightmap();
-        }
+        //}
     }
 
     @Inject(at = @At(value = "HEAD"), method = "a(FFFF)Ljava/nio/FloatBuffer;")
     private void injectSetFogColorBuffer(float par1, float par2, float par3, float par4, CallbackInfoReturnable<FloatBuffer> callbackInfoReturnable){
-        if(Shaders.isActiveShader) {
+        //if(Shaders.isActiveShader) {
             Shaders.setFogColor(par1, par2, par3);
-        }
+        // }
     }
 
     @Overwrite
@@ -50,22 +50,22 @@ public class EntityRendererMixin {
 
         if (par1 == 999) {
             GL11.glFog(2918, this.a(0.0F, 0.0F, 0.0F, 1.0F));
-            if(Shaders.isActiveShader) {
+            //if(Shaders.isActiveShader) {
                 Shaders.sglFogi(2917, 9729);
-            }
+            // }
             GL11.glFogi(2917, 9729);
             GL11.glFogf(2915, 0.0F);
             GL11.glFogf(2916, 8.0F);
 
-            if(Shaders.isActiveShader) {
+            //if(Shaders.isActiveShader) {
                 if (GLContext.getCapabilities().GL_NV_fog_distance) {
                     Shaders.sglFogi(34138, 34139);
                 }
-            } else {
-                if (capability_gl_nv_fog_distance) {
-                    GL11.glFogi(34138, 34139);
-                }
-            }
+//            } else {
+//                if (capability_gl_nv_fog_distance) {
+//                    GL11.glFogi(34138, 34139);
+//                }
+//          }
 
             GL11.glFogf(2915, 0.0F);
         } else {
@@ -81,11 +81,11 @@ public class EntityRendererMixin {
                     var6 = 5.0F + (this.r - 5.0F) * (1.0F - (float)var7 / 20.0F);
                 }
 
-                if(Shaders.isActiveShader) {
+//                if(Shaders.isActiveShader) {
                     Shaders.sglFogi(GL11.GL_FOG_MODE, GL11.GL_LINEAR);
-                } else {
-                    GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_LINEAR);
-                }
+//                } else {
+//                    GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_LINEAR);
+//                }
 
                 if (par1 < 0) {
                     GL11.glFogf(2915, 0.0F);
@@ -95,30 +95,30 @@ public class EntityRendererMixin {
                     GL11.glFogf(2916, var6);
                 }
 
-                if(Shaders.isActiveShader) {
+//                if(Shaders.isActiveShader) {
                     if (GLContext.getCapabilities().GL_NV_fog_distance) {
                         Shaders.sglFogi(34138, 34139);
                     }
-                } else {
-                    if (capability_gl_nv_fog_distance)
-                    {
-                        GL11.glFogi(34138, 34139);
-                    }
-                }
+//                } else {
+//                    if (capability_gl_nv_fog_distance)
+//                    {
+//                        GL11.glFogi(34138, 34139);
+//                    }
+//                }
             } else if (this.X) {
-                if(Shaders.isActiveShader) {
+//                if(Shaders.isActiveShader) {
                     Shaders.sglFogi(2917, 2048);
-                } else {
-                    GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_EXP);
-                }
+//                } else {
+//                    GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_EXP);
+//                }
                 GL11.glFogf(2914, 0.1F);
             } else if (var5 > 0 && Block.blocksList[var5].blockMaterial == Material.water) {
 
-                if(Shaders.isActiveShader) {
+//                if(Shaders.isActiveShader) {
                     Shaders.sglFogi(2917, 2048);
-                } else {
-                    GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_EXP);
-                }
+//                } else {
+//                    GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_EXP);
+//                }
 
                 if (var3.isPotionActive(MobEffectList.waterBreathing)) {
                     GL11.glFogf(2914, 0.05F);
@@ -126,11 +126,11 @@ public class EntityRendererMixin {
                     GL11.glFogf(2914, 0.1F - (float)EnchantmentManager.getRespiration(var3) * 0.03F);
                 }
             } else if (var5 > 0 && Block.blocksList[var5].blockMaterial == Material.lava) {
-                if(Shaders.isActiveShader) {
+//                if(Shaders.isActiveShader) {
                     Shaders.sglFogi(2917, 2048);
-                } else {
-                    GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_EXP);
-                }
+//                } else {
+//                    GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_EXP);
+//                }
                 GL11.glFogf(2914, 2.0F);
             } else {
                 var6 = this.r;
@@ -228,9 +228,9 @@ public class EntityRendererMixin {
                         var6 = 128.0F;
                     }
 
-                    if(Shaders.isActiveShader) {
+//                    if(Shaders.isActiveShader) {
                         Shaders.sglFogi(2917, 9729);
-                    }
+//                    }
 
                 }
 
@@ -243,15 +243,15 @@ public class EntityRendererMixin {
                     GL11.glFogf(2916, var6);
                 }
 
-                if(Shaders.isActiveShader) {
+//                if(Shaders.isActiveShader) {
                     if (GLContext.getCapabilities().GL_NV_fog_distance) {
                         Shaders.sglFogi(34138, 34139);
                     }
-                } else {
-                    if (capability_gl_nv_fog_distance) {
-                        GL11.glFogi(34138, 34139);
-                    }
-                }
+//                } else {
+//                    if (capability_gl_nv_fog_distance) {
+//                        GL11.glFogi(34138, 34139);
+//                    }
+//                }
 
                 if (this.q.f.provider.doesXZShowFog(var3.getBlockPosX(), var3.getEyeBlockPosY(), var3.getBlockPosZ())) {
                     GL11.glFogf(2915, var6 * 0.05F);
@@ -267,21 +267,21 @@ public class EntityRendererMixin {
 
     @Overwrite
     private void a(bfl par1RenderGlobal, float par2) {
-        if (Shaders.isActiveShader ? Shaders.shouldRenderClouds(this.q.u) : this.q.u.d()) {
+        if (Shaders.shouldRenderClouds(this.q.u)) {
             this.q.C.endStartSection("clouds");
             GL11.glPushMatrix();
             this.a(0, par2);
             GL11.glEnable(2912);
 
-            if(Shaders.isActiveShader) {
+            //if(Shaders.isActiveShader) {
                 Shaders.beginClouds();
-            }
+                //}
 
             par1RenderGlobal.b(par2);
 
-            if(Shaders.isActiveShader) {
+            //if(Shaders.isActiveShader) {
                 Shaders.endClouds();
-            }
+            //}
 
             GL11.glDisable(2912);
             this.a(1, par2);
@@ -292,9 +292,9 @@ public class EntityRendererMixin {
 
     @Overwrite
     public void a(float par1, long par2) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException, NoSuchMethodException {
-        if(Shaders.isActiveShader) {
+//        if(Shaders.isActiveShader) {
             Shaders.beginRender(this.q, par1, par2);
-        }
+//        }
 
         this.q.C.startSection("lightTex");
         if (this.ad) {
@@ -336,27 +336,27 @@ public class EntityRendererMixin {
 
             this.q.C.endStartSection("clear");
 
-            if(Shaders.isActiveShader) {
+//            if(Shaders.isActiveShader) {
                 Shaders.setViewport(0, 0, this.q.d, this.q.e);
-            } else {
-                GL11.glViewport(0, 0, this.q.d, this.q.e);
-            }
+//            } else {
+//                GL11.glViewport(0, 0, this.q.d, this.q.e);
+//            }
 
 
             this.i(par1);
             GL11.glClear(16640);
 
-            if(Shaders.isActiveShader) {
+//            if(Shaders.isActiveShader) {
                 Shaders.clearRenderBuffer();
-            }
+//            }
 
             GL11.glEnable(2884);
             this.q.C.endStartSection("camera");
             this.setupCameraTransform(par1, var13, false);
 
-            if(Shaders.isActiveShader) {
+//            if(Shaders.isActiveShader) {
                 Shaders.setCamera(par1);
-            }
+//            }
 
             if (this.last_vsync_nanotime != -1L) {
                 long milliseconds_since_last_vsync = (System.nanoTime() - this.last_vsync_nanotime) / 1000000L;
@@ -383,19 +383,19 @@ public class EntityRendererMixin {
 
             this.q.C.endStartSection("frustrum");
             bfu.a();
-            if (Shaders.isActiveShader ? !Shaders.isShadowPass : this.q.u.getRenderDistance() < 2) {
+            if (!Shaders.isShadowPass) {
                 this.a(-1, par1);
 
-                if(Shaders.isActiveShader) {
+//                if(Shaders.isActiveShader) {
                     Shaders.beginSky();
-                }
+//                }
 
                 this.q.C.endStartSection("sky");
                 var5.a(par1);
 
-                if(Shaders.isActiveShader) {
+//                if(Shaders.isActiveShader) {
                     Shaders.endSky();
-                }
+//                }
             }
 
             GL11.glEnable(2912);
@@ -407,19 +407,19 @@ public class EntityRendererMixin {
             this.q.C.endStartSection("culling");
             bfv frustrum = new bfv();
 
-            if(Shaders.isActiveShader) {
+//            if(Shaders.isActiveShader) {
                 ShadersRender.setFrustrumPosition(frustrum, var7, var9, var11);
                 ShadersRender.clipRenderersByFrustrum(this.q.g, frustrum, par1);
-            } else {
-                frustrum.a(var7, var9, var11);
-                this.q.g.a(frustrum, par1);
-            }
+//            } else {
+//                frustrum.a(var7, var9, var11);
+//                this.q.g.a(frustrum, par1);
+//            }
 
             if (var13 == 0) {
 
-                if(Shaders.isActiveShader) {
+//                if(Shaders.isActiveShader) {
                     Shaders.beginUpdateChunks();
-                }
+//                }
 
                 this.q.C.endStartSection("updatechunks");
 
@@ -434,9 +434,9 @@ public class EntityRendererMixin {
                     }
                 }
 
-                if(Shaders.isActiveShader) {
+                //if(Shaders.isActiveShader) {
                     Shaders.endUpdateChunks();
-                }
+                    //}
             }
 
             if (var4.posY < 128.0) {
@@ -450,13 +450,13 @@ public class EntityRendererMixin {
             att.a();
             this.q.C.endStartSection("terrain");
 
-            if(Shaders.isActiveShader) {
+            //if(Shaders.isActiveShader) {
                 Shaders.beginTerrain();
                 var5.a(var4, 0, par1);
                 Shaders.endTerrain();
-            } else {
-                var5.a(var4, 0, par1);
-            }
+//            } else {
+//                var5.a(var4, 0, par1);
+//            }
 
             GL11.glShadeModel(7424);
             EntityPlayer var17;
@@ -467,24 +467,24 @@ public class EntityRendererMixin {
                 this.b((double)par1);
                 this.q.C.endStartSection("litParticles");
 
-                if(Shaders.isActiveShader) {
+                //if(Shaders.isActiveShader) {
                     Shaders.beginLitParticles();
-                }
+                    // }
 
                 var6.b(var4, par1);
                 att.a();
                 this.a(0, par1);
 
-                if(Shaders.isActiveShader) {
+                // if(Shaders.isActiveShader) {
                     Shaders.beginParticles();
-                }
+                // }
 
                 this.q.C.endStartSection("particles");
                 var6.a(var4, par1);
 
-                if(Shaders.isActiveShader) {
+                //if(Shaders.isActiveShader) {
                     Shaders.endParticles();
-                }
+                //}
 
                 this.a(par1);
                 if (this.q.t != null && var4.isInsideOfMaterial(Material.water) && var4 instanceof EntityPlayer && this.q.u.gui_mode == 0) {
@@ -500,12 +500,12 @@ public class EntityRendererMixin {
             GL11.glEnable(2884);
             GL11.glBlendFunc(770, 771);
             GL11.glDepthMask(true);
-            if(Shaders.isActiveShader) {
+            //if(Shaders.isActiveShader) {
                 Shaders.beginHand();
                 this.b(par1, var13);
                 Shaders.endHand();
                 Shaders.preWater();
-            }
+                //}
 
             GL11.glEnable(3042);
             GL11.glDisable(2884);
@@ -518,9 +518,9 @@ public class EntityRendererMixin {
 
                 GL11.glColorMask(false, false, false, false);
 
-                if(Shaders.isActiveShader) {
+                //if(Shaders.isActiveShader) {
                     Shaders.beginWaterFancy();
-                }
+                //}
                 int var18 = var5.a(var4, 1, par1);
                 if (this.q.u.g) {
                     if (b == 0) {
@@ -533,24 +533,24 @@ public class EntityRendererMixin {
                 }
 
                 if (var18 > 0) {
-                    if(Shaders.isActiveShader) {
+                    //if(Shaders.isActiveShader) {
                         Shaders.midWaterFancy();
-                    }
+                    // }
                     var5.a(1, par1);
                 }
-                if(Shaders.isActiveShader){
+                //if(Shaders.isActiveShader){
                     Shaders.endWater();
-                }
+                    // }
                 GL11.glShadeModel(7424);
             } else {
                 this.q.C.endStartSection("water");
-                if(Shaders.isActiveShader) {
+                //if(Shaders.isActiveShader) {
                     Shaders.beginWater();
                     var5.a(var4, 1, par1);
                     Shaders.endWater();
-                } else {
-                    var5.a(var4, 1, par1);
-                }
+//                } else {
+//                    var5.a(var4, 1, par1);
+//                }
 
             }
 
@@ -558,12 +558,12 @@ public class EntityRendererMixin {
             GL11.glEnable(2884);
             GL11.glDisable(3042);
 
-            if(Shaders.isActiveShader) {
+            //if(Shaders.isActiveShader) {
                 if (Shaders.isShadowPass) {
                     return;
                 }
                 Shaders.readCenterDepth();
-            }
+            //}
 
             if (this.Y == 1.0 && var4 instanceof EntityPlayer && this.q.u.gui_mode == 0 && this.q.t != null && !var4.isInsideOfMaterial(Material.water)) {
                 var17 = (EntityPlayer)var4;
@@ -579,39 +579,39 @@ public class EntityRendererMixin {
             var5.a(bfq.a, (EntityPlayer)var4, par1);
             GL11.glDisable(3042);
             this.q.C.endStartSection("weather");
-            if(Shaders.isActiveShader) {
+            //if(Shaders.isActiveShader) {
                 Shaders.beginWeather();
-            }
+                //}
             this.d(par1);
-            if(Shaders.isActiveShader) {
+            //if(Shaders.isActiveShader) {
                 Shaders.endWeather();
-            }
+            //}
             GL11.glDisable(2912);
-            if(Shaders.isActiveShader) {
+            //if(Shaders.isActiveShader) {
                 Shaders.disableFog();
-            }
+            //}
             if (var4.posY >= 128.0) {
                 this.a(var5, par1);
             }
 
             this.q.C.endStartSection("hand");
-            if(Shaders.isActiveShader) {
+            //if(Shaders.isActiveShader) {
                 Shaders.renderCompositeFinal();
-            }
+            //}
             if (this.Y == 1.0) {
                 GL11.glClear(256);
-                if(Shaders.isActiveShader) {
+                //if(Shaders.isActiveShader) {
                     Shaders.beginFPOverlay();
-                }
+                //}
                 this.b(par1, var13);
-                if(Shaders.isActiveShader) {
+                //if(Shaders.isActiveShader) {
                     Shaders.endFPOverlay();
-                }
+                //}
             }
 
-            if(Shaders.isActiveShader) {
+            //if(Shaders.isActiveShader) {
                 Shaders.endRender();
-            }
+            //}
 
             if (!this.q.u.g) {
                 this.q.C.endSection();
@@ -638,15 +638,15 @@ public class EntityRendererMixin {
                 GL11.glScaled(this.Y, this.Y, 1.0);
             }
 
-            if (Shaders.isActiveShader) {
+//            if (Shaders.isActiveShader) {
                 float var10000 = this.a(par1, false);
                 float var10001 = (float)this.q.d / (float)this.q.e;
                 float var10003 = this.r * 2.0F;
                 Shaders.applyHandDepth();
                 Project.gluPerspective(var10000, var10001, 0.05F, var10003);
-            } else {
-                Project.gluPerspective(this.a(par1, false), (float) this.q.d / (float) this.q.e, 0.05F, this.r * 2.0F);
-            }
+//            } else {
+//                Project.gluPerspective(this.a(par1, false), (float) this.q.d / (float) this.q.e, 0.05F, this.r * 2.0F);
+//            }
 
 
             if (this.q.c.a()) {
@@ -660,7 +660,7 @@ public class EntityRendererMixin {
                 GL11.glTranslatef((float) (par2 * 2 - 1) * 0.1F, 0.0F, 0.0F);
             }
 
-            if(Shaders.isActiveShader) {
+//            if(Shaders.isActiveShader) {
                 if (!Shaders.isCompositeRendered) {
                     this.e(par1);
                     if (this.q.u.f) {
@@ -673,21 +673,21 @@ public class EntityRendererMixin {
                     }
                     return;
                 }
-            } else {
-                GL11.glPushMatrix();
-                this.e(par1);
-                if (this.q.u.f) {
-                    this.f(par1);
-                }
-
-                if (this.q.u.aa == 0 && !this.q.i.inBed() && !this.q.c.a()) {
-                    this.b(par1);
-                    this.c.a(par1);
-                    this.a(par1);
-                }
-
-                GL11.glPopMatrix();
-            }
+//            } else {
+//                GL11.glPushMatrix();
+//                this.e(par1);
+//                if (this.q.u.f) {
+//                    this.f(par1);
+//                }
+//
+//                if (this.q.u.aa == 0 && !this.q.i.inBed() && !this.q.c.a()) {
+//                    this.b(par1);
+//                    this.c.a(par1);
+//                    this.a(par1);
+//                }
+//
+//                GL11.glPopMatrix();
+//            }
 
 
             if (this.q.u.aa == 0 && !this.q.i.inBed()) {

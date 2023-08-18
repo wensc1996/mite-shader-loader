@@ -19,7 +19,7 @@ public class GuiShaders extends awe {
     public boolean needReinit;
     private GuiSlotShaders shaderList;
 
-    public GuiShaders(awe par1GuiScreen, aul par2GameSettings) {
+    public GuiShaders(awe par1GuiScreen) {
         this.parentGui = par1GuiScreen;
 
     }
@@ -52,12 +52,12 @@ public class GuiShaders extends awe {
             float[] choices;
             int i;
             switch (par1GuiButton.g) {
-                case 17:
-                    Shaders.isActiveShader = !Shaders.isActiveShader;
-                    par1GuiButton.f = "开启光影: " + Shaders.isActiveShader;
-                    Shaders.storeConfig();
-                    System.exit(0);
-                    break;
+//                case 17:
+//                    Shaders.isActiveShader = !Shaders.isActiveShader;
+//                    par1GuiButton.f = "开启光影: " + Shaders.isActiveShader;
+//                    Shaders.storeConfig();
+//                    System.exit(0);
+//                    break;
                 case 4:
                     Shaders.dtweak = !Shaders.dtweak;
                     par1GuiButton.f = "新的方块光影效果: " + Shaders.dtweak;
@@ -105,6 +105,7 @@ public class GuiShaders extends awe {
                     try {
                         Shaders.storeConfig();
                     } catch (Exception var5) {
+                        var5.printStackTrace();
                     }
 
                     if (this.needReinit) {

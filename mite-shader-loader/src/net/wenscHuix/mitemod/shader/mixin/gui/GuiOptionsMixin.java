@@ -59,7 +59,7 @@ public class GuiOptionsMixin extends awe {
         if (par1GuiButton.h) {
             if (par1GuiButton.g == 190 && !Main.is_MITE_DS) {
                 this.f.u.b();
-                this.f.a(new GuiShaders(ReflectHelper.dyCast(this), this.d));
+                this.f.a(new GuiShaders(ReflectHelper.dyCast(this)));
             }
         }
     }

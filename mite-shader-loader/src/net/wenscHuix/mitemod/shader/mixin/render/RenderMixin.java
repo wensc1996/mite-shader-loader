@@ -13,7 +13,9 @@ public class RenderMixin {
 
     @Overwrite
     private void c(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
-        if (Shaders.isActiveShader ? !Shaders.shouldSkipDefaultShadow : !par1Entity.disable_shadow) {
+        if (Shaders.shouldSkipDefaultShadow) {
+            return;
+        }
             par4 -= par1Entity.yOffset;
             GL11.glEnable(3042);
             GL11.glBlendFunc(770, 771);
@@ -31,7 +33,7 @@ public class RenderMixin {
 
             double var35 = par1Entity.lastTickPosX + (par1Entity.posX - par1Entity.lastTickPosX) * (double)par9;
             double var14 = par1Entity.lastTickPosY + (par1Entity.posY - par1Entity.lastTickPosY) * (double)par9 + (double)par1Entity.S();
-            var14 -= (double)par1Entity.yOffset;
+            var14 -= par1Entity.yOffset;
             double var16 = par1Entity.lastTickPosZ + (par1Entity.posZ - par1Entity.lastTickPosZ) * (double)par9;
             int var18 = MathHelper.floor_double(var35 - (double)var11);
             int var19 = MathHelper.floor_double(var35 + (double)var11);
@@ -57,7 +59,7 @@ public class RenderMixin {
             GL11.glDisable(3042);
             GL11.glDepthMask(true);
             GL11.glAlphaFunc(516, 0.1F);
-        }
+
     }
 
     @Shadow

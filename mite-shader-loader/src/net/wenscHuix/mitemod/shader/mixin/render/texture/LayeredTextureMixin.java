@@ -49,10 +49,10 @@ public class LayeredTextureMixin extends bia {
             return;
         }
 
-        if(Shaders.isActiveShader) {
+//        if(Shaders.isActiveShader) {
             ShadersTex.loadLayeredTexture(ReflectHelper.dyCast(this), var1, this.b);
-        } else {
-            bip.a(this.b(), var2);
-        }
+//        } else {
+//            bip.a(this.b(), var2);
+//        }
     }
 }

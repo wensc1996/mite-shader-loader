@@ -39,13 +39,13 @@ public class TextureMapMixin extends bia {
             bjo var8 = new bjo(var6.b(), String.format("%s/%s%s", this.h, var6.a(), ".png"), false);
 
             try {
-                if(Shaders.isActiveShader) {
+//                if(Shaders.isActiveShader) {
                     if (!var17.load(par1ResourceManager, var8)) {
                         continue;
                     }
-                } else {
-                    var17.a(par1ResourceManager.a(var8));
-                }
+//                } else {
+//                    var17.a(par1ResourceManager.a(var8));
+//                }
             } catch (RuntimeException var14) {
                 Minecraft.w().getLogAgent().logSevere(String.format("Unable to parse animation metadata from %s: %s", var8, var14.getMessage()));
                 continue;
@@ -67,11 +67,11 @@ public class TextureMapMixin extends bia {
             throw var13;
         }
 
-        if(Shaders.isActiveShader) {
+//        if(Shaders.isActiveShader) {
             ShadersTex.setupTextureMap(var3.a(), var3.b(), var3, ReflectHelper.dyCast(this));
-        } else {
-            bip.a(this.b(), var3.a(), var3.b());
-        }
+//        } else {
+//            bip.a(this.b(), var3.a(), var3.b());
+//        }
 
         HashMap var15 = Maps.newHashMap(this.e);
         Iterator var16 = var3.d().iterator();
@@ -83,11 +83,11 @@ public class TextureMapMixin extends bia {
             this.f.put(var18, var17);
 
             try {
-                if(Shaders.isActiveShader) {
+//                if(Shaders.isActiveShader) {
                     ShadersTex.updateTextureMap(var17.a(0), var17.a(), var17.b(), var17.h(), var17.i(), false, false);
-                } else {
-                    bip.a(var17.a(0), var17.a(), var17.b(), var17.h(), var17.i(), false, false);
-                }
+//                } else {
+//                    bip.a(var17.a(0), var17.a(), var17.b(), var17.h(), var17.i(), false, false);
+//                }
             } catch (Throwable var12) {
                 CrashReport var9 = CrashReport.makeCrashReport(var12, "Stitching texture atlas");
                 CrashReportSystemDetails var10 = var9.makeCategory("Texture being stitched together");
@@ -114,9 +114,9 @@ public class TextureMapMixin extends bia {
 
     @Overwrite
     public void c() {
-        if(Shaders.isActiveShader) {
+//        if(Shaders.isActiveShader) {
             ShadersTex.updatingTex = this.getMultiTexID();
-        }
+//        }
 
 //        Utils.call(bip.class, "b", new Class[]{Integer.class}, new Object[]{this.b()});
 
@@ -128,9 +128,9 @@ public class TextureMapMixin extends bia {
             var2.j();
         }
 
-        if(Shaders.isActiveShader) {
+        //if(Shaders.isActiveShader) {
             ShadersTex.updatingTex = null;
-        }
+        //}
 
     }
 

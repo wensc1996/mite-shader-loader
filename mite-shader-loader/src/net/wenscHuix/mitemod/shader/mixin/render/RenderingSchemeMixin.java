@@ -25,11 +25,11 @@ public class RenderingSchemeMixin {
             Minecraft.O.getLogAgent().logInfo("Rendering scheme: " + getSchemeDescriptor(scheme_index));
         }
 
-        if(Shaders.isActiveShader) {
+//        if(Shaders.isActiveShader) {
             current = 0;
-        } else {
-            current = scheme_index;
-        }
+//        } else {
+//            current = scheme_index;
+//        }
 
         bfq.a = current == 0 ? new TessellatorExtra(2097152) : new TessellatorMITE();
     }

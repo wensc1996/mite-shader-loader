@@ -57,18 +57,18 @@ public class TessellatorMixin {
 
     @Overwrite
     public final void b(float par1, float par2, float par3) {
-        if(Shaders.isActiveShader) {
+//        if(Shaders.isActiveShader) {
             this.q = true;
             this.normalX = par1;
             this.normalY = par2;
             this.normalZ = par3;
-        } else {
-            this.q = true;
-            byte var4 = (byte)((int)(par1 * 127.0F));
-            byte var5 = (byte)((int)(par2 * 127.0F));
-            byte var6 = (byte)((int)(par3 * 127.0F));
-            this.y = var4 & 255 | (var5 & 255) << 8 | (var6 & 255) << 16;
-        }
+//        } else {
+//            this.q = true;
+//            byte var4 = (byte)((int)(par1 * 127.0F));
+//            byte var5 = (byte)((int)(par2 * 127.0F));
+//            byte var6 = (byte)((int)(par3 * 127.0F));
+//            this.y = var4 & 255 | (var5 & 255) << 8 | (var6 & 255) << 16;
+//        }
     }
 
 //    public static void setBufferSize(int bufferSize) {

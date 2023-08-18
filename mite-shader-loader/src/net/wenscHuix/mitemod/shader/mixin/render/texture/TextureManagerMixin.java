@@ -25,11 +25,11 @@ public class TextureManagerMixin {
             var2 = new bif(par1ResourceLocation);
             this.a(par1ResourceLocation, (bio) var2);
         }
-        if (Shaders.isActiveShader) {
+//        if (Shaders.isActiveShader) {
             ShadersTex.bindTexture((bio) var2);
-        } else {
-            TextureUtilExtra.bindTexture(((bio) var2).b());
-        }
+//        } else {
+//            TextureUtilExtra.bindTexture(((bio) var2).b());
+//        }
     }
 
     @Shadow

@@ -86,11 +86,11 @@ public class SimpleTextureMixin extends bia {
                 }
             }
 
-            if(Shaders.isActiveShader) {
+//            if(Shaders.isActiveShader) {
                 ShadersTex.loadSimpleTexture(this.b(), var4, var5, var6, par1ResourceManager, this.b, this.getMultiTexID());
-            } else {
-                bip.a(this.b(), var4, var5, var6);
-            }
+//            } else {
+//                bip.a(this.b(), var4, var5, var6);
+//            }
         } finally {
             if (var2 != null) {
                 var2.close();

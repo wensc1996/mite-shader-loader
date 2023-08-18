@@ -18,10 +18,10 @@ public class TextureClockMixin extends bil {
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/bip;a([IIIIIZZ)V"), method = "j")
     private void redirectUpdateAnimation(int[] var0, int var1, int var2, int var3, int var4, boolean var5, boolean var6) {
-        if(Shaders.isActiveShader) {
+//        if(Shaders.isActiveShader) {
             ShadersTex.updateSubImage((int[])this.a.get(this.g), this.e, this.f, this.c, this.d,false, false);
-        } else {
-            bip.a((int[])this.a.get(this.g), this.e, this.f, this.c, this.d, false, false);
-        }
+//        } else {
+//            bip.a((int[])this.a.get(this.g), this.e, this.f, this.c, this.d, false, false);
+//        }
     }
 }

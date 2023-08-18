@@ -19,20 +19,20 @@ public abstract class RendererLivingEntityMixin extends bgm {
 
     @Redirect(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 2), method = "a(Lnet/minecraft/EntityLiving;Ljava/lang/String;DDDI)V")
     private void redirectRenderLivingLabel0(int cap){
-        if(Shaders.isActiveShader) {
+        //if(Shaders.isActiveShader) {
             Shaders.sglDisableT2D(cap);
-        } else {
-            GL11.glDisable(cap);
-        }
+//        } else {
+//            GL11.glDisable(cap);
+//        }
     }
 
     @Redirect(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 1), method = "a(Lnet/minecraft/EntityLiving;Ljava/lang/String;DDDI)V")
     private void redirectRenderLivingLabel1(int cap){
-        if(Shaders.isActiveShader) {
+        //if(Shaders.isActiveShader) {
             Shaders.sglEnableT2D(cap);
-        } else {
-            GL11.glEnable(cap);
-        }
+//        } else {
+//            GL11.glEnable(cap);
+//        }
     }
 
     //doRenderLiving
@@ -172,19 +172,20 @@ public abstract class RendererLivingEntityMixin extends bgm {
             }
 
             GL11.glDepthMask(true);
-            if(Shaders.isActiveShader) {
+//            if(Shaders.isActiveShader) {
                 Shaders.resetEntityHurtFlash();
-            }
+//            }
             this.c(par1EntityLivingBase, par9);
-            if (Shaders.isActiveShader ? !Shaders.useEntityHurtFlash : true) {
+            //Shaders.isActiveShader ?
+            if (!Shaders.useEntityHurtFlash) {
                 float var27 = par1EntityLivingBase.getBrightness(par9);
                 var18 = this.a(par1EntityLivingBase, var27, par9);
                 bma.a(bma.b);
                 GL11.glDisable(3553);
                 bma.a(bma.a);
-                if(Shaders.isActiveShader) {
+//                if(Shaders.isActiveShader) {
                     Shaders.disableLightmap();
-                }
+//                }
                 if ((var18 >> 24 & 255) > 0 || par1EntityLivingBase.hurtTime > 0 || par1EntityLivingBase.deathTime > 0 || par1EntityLivingBase.tagged) {
                     GL11.glDisable(3553);
                     GL11.glDisable(3008);
@@ -199,9 +200,9 @@ public abstract class RendererLivingEntityMixin extends bgm {
                         GL11.glPopAttrib();
                     }
 
-                    if(Shaders.isActiveShader) {
+//                    if(Shaders.isActiveShader) {
                         Shaders.beginLivingDamage();
-                    }
+//                    }
 
                     if (par1EntityLivingBase.hurtTime > 0 || par1EntityLivingBase.deathTime > 0) {
                         GL11.glColor4f(var27, 0.0F, 0.0F, 0.4F);
@@ -232,9 +233,9 @@ public abstract class RendererLivingEntityMixin extends bgm {
                     }
 
                     GL11.glDepthFunc(515);
-                    if(Shaders.isActiveShader) {
+//                    if(Shaders.isActiveShader) {
                         Shaders.endLivingDamage();
-                    }
+//                    }
                     GL11.glDisable(3042);
                     GL11.glEnable(3008);
                     GL11.glEnable(3553);

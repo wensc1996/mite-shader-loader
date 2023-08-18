@@ -1,6 +1,7 @@
 package net.wenscHuix.mitemod.shader.client;
 
 import net.minecraft.*;
+import net.wenscHuix.mitemod.shader.MITEShaderLoader;
 import net.wenscHuix.mitemod.shader.mixin.render.EntityRendererAccessor;
 import net.wenscHuix.mitemod.shader.util.Utils;
 import org.lwjgl.BufferUtils;
@@ -17,7 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Shaders {
-    public static boolean isActiveShader = true;
+
     public static boolean isInitialized = false;
     private static boolean notFirstInit = false;
     private static int renderDisplayWidth = 0;
@@ -309,7 +310,7 @@ public class Shaders {
         }
 
 //        value = null;
-        isActiveShader = Boolean.parseBoolean(shadersConfig.getProperty("isActiveShader", "true"));
+//        isActiveShader = Boolean.parseBoolean(shadersConfig.getProperty("isActiveShader", "true"));
         dtweak = Boolean.parseBoolean(shadersConfig.getProperty("dtweak", "false"));
         configCloudShadow = Boolean.parseBoolean(shadersConfig.getProperty("cloudShadow", "true"));
         configHandDepthMul = Float.parseFloat(shadersConfig.getProperty("handDepthMul", "0.125"));
@@ -328,7 +329,7 @@ public class Shaders {
 
     public static void storeConfig() {
         System.out.println("[Shaders] 保存配置");
-        shadersConfig.setProperty("isActiveShader", Boolean.toString(isActiveShader));
+//        shadersConfig.setProperty("isActiveShader", Boolean.toString(isActiveShader));
         shadersConfig.setProperty("dtweak", Boolean.toString(dtweak));
         shadersConfig.setProperty("cloudShadow", Boolean.toString(configCloudShadow));
         shadersConfig.setProperty("handDepthMul", Float.toString(configHandDepthMul));
@@ -479,7 +480,7 @@ public class Shaders {
 
     public static void startup(Minecraft mc) {
         Shaders.mc = mc;
-        System.out.println("MITE ShadersMod version 0.0.3");
+        System.out.println("MITE ShadersMod version" + MITEShaderLoader.VERSION);
         loadConfig();
     }
 
@@ -561,7 +562,7 @@ public class Shaders {
                 }
             }
 
-            new HashMap();
+//            new HashMap();
 
             for(p = 0; p < 21; ++p) {
                 if (p == 19) {
@@ -2624,9 +2625,9 @@ public class Shaders {
         shadersdir = new File(Minecraft.w().x, "shaders");
         shaderpacksdir = new File(Minecraft.w().x, shaderpacksdirname);
         configFile = new File(Minecraft.w().x, optionsfilename);
-        blockLightLevel05 = Shaders.isActiveShader ? 0.5F : 1.0F;
-        blockLightLevel06 = Shaders.isActiveShader ? 0.6F : 1.0F;
-        blockLightLevel08 = Shaders.isActiveShader ? 0.8F : 1.0F;
+        blockLightLevel05 = 0.5F;
+        blockLightLevel06 = 0.6F;
+        blockLightLevel08 = 0.8F;
         aoLevel = 0.8F;
         blockAoLight = 1.0F - aoLevel;
         sunPathRotation = 0.0F;

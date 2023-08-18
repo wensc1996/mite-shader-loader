@@ -26,30 +26,29 @@ public class BlockMixin {
 
     @Overwrite
     public final float i(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
-
-        if(Shaders.isActiveShader) {
+//        if(Shaders.isActiveShader) {
             return par1IBlockAccess.isBlockNormalCube(par2, par3, par4) ? Shaders.blockAoLight : 1.0F;
-        } else {
-            int var5 = par1IBlockAccess.getBlockId(par2, par3, par4);
-            if(var5 == 0) {
-                return 1.0f;
-            } else {
-                if(BlockAccessor.getis_normal_cube_lookup()[var5]){
-                    return 0.2f;
-                } else {
-                    if(getBlock(var5) != null) {
-                        Block block = getBlock(var5);
-                        if(Utils.get(block, "is_tree_leaves", boolean.class)) {
-                            return 0.4f;
-                        } else {
-                            return 1f;
-                        }
-                    } else {
-                        return 1f;
-                    }
-                }
-            }
-        }
+//        } else {
+//            int var5 = par1IBlockAccess.getBlockId(par2, par3, par4);
+//            if(var5 == 0) {
+//                return 1.0f;
+//            } else {
+//                if(BlockAccessor.getis_normal_cube_lookup()[var5]){
+//                    return 0.2f;
+//                } else {
+//                    if(getBlock(var5) != null) {
+//                        Block block = getBlock(var5);
+//                        if(Utils.get(block, "is_tree_leaves", boolean.class)) {
+//                            return 0.4f;
+//                        } else {
+//                            return 1f;
+//                        }
+//                    } else {
+//                        return 1f;
+//                    }
+//                }
+//            }
+//        }
     }
 
 }

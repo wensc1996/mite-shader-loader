@@ -749,40 +749,39 @@ public class ShadersTex {
         return dst;
     }
 
-    public static void uploadFrameTexture(bil tas, int frameIndex, int xPos, int yPos) {
-        int frameCount = tas.k();
-        if (frameIndex >= 0 && frameIndex < frameCount) {
-            if (frameCount <= 1) {
-                int[] buf = tas.a(frameIndex);
-                IntBuffer data = getIntBuffer(Utils.get(tas, "c", int.class) * Utils.get(tas, "d", int.class));
-                data.clear();
-                data.put(buf, 0, Utils.get(tas, "c", int.class) * Utils.get(tas, "d", int.class));
-                data.clear();
-                GL11.glTexSubImage2D(3553, 0, xPos, yPos, Utils.get(tas, "c", int.class), Utils.get(tas, "d", int.class), 32993, 33639, data);
-            } else {
-                if (tas.frameBuffers == null) {
-                    tas.frameBuffers = new IntBuffer[frameCount];
-
-                    for(int var8 = 0; var8 < tas.frameBuffers.length; ++var8) {
-                        int[] var10 = tas.a(var8);
-                        IntBuffer buf1 = atu.f(var10.length);
-                        buf1.put(var10);
-                        buf1.clear();
-                        tas.frameBuffers[var8] = buf1;
-                    }
-                }
-
-                IntBuffer var9 = tas.frameBuffers[frameIndex];
-                var9.clear();
-                GL11.glTexSubImage2D(3553, 0, xPos, yPos, tas.getC(), tas.getD(), 32993, 33639, var9);
-            }
-
-            if (tas.mipmapActive) {
-                tas.uploadFrameMipmaps(frameIndex, xPos, yPos);
-            }
-        }
-
-    }
+//    public static void uploadFrameTexture(bil tas, int frameIndex, int xPos, int yPos) {
+//        int frameCount = tas.k();
+//        if (frameIndex >= 0 && frameIndex < frameCount) {
+//            if (frameCount <= 1) {
+//                int[] buf = tas.a(frameIndex);
+//                IntBuffer data = getIntBuffer(Utils.get(tas, "c", int.class) * Utils.get(tas, "d", int.class));
+//                data.clear();
+//                data.put(buf, 0, Utils.get(tas, "c", int.class) * Utils.get(tas, "d", int.class));
+//                data.clear();
+//                GL11.glTexSubImage2D(3553, 0, xPos, yPos, Utils.get(tas, "c", int.class), Utils.get(tas, "d", int.class), 32993, 33639, data);
+//            } else {
+//                if (tas.frameBuffers == null) {
+//                    tas.frameBuffers = new IntBuffer[frameCount];
+//
+//                    for(int var8 = 0; var8 < tas.frameBuffers.length; ++var8) {
+//                        int[] var10 = tas.a(var8);
+//                        IntBuffer buf1 = atu.f(var10.length);
+//                        buf1.put(var10);
+//                        buf1.clear();
+//                        tas.frameBuffers[var8] = buf1;
+//                    }
+//                }
+//
+//                IntBuffer var9 = tas.frameBuffers[frameIndex];
+//                var9.clear();
+//                GL11.glTexSubImage2D(3553, 0, xPos, yPos, tas.getC(), tas.getD(), 32993, 33639, var9);
+//            }
+//
+//            if (tas.mipmapActive) {
+//                tas.uploadFrameMipmaps(frameIndex, xPos, yPos);
+//            }
+//        }
+//    }
 
 //    public static void fixTransparentColor(bil tas, int[] aint) {
 //    }

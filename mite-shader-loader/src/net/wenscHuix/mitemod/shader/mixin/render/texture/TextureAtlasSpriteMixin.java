@@ -53,11 +53,11 @@ public class TextureAtlasSpriteMixin {
             this.h = 0;
             int var3 = this.j.c(this.g);
             if (var1 != var3 && var3 >= 0 && var3 < this.a.size()) {
-                if(Shaders.isActiveShader) {
+//                if(Shaders.isActiveShader) {
                     ShadersTex.updateSubImage(((int[])this.a.get(var3)), this.e, this.f, this.c, this.d, false, false);
-                } else {
-                    bip.a(((int[])this.a.get(var3)), this.e, this.f, this.c, this.d, false, false);
-                }
+//                } else {
+//                    bip.a(((int[])this.a.get(var3)), this.e, this.f, this.c, this.d, false, false);
+//                }
             }
         }
 
@@ -78,9 +78,9 @@ public class TextureAtlasSpriteMixin {
         this.f = var4.getHeight();
         this.e = var4.getWidth();
         int[] var5 = new int[this.f * this.e * 3];
-        if(Shaders.isActiveShader) {
+//        if(Shaders.isActiveShader) {
             ShadersTex.loadAtlasSprite(var4, 0, 0,  this.e, this.f, var5, 0, this.e);
-        }
+        //}
         var4.getRGB(0, 0, this.e, this.f, var5, 0, this.e);
         if (var3 == null) {
             if (this.f != this.e) {
@@ -103,11 +103,11 @@ public class TextureAtlasSpriteMixin {
                     }
 
                     this.d(var10);
-                    if(Shaders.isActiveShader) {
+//                    if(Shaders.isActiveShader) {
                         this.a.set(var10, ShadersTex.extractFrame(var5, var7, var8, var10));
-                    } else{
-                        this.a.set(var10, a(var5, var7, var8, var10));
-                    }
+//                    } else{
+//                        this.a.set(var10, a(var5, var7, var8, var10));
+//                    }
                 }
 
                 this.j = var3;
@@ -115,11 +115,11 @@ public class TextureAtlasSpriteMixin {
                 ArrayList var11 = Lists.newArrayList();
 
                 for(var10 = 0; var10 < var6; ++var10) {
-                    if(Shaders.isActiveShader) {
+//                    if(Shaders.isActiveShader) {
                         this.a.add(ShadersTex.extractFrame(var5, var7, var8, var10));
-                    } else {
-                        this.a.add(a(var5, var7, var8, var10));
-                    }
+//                    } else {
+//                        this.a.add(a(var5, var7, var8, var10));
+//                    }
                     var11.add(new bkn(var10, -1));
                 }
 

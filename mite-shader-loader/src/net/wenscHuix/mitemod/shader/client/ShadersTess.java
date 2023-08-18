@@ -17,6 +17,9 @@ import java.util.Arrays;
 
 public class ShadersTess {
     public static final int vertexStride = 16;
+    public float normalX;
+    public float normalY;
+    public float normalZ;
 
     public ShadersTess() {
     }
