@@ -1,12 +1,10 @@
 package net.wenscHuix.mitemod.shader.mixin.render.texture;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.minecraft.*;
 import net.wenscHuix.mitemod.shader.client.Shaders;
 import net.wenscHuix.mitemod.shader.client.ShadersTex;
 import net.wenscHuix.mitemod.shader.util.TextureUtilExtra;
-import net.wenscHuix.mitemod.shader.util.Utils;
 import net.xiaoyu233.fml.util.ReflectHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

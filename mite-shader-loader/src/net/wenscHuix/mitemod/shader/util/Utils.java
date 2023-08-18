@@ -1,7 +1,5 @@
 package net.wenscHuix.mitemod.shader.util;
 
-import net.minecraft.Minecraft;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

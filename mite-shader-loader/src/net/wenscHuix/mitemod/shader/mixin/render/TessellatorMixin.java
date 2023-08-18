@@ -1,19 +1,13 @@
 package net.wenscHuix.mitemod.shader.mixin.render;
 
 
-import net.minecraft.atu;
 import net.minecraft.bfq;
-import net.minecraft.bgl;
 import net.wenscHuix.mitemod.shader.client.Shaders;
 import net.wenscHuix.mitemod.shader.client.ShadersTess;
 import net.xiaoyu233.fml.util.ReflectHelper;
-import org.lwjgl.opengl.ARBVertexBufferObject;
-import org.lwjgl.opengl.GLContext;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
 
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;

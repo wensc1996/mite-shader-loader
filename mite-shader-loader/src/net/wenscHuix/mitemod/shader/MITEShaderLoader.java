@@ -3,8 +3,6 @@ package net.wenscHuix.mitemod.shader;
 
 import net.wenscHuix.mitemod.shader.mixin.MinecraftMixin;
 import net.xiaoyu233.fml.AbstractMod;
-
-
 import net.xiaoyu233.fml.classloading.Mod;
 import net.xiaoyu233.fml.config.InjectionConfig;
 import org.spongepowered.asm.mixin.MixinEnvironment;

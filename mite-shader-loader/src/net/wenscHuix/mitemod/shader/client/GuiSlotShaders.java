@@ -1,7 +1,7 @@
 package net.wenscHuix.mitemod.shader.client;
 
-import net.minecraft.bfq;
 import net.minecraft.GuiSlot;
+import net.minecraft.bfq;
 
 import java.util.ArrayList;
 

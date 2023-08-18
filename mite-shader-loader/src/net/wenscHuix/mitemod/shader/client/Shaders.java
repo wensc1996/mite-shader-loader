@@ -2,7 +2,6 @@ package net.wenscHuix.mitemod.shader.client;
 
 import net.minecraft.*;
 import net.wenscHuix.mitemod.shader.mixin.render.EntityRendererAccessor;
-import net.wenscHuix.mitemod.shader.mixin.render.EntityRendererInvoker;
 import net.wenscHuix.mitemod.shader.util.Utils;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.*;
