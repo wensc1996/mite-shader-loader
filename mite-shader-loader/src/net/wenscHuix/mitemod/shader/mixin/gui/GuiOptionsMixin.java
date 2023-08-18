@@ -44,14 +44,15 @@ public class GuiOptionsMixin extends awe {
         aut button_video_settings = new aut(101, this.g / 2 - 152, this.h / 6 + 96 - 6, 150, 20, bkb.a("options.video"));
         button_video_settings.h = !Main.is_MITE_DS;
         this.i.add(button_video_settings);
-        this.i.add(new aut(100, this.g / 2 + 2, this.h / 6 + 96 - 6, 150, 20, bkb.a("options.controls")));
-        this.i.add(new aut(102, this.g / 2 - 152, this.h / 6 + 120 - 6, 150 - 20 - 57, 20, bkb.a("options.language")));
-        this.i.add(new aut(103, this.g / 2 + 2, this.h / 6 + 120 - 6, 150, 20, bkb.a("options.multiplayer.title")));
-        this.i.add(new aut(105, this.g / 2 - 152, this.h / 6 + 144 - 6, 150, 20, bkb.a("options.resourcepack")));
-        this.i.add(new aut(104, this.g / 2 + 2, this.h / 6 + 144 - 6, 150, 20, bkb.a("options.snooper.view")));
-        this.i.add(new aut(200, this.g / 2 - 100, this.h / 6 + 168, bkb.a("gui.done")));
 
-        this.i.add(new aut(190, this.g / 2 - 152 + 77, this.h / 6 + 120 - 6, 73, 20, bkb.a("光影...")));
+        this.i.add(new aut(100, this.g / 2 + 2, this.h / 6 + 120 - 6 , 150, 20, bkb.a("options.controls")));
+//        this.i.add(new aut(102, this.g / 2 - 152, this.h / 6 + 120 - 6, 150 - 20 - 57, 20, bkb.a("options.language")));
+        this.i.add(new aut(103, this.g / 2 + 2, this.h / 6 + 144 - 6, 150, 20, bkb.a("options.multiplayer.title")));
+        this.i.add(new aut(105, this.g / 2 - 152, this.h / 6 + 144 - 6, 150, 20, bkb.a("options.resourcepack")));
+//        this.i.add(new aut(104, this.g / 2 + 2, this.h / 6 + 144 - 6, 150, 20, bkb.a("options.snooper.view")));
+        this.i.add(new aut(200, this.g / 2 - 100, this.h / 6 + 168, bkb.a("gui.done")));
+        this.i.add(new aut(190, this.g / 2 + 2, this.h / 6 + 96 - 6, 150, 20, bkb.a("光影...")));
+        this.i.add(new aut(102, this.g / 2 - 152, this.h / 6 + 120 - 6, 150, 20, bkb.a("options.language")));
     }
 
     @Inject(at = @At(value = "HEAD"), method = "a(Lnet/minecraft/aut;)V")
