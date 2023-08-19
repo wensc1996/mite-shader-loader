@@ -2,7 +2,7 @@ package net.wenscHuix.mitemod.shader.client;
 
 import net.minecraft.bfq;
 import net.minecraft.bma;
-import net.wenscHuix.mitemod.shader.mixin.render.TessellatorAccessor;
+import net.wenscHuix.mitemod.mixin.render.TessellatorAccessor;
 import net.wenscHuix.mitemod.shader.util.Common;
 import net.wenscHuix.mitemod.shader.util.TessellatorExtra;
 import net.wenscHuix.mitemod.shader.util.Utils;
@@ -135,7 +135,7 @@ public class ShadersTess {
             }
 
             vtc = tess.r * 4;
-            tess.d();
+//            tess.d();
             return vtc;
         }
     }
@@ -206,7 +206,7 @@ public class ShadersTess {
         if (rbi >= TessellatorExtra.bufferSize - 64) {
             if (TessellatorExtra.bufferSize >= 16777216) {
                 if (tess.s % 4 == 0) {
-                    tess.a();
+//                    tess.a();
                     tess.z = true;
                 }
             } else if (TessellatorExtra.bufferSize > 0) {

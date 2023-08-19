@@ -2,8 +2,8 @@ package net.wenscHuix.mitemod.shader.util;
 
 import net.minecraft.atu;
 import net.minecraft.bfq;
+import net.wenscHuix.mitemod.mixin.render.TessellatorAccessor;
 import net.wenscHuix.mitemod.shader.client.ShadersTess;
-import net.wenscHuix.mitemod.shader.mixin.render.TessellatorAccessor;
 import org.lwjgl.opengl.ARBVertexBufferObject;
 import org.lwjgl.opengl.GLContext;
 
@@ -20,8 +20,7 @@ public class TessellatorExtra extends bfq {
         this.h = new int[par1];
 
         ((TessellatorAccessor)this).setuseVBO(TessellatorAccessor.gettryVBO() && GLContext.getCapabilities().GL_ARB_vertex_buffer_object);
-        if (((TessellatorAccessor)this).getuseVBO())
-        {
+        if (((TessellatorAccessor)this).getuseVBO()) {
             Common.vertexBuffers = atu.f(Common.vboCount);
             ARBVertexBufferObject.glGenBuffersARB(Common.vertexBuffers);
         }
