@@ -233,9 +233,9 @@ public abstract class RendererLivingEntityMixin extends bgm {
                     }
 
                     GL11.glDepthFunc(515);
-//                    if(Shaders.isActiveShader) {
-                        Shaders.endLivingDamage();
-//                    }
+
+                    Shaders.endLivingDamage();
+
                     GL11.glDisable(3042);
                     GL11.glEnable(3008);
                     GL11.glEnable(3553);

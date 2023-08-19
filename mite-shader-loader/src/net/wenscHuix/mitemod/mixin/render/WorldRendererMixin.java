@@ -5,6 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(bfa.class)
 public class WorldRendererMixin {
+    public boolean isDynamicLight;
     private int c;
     private int d;
     private int e;

@@ -4,6 +4,8 @@ package net.wenscHuix.mitemod.mixin.render;
 import net.minecraft.*;
 import net.wenscHuix.mitemod.shader.client.Shaders;
 import net.wenscHuix.mitemod.shader.client.ShadersRender;
+import net.wenscHuix.mitemod.shader.client.dynamicLight.DynamicLights;
+import net.xiaoyu233.fml.util.ReflectHelper;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.util.glu.Project;
@@ -50,22 +52,17 @@ public class EntityRendererMixin {
 
         if (par1 == 999) {
             GL11.glFog(2918, this.a(0.0F, 0.0F, 0.0F, 1.0F));
-            //if(Shaders.isActiveShader) {
-                Shaders.sglFogi(2917, 9729);
-            // }
+
+            Shaders.sglFogi(2917, 9729);
+
             GL11.glFogi(2917, 9729);
             GL11.glFogf(2915, 0.0F);
             GL11.glFogf(2916, 8.0F);
 
-            //if(Shaders.isActiveShader) {
-                if (GLContext.getCapabilities().GL_NV_fog_distance) {
-                    Shaders.sglFogi(34138, 34139);
-                }
-//            } else {
-//                if (capability_gl_nv_fog_distance) {
-//                    GL11.glFogi(34138, 34139);
-//                }
-//          }
+
+            if (GLContext.getCapabilities().GL_NV_fog_distance) {
+                Shaders.sglFogi(34138, 34139);
+            }
 
             GL11.glFogf(2915, 0.0F);
         } else {
@@ -81,11 +78,9 @@ public class EntityRendererMixin {
                     var6 = 5.0F + (this.r - 5.0F) * (1.0F - (float)var7 / 20.0F);
                 }
 
-//                if(Shaders.isActiveShader) {
-                    Shaders.sglFogi(GL11.GL_FOG_MODE, GL11.GL_LINEAR);
-//                } else {
-//                    GL11.glFogi(GL11.GL_FOG_MODE, GL11.GL_LINEAR);
-//                }
+
+                Shaders.sglFogi(GL11.GL_FOG_MODE, GL11.GL_LINEAR);
+
 
                 if (par1 < 0) {
                     GL11.glFogf(2915, 0.0F);
@@ -95,16 +90,11 @@ public class EntityRendererMixin {
                     GL11.glFogf(2916, var6);
                 }
 
-//                if(Shaders.isActiveShader) {
-                    if (GLContext.getCapabilities().GL_NV_fog_distance) {
-                        Shaders.sglFogi(34138, 34139);
-                    }
-//                } else {
-//                    if (capability_gl_nv_fog_distance)
-//                    {
-//                        GL11.glFogi(34138, 34139);
-//                    }
-//                }
+
+                if (GLContext.getCapabilities().GL_NV_fog_distance) {
+                    Shaders.sglFogi(34138, 34139);
+                }
+
             } else if (this.X) {
 //                if(Shaders.isActiveShader) {
                     Shaders.sglFogi(2917, 2048);
@@ -292,9 +282,7 @@ public class EntityRendererMixin {
 
     @Overwrite
     public void a(float par1, long par2) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException, NoSuchMethodException {
-//        if(Shaders.isActiveShader) {
-            Shaders.beginRender(this.q, par1, par2);
-//        }
+        Shaders.beginRender(this.q, par1, par2);
 
         this.q.C.startSection("lightTex");
         if (this.ad) {
@@ -322,6 +310,7 @@ public class EntityRendererMixin {
         double var7 = var4.lastTickPosX + (var4.posX - var4.lastTickPosX) * (double)par1;
         double var9 = var4.lastTickPosY + (var4.posY - var4.lastTickPosY) * (double)par1;
         double var11 = var4.lastTickPosZ + (var4.posZ - var4.lastTickPosZ) * (double)par1;
+
         this.q.C.endStartSection("center");
 
         for(int var13 = 0; var13 < 2; ++var13) {
@@ -336,27 +325,17 @@ public class EntityRendererMixin {
 
             this.q.C.endStartSection("clear");
 
-//            if(Shaders.isActiveShader) {
-                Shaders.setViewport(0, 0, this.q.d, this.q.e);
-//            } else {
-//                GL11.glViewport(0, 0, this.q.d, this.q.e);
-//            }
-
+            Shaders.setViewport(0, 0, this.q.d, this.q.e);
 
             this.i(par1);
             GL11.glClear(16640);
 
-//            if(Shaders.isActiveShader) {
-                Shaders.clearRenderBuffer();
-//            }
-
+            Shaders.clearRenderBuffer();
             GL11.glEnable(2884);
             this.q.C.endStartSection("camera");
             this.setupCameraTransform(par1, var13, false);
 
-//            if(Shaders.isActiveShader) {
-                Shaders.setCamera(par1);
-//            }
+            Shaders.setCamera(par1);
 
             if (this.last_vsync_nanotime != -1L) {
                 long milliseconds_since_last_vsync = (System.nanoTime() - this.last_vsync_nanotime) / 1000000L;
@@ -386,16 +365,13 @@ public class EntityRendererMixin {
             if (!Shaders.isShadowPass) {
                 this.a(-1, par1);
 
-//                if(Shaders.isActiveShader) {
-                    Shaders.beginSky();
-//                }
+                Shaders.beginSky();
+
 
                 this.q.C.endStartSection("sky");
                 var5.a(par1);
 
-//                if(Shaders.isActiveShader) {
-                    Shaders.endSky();
-//                }
+                Shaders.endSky();
             }
 
             GL11.glEnable(2912);
@@ -407,19 +383,15 @@ public class EntityRendererMixin {
             this.q.C.endStartSection("culling");
             bfv frustrum = new bfv();
 
-//            if(Shaders.isActiveShader) {
-                ShadersRender.setFrustrumPosition(frustrum, var7, var9, var11);
-                ShadersRender.clipRenderersByFrustrum(this.q.g, frustrum, par1);
-//            } else {
-//                frustrum.a(var7, var9, var11);
-//                this.q.g.a(frustrum, par1);
-//            }
+
+            ShadersRender.setFrustrumPosition(frustrum, var7, var9, var11);
+            ShadersRender.clipRenderersByFrustrum(this.q.g, frustrum, par1);
+
 
             if (var13 == 0) {
 
-//                if(Shaders.isActiveShader) {
-                    Shaders.beginUpdateChunks();
-//                }
+
+                Shaders.beginUpdateChunks();
 
                 this.q.C.endStartSection("updatechunks");
 
@@ -434,9 +406,7 @@ public class EntityRendererMixin {
                     }
                 }
 
-                //if(Shaders.isActiveShader) {
-                    Shaders.endUpdateChunks();
-                    //}
+                Shaders.endUpdateChunks();
             }
 
             if (var4.posY < 128.0) {
@@ -500,12 +470,12 @@ public class EntityRendererMixin {
             GL11.glEnable(2884);
             GL11.glBlendFunc(770, 771);
             GL11.glDepthMask(true);
-            //if(Shaders.isActiveShader) {
-                Shaders.beginHand();
-                this.b(par1, var13);
-                Shaders.endHand();
-                Shaders.preWater();
-                //}
+
+            Shaders.beginHand();
+            this.b(par1, var13);
+            Shaders.endHand();
+            Shaders.preWater();
+
 
             GL11.glEnable(3042);
             GL11.glDisable(2884);
@@ -518,9 +488,9 @@ public class EntityRendererMixin {
 
                 GL11.glColorMask(false, false, false, false);
 
-                //if(Shaders.isActiveShader) {
-                    Shaders.beginWaterFancy();
-                //}
+
+                Shaders.beginWaterFancy();
+
                 int var18 = var5.a(var4, 1, par1);
                 if (this.q.u.g) {
                     if (b == 0) {

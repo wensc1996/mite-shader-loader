@@ -1,5 +1,6 @@
 package net.wenscHuix.mitemod.shader.client.dynamicLight.config;
 
+import net.wenscHuix.mitemod.optimize.gui.Config;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import net.minecraft.*;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class Config {
+public class ShaderConfig {
     private static final Logger LOGGER = LogManager.getLogger();
     private static Minecraft minecraft = Minecraft.w();
 
@@ -17,7 +18,7 @@ public class Config {
     }
 
     public static boolean isDynamicLights() {
-        return true;
+        return Config.dynamicLights;
     }
 
     public static boolean isDynamicLightsFast() {
@@ -25,7 +26,7 @@ public class Config {
     }
 
     public static boolean isDynamicHandLight() {
-        return false;
+        return true;
     }
 
     public static boolean isClearWater() {

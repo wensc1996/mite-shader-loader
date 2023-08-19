@@ -1,7 +1,7 @@
 package net.wenscHuix.mitemod.shader.client.dynamicLight;
 
 import net.minecraft.*;
-import net.wenscHuix.mitemod.shader.client.dynamicLight.config.Config;
+import net.wenscHuix.mitemod.shader.client.dynamicLight.config.ShaderConfig;
 import net.wenscHuix.mitemod.shader.util.BlockPos;
 
 import java.util.HashSet;
@@ -18,13 +18,16 @@ public class DynamicLight {
     private long timeCheckMs = 0L;
     private Set<BlockPos> setLitChunkPos = new HashSet();
 
+    private bfl renderGlobal;
+
     public DynamicLight(Entity entity) {
         this.entity = entity;
-        this.offsetY = (double)entity.getEyeHeight();
+        this.offsetY = entity.getEyeHeight();
     }
 
     public void update(bfl renderGlobal) {
-        if (Config.isDynamicLightsFast()) {
+        this.renderGlobal = renderGlobal;
+        if (ShaderConfig.isDynamicLightsFast()) {
             long i = System.currentTimeMillis();
 
             if (i < this.timeCheckMs + 500L) {
@@ -59,10 +62,11 @@ public class DynamicLight {
             Set<BlockPos> set = new HashSet();
 
             if (j > 0) {
-                for (bfa bfa : renderGlobal.o) {
-                    this.updateChunkLight(bfa, this.setLitChunkPos, set);
-                }
+                bfa bfa = new bfa(world, null, (int) d6, (int) d0, (int) d1, 0);
+                this.updateChunkLight(bfa, this.setLitChunkPos, set);
             }
+
+            renderGlobal.markDynamicLight();
 
             this.updateLitChunks(renderGlobal);
             this.setLitChunkPos = set;
@@ -76,9 +80,11 @@ public class DynamicLight {
 //        return pos.offset(facing, 16);
 //    }
 
+
     private void updateChunkLight(bfa worldRenderer, Set<BlockPos> setPrevPos, Set<BlockPos> setNewPos) {
         if (worldRenderer != null) {
             worldRenderer.q = true;
+            worldRenderer.isDynamicLight = true;
 
             BlockPos blockpos = new BlockPos(worldRenderer.getX(), worldRenderer.getY(), worldRenderer.getZ());
 
@@ -93,11 +99,15 @@ public class DynamicLight {
     }
 
     public void updateLitChunks(bfl renderGlobal) {
-        for (BlockPos blockpos : this.setLitChunkPos) {
+//        for (BlockPos blockpos : this.setLitChunkPos) {
             for (bfa bfa : renderGlobal.o) {
                 this.updateChunkLight(bfa, null, null);
             }
-        }
+//        }
+//        for (BlockPos blockpos : this.setLitChunkPos) {
+//            bfa bfa = new bfa(renderGlobal.getClientWorld(), null, (int) blockpos.x, (int) blockpos.y, (int) blockpos.x, 0);
+//            this.updateChunkLight(bfa, null, null);
+//        }
     }
 
     public Entity getEntity() {

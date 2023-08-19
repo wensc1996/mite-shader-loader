@@ -3,6 +3,9 @@ package net.wenscHuix.mitemod.mixin.render;
 import net.minecraft.*;
 import net.wenscHuix.mitemod.optimize.gui.Config;
 import net.wenscHuix.mitemod.shader.client.Shaders;
+import net.wenscHuix.mitemod.shader.client.dynamicLight.DynamicLights;
+import net.wenscHuix.mitemod.shader.client.dynamicLight.config.ShaderConfig;
+import net.xiaoyu233.fml.util.ReflectHelper;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,8 +18,76 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Mixin(bfl.class)
 public class RenderGlobalMixin implements IWorldAccess {
+
+
+    public void markDynamicLight() {
+        for (bfa world_renderer : this.o) {
+            if (!this.m.contains(world_renderer) && world_renderer.isDynamicLight) {
+                world_renderer.isDynamicLight = false;
+                this.m.add(world_renderer);
+            }
+        }
+
+    }
+
+
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/MethodProfiler;startSection(Ljava/lang/String;)V", ordinal = 1,
+            shift = At.Shift.AFTER), method = "a(Lnet/minecraft/EntityLiving;Z)Z")
+    private void injectUpdateRenderers(CallbackInfoReturnable<Boolean> callbackInfoReturnable){
+        if(ShaderConfig.isDynamicLights()) {
+            DynamicLights.update(ReflectHelper.dyCast(this));
+        }
+    }
+
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/aul;getRenderDistance()I",
+            shift = At.Shift.AFTER), method = "a()V")
+    private void injectLoadRenderers(CallbackInfo callbackInfo){
+        if(ShaderConfig.isDynamicLights()) {
+            DynamicLights.clear();
+        }
+    }
+
+    @Overwrite
+    public void onEntityCreate(Entity par1Entity) {
+        if(ShaderConfig.isDynamicLights()) {
+            DynamicLights.entityAdded(par1Entity, ReflectHelper.dyCast(this));
+        }
+    }
+
+    @Overwrite
+    public void onEntityDestroy(Entity par1Entity) {
+        if(ShaderConfig.isDynamicLights()) {
+            DynamicLights.entityRemoved(par1Entity, ReflectHelper.dyCast(this));
+        }
+    }
+
+    @Overwrite
+    public void a(bdd par1WorldClient) {
+        if (this.k != null) {
+            this.k.b(this);
+        }
+
+        this.c = -9999.0;
+        this.d = -9999.0;
+        this.e = -9999.0;
+        bgl.a.a(par1WorldClient);
+        this.k = par1WorldClient;
+        if (ShaderConfig.isDynamicLights()) {
+            DynamicLights.clear();
+        }
+
+        this.u = new bfr(par1WorldClient);
+        if (par1WorldClient != null) {
+            par1WorldClient.addWorldAccess(this);
+            this.a();
+        }
+
+    }
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/MethodProfiler;endStartSection(Ljava/lang/String;)V", ordinal = 1,
             shift = At.Shift.AFTER), method = "a(Lnet/minecraft/Vec3D;Lnet/minecraft/bft;F)V")
@@ -186,6 +257,8 @@ public class RenderGlobalMixin implements IWorldAccess {
 ////            this.t.k.addBlockDestroyEffects(x, y, z, block_id, metadata, aux_data);
 ////        }
 //    }
+
+
     @Overwrite
     public void b(float par1) {
         if (this.t.f.provider.isSurfaceWorld()) {
@@ -322,8 +395,18 @@ public class RenderGlobalMixin implements IWorldAccess {
     }
 
 
+    public List getWorldRenderersToUpdate() {
+        return m;
+    }
+
     @Shadow
     private bdd k;
+    @Shadow
+    private List m;
+    @Shadow
+    private bfa[] n;
+    @Shadow
+    public bfa[] o;
     @Shadow
     @Final
     private bim l;
@@ -335,7 +418,19 @@ public class RenderGlobalMixin implements IWorldAccess {
     @Shadow
     private Minecraft t;
     @Shadow
+    double c;
+    @Shadow
+    double d;
+    @Shadow
+    double e;
+    @Shadow
+    private bfr u;
+    @Shadow
     public void c(float par1) {
+
+    }
+    @Shadow
+    public void a() {
 
     }
     @Shadow
@@ -378,16 +473,6 @@ public class RenderGlobalMixin implements IWorldAccess {
 
     @Shadow
     public void spawnParticleEx(EnumParticle enumParticle, int i, int i1, double v, double v1, double v2, double v3, double v4, double v5) {
-
-    }
-
-    @Shadow
-    public void onEntityCreate(Entity entity) {
-
-    }
-
-    @Shadow
-    public void onEntityDestroy(Entity entity) {
 
     }
 
