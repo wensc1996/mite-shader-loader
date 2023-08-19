@@ -2,7 +2,7 @@ package net.wenscHuix.mitemod.mixin.gui;
 
 import net.minecraft.*;
 import net.minecraft.client.main.Main;
-import net.wenscHuix.mitemod.shader.client.GuiShaders;
+import net.wenscHuix.mitemod.optimize.gui.GuiPlusVideo;
 import net.xiaoyu233.fml.util.ReflectHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -51,7 +51,7 @@ public class GuiOptionsMixin extends awe {
         this.i.add(new aut(105, this.g / 2 - 152, this.h / 6 + 144 - 6, 150, 20, bkb.a("options.resourcepack")));
 //        this.i.add(new aut(104, this.g / 2 + 2, this.h / 6 + 144 - 6, 150, 20, bkb.a("options.snooper.view")));
         this.i.add(new aut(200, this.g / 2 - 100, this.h / 6 + 168, bkb.a("gui.done")));
-        this.i.add(new aut(190, this.g / 2 + 2, this.h / 6 + 96 - 6, 150, 20, bkb.a("光影...")));
+        this.i.add(new aut(190, this.g / 2 + 2, this.h / 6 + 96 - 6, 150, 20, bkb.a("PlusVideo...")));
         this.i.add(new aut(102, this.g / 2 - 152, this.h / 6 + 120 - 6, 150, 20, bkb.a("options.language")));
     }
 
@@ -60,7 +60,7 @@ public class GuiOptionsMixin extends awe {
         if (par1GuiButton.h) {
             if (par1GuiButton.g == 190 && !Main.is_MITE_DS) {
                 this.f.u.b();
-                this.f.a(new GuiShaders(ReflectHelper.dyCast(this)));
+                this.f.a(new GuiPlusVideo(ReflectHelper.dyCast(this), this.d));
             }
         }
     }

@@ -1,4 +1,4 @@
-package net.wenscHuix.mitemod.shader;
+package net.wenscHuix.mitemod;
 
 
 import net.wenscHuix.mitemod.mixin.MinecraftMixin;
@@ -12,9 +12,9 @@ public class MITEShaderLoader extends AbstractMod {
 
     @Override
     public int modVerNum() {
-        return 4;
+        return 5;
     }
-    public static final String VERSION = "v0.0.4";
+    public static final String VERSION = "v0.0.5";
 
 
     public MITEShaderLoader() {

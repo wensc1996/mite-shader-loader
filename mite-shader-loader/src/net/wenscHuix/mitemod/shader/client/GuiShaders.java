@@ -6,7 +6,6 @@
 package net.wenscHuix.mitemod.shader.client;
 
 import net.minecraft.*;
-import net.wenscHuix.mitemod.shader.MITEShaderLoader;
 import org.lwjgl.Sys;
 
 import java.io.File;
@@ -233,7 +232,7 @@ public class GuiShaders extends awe {
         }
 
         this.a(this.o, "光影配置文件列表", this.g / 2, 16, 16777215);
-        this.a(this.o, MITEShaderLoader.VERSION + "(by wensc,Huix)", this.g - 40, 10, 8421504);
+//        this.a(this.o, MITEShaderLoader.VERSION + "(by wensc,Huix)", this.g - 40, 10, 8421504);
         super.a(par1, par2, par3);
     }
 

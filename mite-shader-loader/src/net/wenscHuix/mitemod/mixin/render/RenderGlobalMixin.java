@@ -1,6 +1,7 @@
 package net.wenscHuix.mitemod.mixin.render;
 
 import net.minecraft.*;
+import net.wenscHuix.mitemod.optimize.gui.Config;
 import net.wenscHuix.mitemod.shader.client.Shaders;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
@@ -9,6 +10,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
@@ -19,223 +21,170 @@ public class RenderGlobalMixin implements IWorldAccess {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/MethodProfiler;endStartSection(Ljava/lang/String;)V", ordinal = 1,
             shift = At.Shift.AFTER), method = "a(Lnet/minecraft/Vec3D;Lnet/minecraft/bft;F)V")
     private void injectRenderEntities0(CallbackInfo callbackInfo){
-        // if(Shaders.isActiveShader) {
-            Shaders.beginEntities();
-        //}
+        Shaders.beginEntities();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/MethodProfiler;endStartSection(Ljava/lang/String;)V", ordinal = 2,
             shift = At.Shift.AFTER), method = "a(Lnet/minecraft/Vec3D;Lnet/minecraft/bft;F)V")
     private void injectRenderEntities1(CallbackInfo callbackInfo){
-        //if(Shaders.isActiveShader) {
-            Shaders.endEntities();
-            Shaders.beginTileEntities();
-        // }
+        Shaders.endEntities();
+        Shaders.beginTileEntities();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/EntityRenderer;a(D)V", shift = At.Shift.AFTER),
             method = "a(Lnet/minecraft/Vec3D;Lnet/minecraft/bft;F)V")
     private void injectRenderEntities2(CallbackInfo callbackInfo){
-        //if(Shaders.isActiveShader) {
-            Shaders.endTileEntities();
-        //}
+        Shaders.endTileEntities();
+        
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 0, shift = At.Shift.AFTER),
             method = "a(Lnet/minecraft/EntityLiving;ID)I")
     private void injectSortAndRender0(CallbackInfoReturnable<Integer> callbackInfoReturnable){
-        //if(Shaders.isActiveShader) {
-            Shaders.disableTexture2D();
-        //}
+        Shaders.disableTexture2D();
+
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 3, shift = At.Shift.AFTER),
             method = "a(Lnet/minecraft/EntityLiving;ID)I")
     private void injectSortAndRender1(CallbackInfoReturnable<Integer> callbackInfoReturnable){
-        //if(Shaders.isActiveShader) {
-            Shaders.disableFog();
-        //}
+        Shaders.disableFog();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 0, shift = At.Shift.AFTER),
             method = "a(Lnet/minecraft/EntityLiving;ID)I")
     private void injectSortAndRender2(CallbackInfoReturnable<Integer> callbackInfoReturnable){
-        //if(Shaders.isActiveShader) {
-            Shaders.enableTexture2D();
-        //}
+        Shaders.enableTexture2D();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 2, shift = At.Shift.AFTER),
             method = "a(Lnet/minecraft/EntityLiving;ID)I")
     private void injectSortAndRender3(CallbackInfoReturnable<Integer> callbackInfoReturnable){
-        //if(Shaders.isActiveShader) {
-            Shaders.enableFog();
-       // }
+        Shaders.enableFog();
+
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 1, shift = At.Shift.AFTER),
             method = "a(F)V")
     private void injectRenderSky0(CallbackInfo callbackInfo){
-       // if(Shaders.isActiveShader) {
-            Shaders.disableFog();
-       // }
+        Shaders.disableFog();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 1, shift = At.Shift.AFTER),
             method = "a(F)V")
     private void injectRenderSky1(CallbackInfo callbackInfo){
-       // if(Shaders.isActiveShader) {
-            Shaders.enableTexture2D();
-       // }
+        Shaders.enableTexture2D();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 3, shift = At.Shift.AFTER),
             method = "a(F)V")
     private void injectRenderSky2(CallbackInfo callbackInfo){
-       // if(Shaders.isActiveShader) {
-            Shaders.disableTexture2D();
-        //}
+        Shaders.disableTexture2D();
     }
 
     @Inject(locals = LocalCapture.CAPTURE_FAILHARD, at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/bdd;a(Lnet/minecraft/Entity;F)Lnet/minecraft/Vec3D;"),
             method = "a(F)V")
     private void injectRenderSky3(float par1, CallbackInfo ci, Vec3D var2){
-       // if(Shaders.isActiveShader) {
-            Shaders.setSkyColor(var2);
-       // }
+        Shaders.setSkyColor(var2);
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 3, shift = At.Shift.AFTER),
             method = "a(F)V")
     private void injectRenderSky4(CallbackInfo callbackInfo){
-        //if(Shaders.isActiveShader) {
-            Shaders.enableFog();
-        //}
+        Shaders.enableFog();
+
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glColor3f(FFF)V", ordinal = 1, shift = At.Shift.AFTER),
             method = "a(F)V")
     private void injectRenderSky5(CallbackInfo callbackInfo){
-        //if(Shaders.isActiveShader) {
-            Shaders.preSkyList();
-        //}
+        Shaders.preSkyList();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 4, shift = At.Shift.AFTER),
             method = "a(F)V")
     private void injectRenderSky6(CallbackInfo callbackInfo){
-        //if(Shaders.isActiveShader) {
-            Shaders.disableFog();
-        //}
+        Shaders.disableFog();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 6, shift = At.Shift.AFTER),
             method = "a(F)V")
     private void injectRenderSky7(CallbackInfo callbackInfo){
-        //if(Shaders.isActiveShader) {
-            Shaders.disableTexture2D();
-        //}
+        Shaders.disableTexture2D();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 5, shift = At.Shift.AFTER),
             method = "a(F)V")
     private void injectRenderSky8(CallbackInfo callbackInfo){
-       // if(Shaders.isActiveShader) {
-            Shaders.enableTexture2D();
-        //}
+        Shaders.enableTexture2D();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V", ordinal = 8, shift = At.Shift.AFTER),
             method = "a(F)V")
     private void injectRenderSky9(CallbackInfo callbackInfo){
-        //if(Shaders.isActiveShader) {
-            Shaders.preCelestialRotate();
-        //}
+        Shaders.preCelestialRotate();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glRotatef(FFFF)V", ordinal = 9, shift = At.Shift.AFTER),
             method = "a(F)V")
     private void injectRenderSky10(CallbackInfo callbackInfo){
-        //if(Shaders.isActiveShader) {
-            Shaders.postCelestialRotate();
-       // }
+        Shaders.postCelestialRotate();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 7, shift = At.Shift.AFTER),
             method = "a(F)V")
     private void injectRenderSky11(CallbackInfo callbackInfo){
-        //if(Shaders.isActiveShader) {
-            Shaders.disableTexture2D();
-        //}
+        Shaders.disableTexture2D();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 7, shift = At.Shift.AFTER),
             method = "a(F)V")
     private void injectRenderSky12(CallbackInfo callbackInfo){
-        //if(Shaders.isActiveShader) {
-            Shaders.enableFog();
-        //}
+        Shaders.enableFog();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 9, shift = At.Shift.AFTER),
             method = "a(F)V")
     private void injectRenderSky13(CallbackInfo callbackInfo){
-        //if(Shaders.isActiveShader) {
-            Shaders.disableTexture2D();
-        //}
+        Shaders.disableTexture2D();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 8, shift = At.Shift.AFTER),
             method = "a(F)V")
     private void injectRenderSky14(CallbackInfo callbackInfo){
-        // if(Shaders.isActiveShader) {
-            Shaders.enableTexture2D();
-        //}
+        Shaders.enableTexture2D();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 0, shift = At.Shift.AFTER),
             method = "compileCloudsFancy")
     private void injectCompileCloudsFancy0(CallbackInfo callbackInfo){
-        // if(Shaders.isActiveShader) {
-            Shaders.disableFog();
-        //}
+        Shaders.disableFog();
+
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 2, shift = At.Shift.AFTER),
             method = "compileCloudsFancy")
     private void injectCompileCloudsFancy1(CallbackInfo callbackInfo){
-        // if(Shaders.isActiveShader) {
-            Shaders.disableTexture2D();
-        //}
+        Shaders.disableTexture2D();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 1, shift = At.Shift.AFTER),
             method = "compileCloudsFancy")
     private void injectCompileCloudsFancy2(CallbackInfo callbackInfo){
-        //if(Shaders.isActiveShader) {
-            Shaders.enableFog();
-        //}
+        Shaders.enableFog();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 3, shift = At.Shift.AFTER),
             method = "compileCloudsFancy")
     private void injectCompileCloudsFancy3(CallbackInfo callbackInfo){
-        //if(Shaders.isActiveShader) {
-            Shaders.enableTexture2D();
-        //}
+        Shaders.enableTexture2D();
     }
-//    @Overwrite
-//    public beg doSpawnParticle(EnumParticle enum_particle, int index, int metadata, double posX, double posY, double posZ, double par8, double par10, double par12) {
-//        return null;
-//    }
 
-//    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/bfl;renderCloudsFancy_MITE(F)V"), method = "b(F)V")
-//    private void redirectRenderClouds(float par1){
-//        if(Shaders.isActiveShader){
-//            this.c(par1);
-//        } else {
-//            this.renderCloudsFancy_MITE(par1);
-//        }
+//    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/beh;addBlockDestroyEffects(IIIIII)V"), method = "playAuxSFX")
+//    private void redirectPlayAuxSFX(){
+////        if(!Config.blockDestroyEffects){
+////            this.t.k.addBlockDestroyEffects(x, y, z, block_id, metadata, aux_data);
+////        }
 //    }
     @Overwrite
     public void b(float par1) {
@@ -338,12 +287,7 @@ public class RenderGlobalMixin implements IWorldAccess {
             } else if (this.t.u.g) {
                 this.c(par1);
             } else {
-                //if(Shaders.isActiveShader){
-                    this.c(par1);
-                // }
-//                else {
-//                    this.renderCloudsFancy_MITE(par1);
-//                }
+                this.c(par1);
             }
         }
 
@@ -352,33 +296,25 @@ public class RenderGlobalMixin implements IWorldAccess {
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glBlendFunc(II)V", shift = At.Shift.AFTER),
             method = "a(Lnet/minecraft/bfq;Lnet/minecraft/EntityPlayer;F)V")
     private void injectDrawBlockDamageTexture0(CallbackInfo callbackInfo){
-        //if(Shaders.isActiveShader) {
-            Shaders.beginBlockDestroyProgress();
-        //}
+        Shaders.beginBlockDestroyProgress();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glPopMatrix()V", shift = At.Shift.AFTER),
             method = "a(Lnet/minecraft/bfq;Lnet/minecraft/EntityPlayer;F)V")
     private void injectDrawBlockDamageTexture1(CallbackInfo callbackInfo){
-//        if(Shaders.isActiveShader) {
-            Shaders.endBlockDestroyProgress();
-//        }
+        Shaders.endBlockDestroyProgress();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 0, shift = At.Shift.AFTER),
             method = "drawSelectionBox")
     private void injectDrawSelectionBox0(CallbackInfo callbackInfo){
-//        if(Shaders.isActiveShader) {
-            Shaders.disableTexture2D();
-//        }
+        Shaders.disableTexture2D();
     }
 
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 1, shift = At.Shift.AFTER),
             method = "drawSelectionBox")
     private void injectDrawSelectionBox1(CallbackInfo callbackInfo){
-//        if(Shaders.isActiveShader) {
-            Shaders.enableTexture2D();
-//        }
+        Shaders.enableTexture2D();
     }
 
     @Shadow

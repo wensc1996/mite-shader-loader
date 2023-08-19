@@ -1,7 +1,7 @@
 package net.wenscHuix.mitemod.shader.client;
 
 import net.minecraft.*;
-import net.wenscHuix.mitemod.shader.MITEShaderLoader;
+import net.wenscHuix.mitemod.MITEShaderLoader;
 import net.wenscHuix.mitemod.mixin.render.EntityRendererAccessor;
 import net.wenscHuix.mitemod.shader.util.Utils;
 import org.lwjgl.BufferUtils;
@@ -155,7 +155,7 @@ public class Shaders {
     private static int newCompositeMipmapSetting = 0;
     private static int activeCompositeMipmapSetting = 0;
 //    public static Properties loadedShaders = null;
-    public static Properties shadersConfig = null;
+    public static Properties shadersConfig = new Properties();;
     public static bio defaultTexture = null;
     public static boolean normalMapEnabled = false;
     public static boolean shadowMipmapEnabled = false;
@@ -208,7 +208,7 @@ public class Shaders {
     private static HFNoiseTexture noiseTexture;
     private static boolean noiseTextureEnabled;
     private static int noiseTextureResolution;
-    private static final int bigBufferSize = 1780;
+//    private static final int bigBufferSize = 1780;
     private static final ByteBuffer bigBuffer;
     private static final FloatBuffer previousProjection;
     private static final FloatBuffer projection;
@@ -278,7 +278,7 @@ public class Shaders {
     }
 
     public static void loadConfig() {
-        System.out.println("[MITE Shaders] 加载配置");
+//        System.out.println("[MITE Shaders] 加载配置");
 
         try {
             if (!shaderpacksdir.exists()) {
@@ -288,7 +288,6 @@ public class Shaders {
             System.err.println("[Shaders] 打开光影目录失败");
         }
 
-        shadersConfig = new Properties();
         shadersConfig.setProperty("shaderPack", "");
         FileReader value;
         if (configFile.exists()) {
@@ -328,7 +327,7 @@ public class Shaders {
     }
 
     public static void storeConfig() {
-        System.out.println("[Shaders] 保存配置");
+//        System.out.println("[MITE Shaders] 保存配置");
 //        shadersConfig.setProperty("isActiveShader", Boolean.toString(isActiveShader));
         shadersConfig.setProperty("dtweak", Boolean.toString(dtweak));
         shadersConfig.setProperty("cloudShadow", Boolean.toString(configCloudShadow));
@@ -383,9 +382,9 @@ public class Shaders {
         }
 
         if (shaderPack != null) {
-            System.out.println("[Shaders] 加载光影");
+            System.out.println("[Shaders] 加载光影成功");
         } else {
-            System.out.println("[Shaders] 未加载光影");
+            System.out.println("[Shaders] 加载光影失败");
             shaderPack = new ShaderPackNone();
         }
 
