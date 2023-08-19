@@ -293,6 +293,10 @@ public class RenderGlobalMixin implements IWorldAccess {
 
     }
 
+    public bdd getClientWorld(){
+        return k;
+    }
+
     @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glBlendFunc(II)V", shift = At.Shift.AFTER),
             method = "a(Lnet/minecraft/bfq;Lnet/minecraft/EntityPlayer;F)V")
     private void injectDrawBlockDamageTexture0(CallbackInfo callbackInfo){
@@ -317,6 +321,9 @@ public class RenderGlobalMixin implements IWorldAccess {
         Shaders.enableTexture2D();
     }
 
+
+    @Shadow
+    private bdd k;
     @Shadow
     @Final
     private bim l;
@@ -325,8 +332,6 @@ public class RenderGlobalMixin implements IWorldAccess {
     private static bjo i;
     @Shadow
     private int x;
-    @Shadow
-    private bdd k;
     @Shadow
     private Minecraft t;
     @Shadow

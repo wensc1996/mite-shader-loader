@@ -14,26 +14,23 @@ public class MITEShaderLoader extends AbstractMod {
     public int modVerNum() {
         return 5;
     }
-    public static final String VERSION = "v0.0.5";
+    public static final String VERSION = "  ";
 
 
-    public MITEShaderLoader() {
-    }
-
+    @Override
     public void preInit() {
-    }
 
+    }
 
     @Override
     public InjectionConfig getInjectionConfig() {
         return InjectionConfig.Builder.of("mite-shader-loader", MinecraftMixin.class.getPackage(), MixinEnvironment.Phase.INIT).setRequired().build();
     }
 
-
+    @Override
     public void postInit() {
-//        super.postInit();
-    }
 
+    }
 
     @Override
     public String modId() {
