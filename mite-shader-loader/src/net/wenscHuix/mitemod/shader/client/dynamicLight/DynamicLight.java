@@ -20,9 +20,11 @@ public class DynamicLight {
     private int lastLightLevel = 0;
     private boolean underwater = false;
     private long timeCheckMs = 0L;
-    private Set<BlockPos> setLitChunkPos = new HashSet();
+//    private Set<BlockPos> setLitChunkPos = new HashSet();
 
     private bfl renderGlobal;
+
+    private boolean willFlash = false;
 
     public DynamicLight(Entity entity) {
         this.entity = entity;
@@ -63,14 +65,14 @@ public class DynamicLight {
                 this.underwater = block == Block.waterStill;
             }
 
-            Set<BlockPos> set = new HashSet();
+//            Set<BlockPos> set = new HashSet();
 
             if (j > 0) {
                 this.updateChunkLight(new BlockPos(d6, d0, d1));
             }
 
             this.updateLitChunks(renderGlobal);
-            this.setLitChunkPos = set;
+//            this.setLitChunkPos = set;
         }
     }
 
@@ -110,11 +112,17 @@ public class DynamicLight {
     }
 
     public void updateLitChunks(bfl renderGlobal) {
-        if(DynamicLights.getLightLevel(this.entity) == 0){
-            Runnable task = renderGlobal::markAllRenderersUninitialized;;
+        if (DynamicLights.getLightLevel(this.entity) != 0){
+            Runnable task = () -> this.willFlash = true;
             ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
-            executor.scheduleAtFixedRate(task, 0, 10, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(task, 0, 30, TimeUnit.SECONDS);
+        }
 
+        if(DynamicLights.getLightLevel(this.entity) == 0){
+            if (this.willFlash){
+                this.willFlash = false;
+                renderGlobal.markAllRenderersUninitialized();;
+            }
         }
     }
 
