@@ -6,6 +6,10 @@ import net.wenscHuix.mitemod.shader.util.BlockPos;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class DynamicLight {
     private Entity entity;
@@ -62,52 +66,56 @@ public class DynamicLight {
             Set<BlockPos> set = new HashSet();
 
             if (j > 0) {
-                bfa bfa = new bfa(world, null, (int) d6, (int) d0, (int) d1, 0);
-                this.updateChunkLight(bfa, this.setLitChunkPos, set);
+                this.updateChunkLight(new BlockPos(d6, d0, d1));
             }
-
-            renderGlobal.markDynamicLight();
 
             this.updateLitChunks(renderGlobal);
             this.setLitChunkPos = set;
         }
     }
 
-//    private BlockPos getChunkPos(bfa renderChunk, BlockPos pos, EnumFacing facing) {
-//        if (renderChunk != null){
-//            return renderChunk.isRenderingCoords(pos.x, pos.y, pos.z) ? pos : pos.offset(facing, 16);
-//        }
-//        return pos.offset(facing, 16);
-//    }
+    private BlockPos getChunkPos(BlockPos pos, EnumFacing facing) {
+        return pos.offset(facing, 16);
+    }
 
 
-    private void updateChunkLight(bfa worldRenderer, Set<BlockPos> setPrevPos, Set<BlockPos> setNewPos) {
-        if (worldRenderer != null) {
-            worldRenderer.q = true;
-            worldRenderer.isDynamicLight = true;
+    private void updateChunkLight(BlockPos pos) {
+        int d6 = pos.x;
+        int d0 = pos.y;
+        int d1 = pos.z;
 
-            BlockPos blockpos = new BlockPos(worldRenderer.getX(), worldRenderer.getY(), worldRenderer.getZ());
-
-            if (setPrevPos != null) {
-                setPrevPos.remove(blockpos);
-            }
-
-            if (setNewPos != null) {
-                setNewPos.add(blockpos);
+        if (renderGlobal != null) {
+            EnumFacing enumfacing2 = (MathHelper.floor_double(d6) & 15) >= 8 ? EnumFacing.EAST : EnumFacing.WEST;
+            EnumFacing enumfacing = (MathHelper.floor_double(d0) & 15) >= 8 ? EnumFacing.UP : EnumFacing.DOWN;
+            EnumFacing enumfacing1 = (MathHelper.floor_double(d1) & 15) >= 8 ? EnumFacing.SOUTH : EnumFacing.NORTH;
+            for (int i = 0; i <= 16; i++) {
+                BlockPos blockpos = new BlockPos(d6 + i, d0, d1 + i);
+                BlockPos blockpos1 = this.getChunkPos(blockpos, enumfacing2);
+                BlockPos blockpos2 = this.getChunkPos(blockpos, enumfacing1);
+                BlockPos blockpos3 = this.getChunkPos(blockpos1, enumfacing1);
+                BlockPos blockpos4 = this.getChunkPos(blockpos, enumfacing);
+                BlockPos blockpos5 = this.getChunkPos(blockpos4, enumfacing2);
+                BlockPos blockpos6 = this.getChunkPos(blockpos4, enumfacing1);
+                BlockPos blockpos7 = this.getChunkPos(blockpos5, enumfacing1);
+                renderGlobal.markBlockForRenderUpdate(blockpos.x, blockpos.y, blockpos.z);
+                renderGlobal.markBlockForRenderUpdate(blockpos1.x, blockpos1.y, blockpos1.z);
+                renderGlobal.markBlockForRenderUpdate(blockpos2.x, blockpos2.y, blockpos2.z);
+                renderGlobal.markBlockForRenderUpdate(blockpos3.x, blockpos3.y, blockpos3.z);
+                renderGlobal.markBlockForRenderUpdate(blockpos4.x, blockpos4.y, blockpos4.z);
+                renderGlobal.markBlockForRenderUpdate(blockpos5.x, blockpos5.y, blockpos5.z);
+                renderGlobal.markBlockForRenderUpdate(blockpos6.x, blockpos6.y, blockpos6.z);
+                renderGlobal.markBlockForRenderUpdate(blockpos7.x, blockpos7.y, blockpos7.z);
             }
         }
     }
 
     public void updateLitChunks(bfl renderGlobal) {
-//        for (BlockPos blockpos : this.setLitChunkPos) {
-            for (bfa bfa : renderGlobal.o) {
-                this.updateChunkLight(bfa, null, null);
-            }
-//        }
-//        for (BlockPos blockpos : this.setLitChunkPos) {
-//            bfa bfa = new bfa(renderGlobal.getClientWorld(), null, (int) blockpos.x, (int) blockpos.y, (int) blockpos.x, 0);
-//            this.updateChunkLight(bfa, null, null);
-//        }
+        if(DynamicLights.getLightLevel(this.entity) == 0){
+            Runnable task = renderGlobal::markAllRenderersUninitialized;;
+            ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
+            executor.scheduleAtFixedRate(task, 0, 10, TimeUnit.SECONDS);
+
+        }
     }
 
     public Entity getEntity() {

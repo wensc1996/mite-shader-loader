@@ -250,8 +250,18 @@ public class DynamicLights {
                 }
             }
 
-            if (item == Item.appleGold) {
-                return 10;
+            if (item == Item.bucketAdamantiumLava || item == Item.bucketGoldLava || item == Item.bucketCopperLava || item == Item.bucketIronLava
+                    || item == Item.bucketMithrilLava || item == Item.bucketAncientMetalLava || item == Item.bucketSilverLava) {
+                return Block.lavaStill.getLightValue();
+            } else if (item instanceof ItemCoin) {
+                if (item == Item.coinAncientMetal){
+                    return 10;
+                } else if (item == Item.coinMithril){
+                    return 12;
+                } else if (item == Item.coinAdamantium){
+                    return 14;
+                }
+                return 5;
             } else if (item != Item.blazeRod && item != Item.blazePowder) {
                 if (item == Item.glowstone) {
                     return 8;
@@ -324,11 +334,6 @@ public class DynamicLights {
                         EntityLiving entityLiving = (EntityLiving) entity;
                         ItemStack itemstack2 = entityLiving.getHeldItemStack();
                         int i = getLightLevel(itemstack2);
-
-//                        if (entity instanceof EntityPlayer){
-//                            System.out.println(itemstack2.getDisplayName() + i);
-//                        }
-
                         ItemStack itemstack1 = entityLiving.getEquipmentInSlot(4);
                         int j = getLightLevel(itemstack1);
                         return Math.max(i, j);

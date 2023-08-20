@@ -25,15 +25,14 @@ import java.util.List;
 public class RenderGlobalMixin implements IWorldAccess {
 
 
-    public void markDynamicLight() {
-        for (bfa world_renderer : this.o) {
-            if (!this.m.contains(world_renderer) && world_renderer.isDynamicLight) {
-                world_renderer.isDynamicLight = false;
-                this.m.add(world_renderer);
-            }
-        }
-
-    }
+//    public void markDynamicLight() {
+//        for (bfa world_renderer : this.o) {
+//            if (!this.m.contains(world_renderer) && world_renderer.isDynamicLight) {
+//                world_renderer.isDynamicLight = false;
+//                this.m.add(world_renderer);
+//            }
+//        }
+//    }
 
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/MethodProfiler;startSection(Ljava/lang/String;)V", ordinal = 1,
