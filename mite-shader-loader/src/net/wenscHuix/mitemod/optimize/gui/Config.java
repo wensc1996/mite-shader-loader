@@ -14,6 +14,7 @@ public class Config {
 
     public static boolean blockDestroyEffects;
     public static boolean dynamicLights;
+    public static boolean drawSelectionBox;
 
     public static void loadConfig() {
         try {
@@ -34,12 +35,14 @@ public class Config {
 
         blockDestroyEffects = Boolean.parseBoolean(optimizeConfig.getProperty("blockDestroyEffects", "true"));
         dynamicLights = Boolean.parseBoolean(optimizeConfig.getProperty("dynamicLights", "false"));
+        drawSelectionBox = Boolean.parseBoolean(optimizeConfig.getProperty("drawSelectionBox", "true"));
     }
 
 
     public static void storeConfig() {
         optimizeConfig.setProperty("blockDestroyEffects", Boolean.toString(blockDestroyEffects));
         optimizeConfig.setProperty("dynamicLights", Boolean.toString(dynamicLights));
+        optimizeConfig.setProperty("drawSelectionBox", Boolean.toString(drawSelectionBox));
 
         try{
             FileWriter writer = new FileWriter(configFile);

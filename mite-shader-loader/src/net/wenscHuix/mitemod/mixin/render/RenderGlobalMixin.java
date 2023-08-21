@@ -34,6 +34,39 @@ public class RenderGlobalMixin implements IWorldAccess {
 //        }
 //    }
 
+//    @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 0, shift = At.Shift.AFTER),
+//            method = "drawSelectionBox")
+//    private void injectDrawSelectionBox0(CallbackInfo callbackInfo){
+//        Shaders.disableTexture2D();
+//    }
+//
+//    @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 1, shift = At.Shift.AFTER),
+//            method = "drawSelectionBox")
+//    private void injectDrawSelectionBox1(CallbackInfo callbackInfo){
+//        Shaders.enableTexture2D();
+//    }
+    @Overwrite
+    public void drawSelectionBox(EntityPlayer par1EntityPlayer, RaycastCollision rc, int par3, float par4) {
+        if (par3 == 0 && rc.isBlock() && Config.drawSelectionBox) {
+            GL11.glEnable(3042);
+            GL11.glBlendFunc(770, 771);
+            GL11.glColor4f(0.0F, 0.0F, 0.0F, 0.4F);
+            GL11.glLineWidth(2.0F);
+            GL11.glDisable(3553);
+            Shaders.disableTexture2D();
+            GL11.glDepthMask(false);
+            float var5 = 0.002F;
+            Block block = rc.getBlockHit();
+            double var7 = par1EntityPlayer.lastTickPosX + (par1EntityPlayer.posX - par1EntityPlayer.lastTickPosX) * (double)par4;
+            double var9 = par1EntityPlayer.lastTickPosY + (par1EntityPlayer.posY - par1EntityPlayer.lastTickPosY) * (double)par4;
+            double var11 = par1EntityPlayer.lastTickPosZ + (par1EntityPlayer.posZ - par1EntityPlayer.lastTickPosZ) * (double)par4;
+            this.a(block.c_(this.k, rc.block_hit_x, rc.block_hit_y, rc.block_hit_z).expand((double)var5, (double)var5, (double)var5).getOffsetBoundingBox(-var7, -var9, -var11));
+            GL11.glDepthMask(true);
+            GL11.glEnable(3553);
+            Shaders.enableTexture2D();
+            GL11.glDisable(3042);
+        }
+    }
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/MethodProfiler;startSection(Ljava/lang/String;)V", ordinal = 1,
             shift = At.Shift.AFTER), method = "a(Lnet/minecraft/EntityLiving;Z)Z")
@@ -381,18 +414,6 @@ public class RenderGlobalMixin implements IWorldAccess {
         Shaders.endBlockDestroyProgress();
     }
 
-    @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDisable(I)V", ordinal = 0, shift = At.Shift.AFTER),
-            method = "drawSelectionBox")
-    private void injectDrawSelectionBox0(CallbackInfo callbackInfo){
-        Shaders.disableTexture2D();
-    }
-
-    @Inject(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glEnable(I)V", ordinal = 1, shift = At.Shift.AFTER),
-            method = "drawSelectionBox")
-    private void injectDrawSelectionBox1(CallbackInfo callbackInfo){
-        Shaders.enableTexture2D();
-    }
-
 
     public List getWorldRenderersToUpdate() {
         return m;
@@ -487,6 +508,10 @@ public class RenderGlobalMixin implements IWorldAccess {
 
     @Shadow
     public void playAuxSFX(EntityPlayer entityPlayer, int i, int i1, int i2, int i3, int i4) {
+
+    }
+    @Shadow
+    private void a(AxisAlignedBB par1AxisAlignedBB) {
 
     }
 

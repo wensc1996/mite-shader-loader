@@ -12,9 +12,9 @@ public class MITEShaderLoader extends AbstractMod {
 
     @Override
     public int modVerNum() {
-        return 8;
+        return 9;
     }
-    public static final String VERSION = "v0.0.8";
+    public static final String VERSION = "v0.0.9";
 
 
     @Override
