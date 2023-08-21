@@ -51,9 +51,7 @@ public class RenderBlocksMixin {
 
     @Overwrite
     public boolean b(Block par1Block, int par2, int par3, int par4) {
-//        if(Shaders.isActiveShader) {
-            Shaders.pushEntity(par1Block);
-//        }
+        Shaders.pushEntity(par1Block);
 
         int renderType = par1Block.getRenderType();
         if (renderType == -1) {
@@ -73,124 +71,84 @@ public class RenderBlocksMixin {
             boolean value;
             if (renderType == 0){
                 value = this.p(par1Block, par2, par3, par4);
-//                if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-//                }
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 1) {
                 value = this.k(par1Block, par2, par3, par4);
-//                if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-//                }
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 2) {
                 value = this.c(par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-               // }
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 3) {
                 value = this.a((BlockFire)par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 4) {
                 value = this.o(par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-              //  }
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 5) {
                 value = this.h(par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-               // }
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 6) {
                 value = this.m(par1Block, par2, par3, par4);
-               // if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-              //  }
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 7) {
                 value = this.t(par1Block, par2, par3, par4);
-               // if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 8) {
                 value = this.i(par1Block, par2, par3, par4);
-               // if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-               // }
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 9) {
                 value = this.a((BlockMinecartTrackAbstract)par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 10) {
                 value = this.a((BlockStairs)par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 11) {
                 value = this.a((BlockFence)par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
                 return value;
             }  else if (renderType == 12) {
                 value = this.e(par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 13) {
                 value = this.s(par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 14) {
                 value = this.u(par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 15) {
                 value = this.a((BlockRepeater)par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 16) {
                 value = this.b(par1Block, par2, par3, par4, false);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
+                Shaders.fixRenderPistonBase();
                 return value;
             } else if (renderType == 17) {
                 value = this.c(par1Block, par2, par3, par4, true);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
-
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 18) {
                 value = this.a((BlockThinFence)par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 19) {
                 value = this.l(par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-               // }
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 20) {
                 value = this.j(par1Block, par2, par3, par4);
@@ -255,62 +213,45 @@ public class RenderBlocksMixin {
                 return value;
             } else if (renderType == 31) {
                 value = this.q(par1Block, par2, par3, par4);
-               // if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-               // }
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 32) {
                 value = this.a((BlockCobbleWall)par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-               // }
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 33) {
                 value = this.a((BlockFlowerPot)par1Block, par2, par3, par4);
-               // if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-               // }
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 34) {
                 value = this.a((BlockBeacon)par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-               // }
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 35) {
                 value = this.a((BlockAnvil)par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 36) {
                 value =this.a((BlockDiodeAbstract)par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 37) {
                 value = this.a((BlockRedstoneComparator)par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-               // }
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 38) {
                 value = this.a((BlockHopper)par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-               // }
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 39) {
                 value = this.r(par1Block, par2, par3, par4);
-//                if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-//                }
+
+                Shaders.popEntity();
+
                 return value;
             }
-            //if(Shaders.isActiveShader) {
-                Shaders.popEntity();
-            //}
+
+//            Shaders.popEntity();
 
             return false;
         }

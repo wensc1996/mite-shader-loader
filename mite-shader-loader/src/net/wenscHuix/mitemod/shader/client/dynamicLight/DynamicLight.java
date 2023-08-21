@@ -26,6 +26,10 @@ public class DynamicLight {
 
     private boolean willFlash = false;
 
+    private int lightValue;
+
+    private World world;
+
     public DynamicLight(Entity entity) {
         this.entity = entity;
         this.offsetY = entity.getEyeHeight();
@@ -47,6 +51,7 @@ public class DynamicLight {
         double d0 = this.entity.posY - 0.5D + this.offsetY;
         double d1 = this.entity.posZ - 0.5D;
         int j = DynamicLights.getLightLevel(this.entity);
+        this.lightValue = j;
         double d2 = d6 - this.lastPosX;
         double d3 = d0 - this.lastPosY;
         double d4 = d1 - this.lastPosZ;
@@ -59,6 +64,7 @@ public class DynamicLight {
             this.lastLightLevel = j;
             this.underwater = false;
             World world = renderGlobal.getClientWorld();
+            this.world =world;
 
             if (world != null) {
                 Block block = world.getBlock(MathHelper.floor_double(d6), MathHelper.floor_double(d0), MathHelper.floor_double(d1));
@@ -86,7 +92,7 @@ public class DynamicLight {
         int d0 = pos.y;
         int d1 = pos.z;
 
-        if (renderGlobal != null) {
+        if (this.renderGlobal != null) {
             EnumFacing enumfacing2 = (MathHelper.floor_double(d6) & 15) >= 8 ? EnumFacing.EAST : EnumFacing.WEST;
             EnumFacing enumfacing = (MathHelper.floor_double(d0) & 15) >= 8 ? EnumFacing.UP : EnumFacing.DOWN;
             EnumFacing enumfacing1 = (MathHelper.floor_double(d1) & 15) >= 8 ? EnumFacing.SOUTH : EnumFacing.NORTH;
@@ -99,17 +105,39 @@ public class DynamicLight {
                 BlockPos blockpos5 = this.getChunkPos(blockpos4, enumfacing2);
                 BlockPos blockpos6 = this.getChunkPos(blockpos4, enumfacing1);
                 BlockPos blockpos7 = this.getChunkPos(blockpos5, enumfacing1);
-                renderGlobal.markBlockForRenderUpdate(blockpos.x, blockpos.y, blockpos.z);
-                renderGlobal.markBlockForRenderUpdate(blockpos1.x, blockpos1.y, blockpos1.z);
-                renderGlobal.markBlockForRenderUpdate(blockpos2.x, blockpos2.y, blockpos2.z);
-                renderGlobal.markBlockForRenderUpdate(blockpos3.x, blockpos3.y, blockpos3.z);
-                renderGlobal.markBlockForRenderUpdate(blockpos4.x, blockpos4.y, blockpos4.z);
-                renderGlobal.markBlockForRenderUpdate(blockpos5.x, blockpos5.y, blockpos5.z);
-                renderGlobal.markBlockForRenderUpdate(blockpos6.x, blockpos6.y, blockpos6.z);
-                renderGlobal.markBlockForRenderUpdate(blockpos7.x, blockpos7.y, blockpos7.z);
+//                if(this.world != null) {
+//                    if (this.canUpdate(blockpos)) {
+                        this.renderGlobal.markBlockForRenderUpdate(blockpos.x, blockpos.y, blockpos.z);
+//                    }
+//                    if (this.canUpdate(blockpos1)) {
+                        this.renderGlobal.markBlockForRenderUpdate(blockpos1.x, blockpos1.y, blockpos1.z);
+//                    }
+//                    if (this.canUpdate(blockpos2)) {
+                        this.renderGlobal.markBlockForRenderUpdate(blockpos2.x, blockpos2.y, blockpos2.z);
+//                    }
+//                    if (this.canUpdate(blockpos3)) {
+                        this.renderGlobal.markBlockForRenderUpdate(blockpos3.x, blockpos3.y, blockpos3.z);
+//                    }
+//                    if (this.canUpdate(blockpos4)) {
+                        this. renderGlobal.markBlockForRenderUpdate(blockpos4.x, blockpos4.y, blockpos4.z);
+//                    }
+//                    if (this.canUpdate(blockpos5)) {
+                        this.renderGlobal.markBlockForRenderUpdate(blockpos5.x, blockpos5.y, blockpos5.z);
+//                    }
+//                    if (this.canUpdate(blockpos6)) {
+                        this.renderGlobal.markBlockForRenderUpdate(blockpos6.x, blockpos6.y, blockpos6.z);
+//                    }
+//                    if (this.canUpdate(blockpos7)) {
+                        this. renderGlobal.markBlockForRenderUpdate(blockpos7.x, blockpos7.y, blockpos7.z);
+//                    }
+//                }
             }
         }
     }
+
+//    private boolean canUpdate(BlockPos pos) {
+//        return this.world.getBlock(pos) != null && this.world.getBlock(pos).getLightValue() <= lightValue;
+//    }
 
     public void updateLitChunks(bfl renderGlobal) {
         if (DynamicLights.getLightLevel(this.entity) != 0){

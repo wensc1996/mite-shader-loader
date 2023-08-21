@@ -206,7 +206,7 @@ public class ShadersTess {
         if (rbi >= TessellatorExtra.bufferSize - 64) {
             if (TessellatorExtra.bufferSize >= 16777216) {
                 if (tess.s % 4 == 0) {
-//                    tess.a();
+                    tess.a();
                     tess.z = true;
                 }
             } else if (TessellatorExtra.bufferSize > 0) {
@@ -264,7 +264,9 @@ public class ShadersTess {
         rawBuffer[rbi + 3] = Float.floatToRawIntBits((float)tess.j);
         rawBuffer[rbi + 4] = Float.floatToRawIntBits((float)tess.k);
         rawBuffer[rbi + 5] = tess.m;
+
         rawBuffer[rbi + 6] = Shaders.getEntityData();
+
         rawBuffer[rbi + 7] = tess.l;
         rawBuffer[rbi + 8] = Float.floatToRawIntBits(tess.normalX);
         rawBuffer[rbi + 9] = Float.floatToRawIntBits(tess.normalY);

@@ -13,6 +13,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.sql.SQLOutput;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -242,9 +243,6 @@ public class Shaders {
     public static int[] entityData;
     public static int entityDataIndex;
 
-    private Shaders() {
-
-    }
 
     private static ByteBuffer nextByteBuffer(int size) {
         ByteBuffer buffer = bigBuffer;
@@ -420,8 +418,9 @@ public class Shaders {
         return Integer.toString(Integer.parseInt(vs.substring(1, 3))) + "." + Integer.toString(Integer.parseInt(vs.substring(3, 5))) + "." + Integer.toString(Integer.parseInt(vs.substring(5)));
     }
 
-    static void checkOptifine() {
-    }
+//    static void checkOptifine() {
+//
+//    }
 
     public static int checkFramebufferStatus(String location) {
         int status = EXTFramebufferObject.glCheckFramebufferStatusEXT(36160);
@@ -1728,7 +1727,10 @@ public class Shaders {
                 EXTFramebufferObject.glBindFramebufferEXT(36160, sfb);
                 GL20.glDrawBuffers(programsDrawBuffers[20]);
                 useProgram(20);
-                Utils.call(mc.p, "a", EntityRenderer.class, new Class[]{float.class, long.class}, new Object[]{f, l});
+
+                mc.p.a(f,l);
+
+//                Utils.call(mc.p, "a", EntityRenderer.class, new Class[]{float.class, long.class}, new Object[]{f, l});
                 GL11.glFlush();
                 isShadowPass = false;
                 mc.u.h = preShadowPassAdvancedOpengl;
@@ -2326,9 +2328,15 @@ public class Shaders {
     }
 
     public static void beginMobEye() {
-        GL11.glEnable(3008);
-        GL11.glBlendFunc(770, 1);
+        if (isRenderingWorld) {
+            useProgram(9);
+            if (programsID[9] == programsID[2]) {
+                GL11.glEnable(3008);
+                GL11.glBlendFunc(770, 1);
+            }
+        }
     }
+
 
     public static void setEntityHurtFlash(int hurt, int flash) {
         if (useEntityHurtFlash && isRenderingWorld && !isShadowPass) {
@@ -2596,13 +2604,17 @@ public class Shaders {
         }
     }
 
+
+
+
     public static int getEntityData() {
         return entityData[entityDataIndex];
     }
 
-    public static void pushEntity(int par1, int par2) {
+    public static void pushEntity(int data0, int data1) {
         ++entityDataIndex;
-        entityData[entityDataIndex] = par1 & '\uffff' | par2 << 16;
+        entityData[entityDataIndex * 2] = data0 & 65535 | data1 << 16;
+        entityData[entityDataIndex * 2 + 1] = 0;
     }
 
     public static void pushEntity(int par1) {
@@ -2612,13 +2624,22 @@ public class Shaders {
 
     public static void pushEntity(Block block) {
         ++entityDataIndex;
-        entityData[entityDataIndex] = block.blockID & '\uffff';
+        entityData[entityDataIndex * 2] = block.blockID & 65535 | block.getRenderType() << 16;
+        entityData[entityDataIndex * 2 + 1] = 0;
     }
 
     public static void popEntity() {
         --entityDataIndex;
         entityData[entityDataIndex] = 0;
     }
+
+    public static void fixRenderPistonBase(){
+//        System.out.println(entityDataIndex);
+        if (entityDataIndex >= 8){
+            entityDataIndex -= 8;
+        }
+    }
+
 
     static {
         shadersdir = new File(Minecraft.w().x, "shaders");
@@ -2669,7 +2690,7 @@ public class Shaders {
         gbufferMipmapEnabledPattern = Pattern.compile("[ \t]*const[ \t]*bool[ \t]*(\\w+)MipmapEnabled[ \t]*=[ \t]*true[ \t]*;.*");
         invertMat4x_m = new float[16];
         invertMat4x_inv = new float[16];
-        entityData = new int[20];
+        entityData = new int[80];
         entityDataIndex = 0;
     }
 }
