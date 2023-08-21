@@ -2612,8 +2612,7 @@ public class Shaders {
 
     public static void pushEntity(int data0, int data1) {
         ++entityDataIndex;
-        entityData[entityDataIndex * 2] = data0 & 65535 | data1 << 16;
-        entityData[entityDataIndex * 2 + 1] = 0;
+        entityData[entityDataIndex] = data0 & '\uffff' | data1 << 16;
     }
 
     public static void pushEntity(int par1) {
@@ -2623,8 +2622,7 @@ public class Shaders {
 
     public static void pushEntity(Block block) {
         ++entityDataIndex;
-        entityData[entityDataIndex * 2] = block.blockID & 65535 | block.getRenderType() << 16;
-        entityData[entityDataIndex * 2 + 1] = 0;
+        entityData[entityDataIndex] = block.blockID & '\uffff';
     }
 
     public static void popEntity() {

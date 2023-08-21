@@ -118,7 +118,7 @@ public class RenderBlocksMixin {
                 value = this.a((BlockFence)par1Block, par2, par3, par4);
                 Shaders.popEntity();
                 return value;
-            }  else if (renderType == 12) {
+            } else if (renderType == 12) {
                 value = this.e(par1Block, par2, par3, par4);
                 Shaders.popEntity();
                 return value;
