@@ -3,6 +3,7 @@ package net.wenscHuix.mitemod.mixin.gui;
 import net.minecraft.*;
 import net.minecraft.client.main.Main;
 import net.wenscHuix.mitemod.optimize.gui.GuiPlusVideo;
+import net.wenscHuix.mitemod.shader.client.GuiShaders;
 import net.xiaoyu233.fml.util.ReflectHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -41,7 +42,8 @@ public class GuiOptionsMixin extends awe {
             ++var1;
         }
 
-        aut button_video_settings = new aut(101, this.g / 2 - 152, this.h / 6 + 96 - 6, 150, 20, bkb.a("options.video"));
+        aut button_video_settings = new aut(101, this.g / 2 - 152, this.h / 6 + 96 - 6, 73, 20, bkb.a("options.video"));
+        this.i.add(new aut(191, this.g / 2 - 152 + 77, this.h / 6 + 96 - 6, 73, 20, bkb.a("光影...")));
         button_video_settings.h = !Main.is_MITE_DS;
         this.i.add(button_video_settings);
 
@@ -51,8 +53,9 @@ public class GuiOptionsMixin extends awe {
         this.i.add(new aut(105, this.g / 2 - 152, this.h / 6 + 144 - 6, 150, 20, bkb.a("options.resourcepack")));
 //        this.i.add(new aut(104, this.g / 2 + 2, this.h / 6 + 144 - 6, 150, 20, bkb.a("options.snooper.view")));
         this.i.add(new aut(200, this.g / 2 - 100, this.h / 6 + 168, bkb.a("gui.done")));
-        this.i.add(new aut(190, this.g / 2 + 2, this.h / 6 + 96 - 6, 150, 20, bkb.a("PlusVideo...")));
+        this.i.add(new aut(190, this.g / 2 + 2, this.h / 6 + 96 - 6, 150, 20, bkb.a("高级视频设置...")));
         this.i.add(new aut(102, this.g / 2 - 152, this.h / 6 + 120 - 6, 150, 20, bkb.a("options.language")));
+
     }
 
     @Inject(at = @At(value = "HEAD"), method = "a(Lnet/minecraft/aut;)V")
@@ -61,6 +64,10 @@ public class GuiOptionsMixin extends awe {
             if (par1GuiButton.g == 190 && !Main.is_MITE_DS) {
                 this.f.u.b();
                 this.f.a(new GuiPlusVideo(ReflectHelper.dyCast(this), this.d));
+            }
+            if (par1GuiButton.g == 191 && !Main.is_MITE_DS) {
+                this.f.u.b();
+                this.f.a(new GuiShaders(ReflectHelper.dyCast(this)));
             }
         }
     }

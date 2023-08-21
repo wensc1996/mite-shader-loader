@@ -19,7 +19,6 @@ public class GuiPlusVideo extends awe {
     public void A_() {
         this.screenTitle = bkb.a("Plus Video Settings");
         this.i.add(new aut(200, this.g / 2 - 100, this.h / 6 + 168, bkb.a("gui.done")));
-        this.i.add(new aut(100, this.g / 2 - 155, this.h / 7, 300, 20, bkb.a("光影...")));
         this.i.add(new aut(101, this.g / 2 - 155, this.h / 7 + 25, 300, 20, bkb.a("粒子效果")));
         this.i.add(new aut(102, this.g / 2 - 155, this.h / 7 + 50, 150, 20, "动态光源: " + Config.dynamicLights));
         this.i.add(new aut(103, this.g / 2 - 155, this.h / 7 + 75, 150, 20, "绘制选择框: " + Config.drawSelectionBox));
@@ -29,10 +28,7 @@ public class GuiPlusVideo extends awe {
     @Override
     public void a(aut par1GuiButton) {
         if (par1GuiButton.h) {
-            if (par1GuiButton.g == 100) {
-                this.f.u.b();
-                this.f.a(new GuiShaders(this));
-            } else if (par1GuiButton.g == 101) {
+             if (par1GuiButton.g == 101) {
                 this.f.u.b();
                 this.f.a(new GuiParticle(this, this.guiGameSettings));
             } else if (par1GuiButton.g == 102) {

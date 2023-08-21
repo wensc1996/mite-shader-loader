@@ -162,7 +162,7 @@ public class Shaders {
     public static boolean shadowMipmapEnabled = false;
     public static boolean shadowHardwareFilteringEnabled = false;
     public static boolean dtweak = true;
-    public static boolean configCloudShadow = false;
+    public static boolean configCloudShadow = true;
     public static float configHandDepthMul = 0.125F;
     public static float configRenderResMul = 1.0F;
     public static float configShadowResMul = 1.0F;
@@ -2518,7 +2518,6 @@ public class Shaders {
         } else if (cap == 2912) {
             enableFog();
         }
-
     }
 
     public static void glDisableWrapper(int cap) {
@@ -2633,14 +2632,6 @@ public class Shaders {
         entityData[entityDataIndex] = 0;
     }
 
-    public static void fixRenderPistonBase(){
-//        System.out.println(entityDataIndex);
-        if (entityDataIndex >= 8){
-            entityDataIndex -= 8;
-        }
-    }
-
-
     static {
         shadersdir = new File(Minecraft.w().x, "shaders");
         shaderpacksdir = new File(Minecraft.w().x, shaderpacksdirname);
@@ -2690,7 +2681,7 @@ public class Shaders {
         gbufferMipmapEnabledPattern = Pattern.compile("[ \t]*const[ \t]*bool[ \t]*(\\w+)MipmapEnabled[ \t]*=[ \t]*true[ \t]*;.*");
         invertMat4x_m = new float[16];
         invertMat4x_inv = new float[16];
-        entityData = new int[80];
+        entityData = new int[20];
         entityDataIndex = 0;
     }
 }

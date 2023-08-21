@@ -55,6 +55,7 @@ public class RenderBlocksMixin {
 
         int renderType = par1Block.getRenderType();
         if (renderType == -1) {
+            Shaders.popEntity();
             return false;
         } else {
             if (this.d != null && renderType == 22) {
@@ -136,7 +137,6 @@ public class RenderBlocksMixin {
             } else if (renderType == 16) {
                 value = this.b(par1Block, par2, par3, par4, false);
                 Shaders.popEntity();
-                Shaders.fixRenderPistonBase();
                 return value;
             } else if (renderType == 17) {
                 value = this.c(par1Block, par2, par3, par4, true);
@@ -152,64 +152,43 @@ public class RenderBlocksMixin {
                 return value;
             } else if (renderType == 20) {
                 value = this.j(par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-               // }
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 21) {
                 value = this.a((BlockFenceGate)par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 23) {
                 value = this.n(par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 24) {
                 value = this.a((BlockCauldron)par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-               // }
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 25) {
                 value = this.a((BlockBrewingStand)par1Block, par2, par3, par4);
-               // if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 26) {
                 value = this.a((BlockEnderPortalFrame)par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 27) {
-
                 value = this.a((BlockDragonEgg)par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 28) {
                 value = this.a((BlockCocoa)par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 29) {
                 value = this.f(par1Block, par2, par3, par4);
-                //if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-               // }
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 30) {
                 value =this.g(par1Block, par2, par3, par4);
-               // if(Shaders.isActiveShader) {
-                    Shaders.popEntity();
-                //}
+                Shaders.popEntity();
                 return value;
             } else if (renderType == 31) {
                 value = this.q(par1Block, par2, par3, par4);
@@ -245,14 +224,10 @@ public class RenderBlocksMixin {
                 return value;
             } else if (renderType == 39) {
                 value = this.r(par1Block, par2, par3, par4);
-
                 Shaders.popEntity();
-
                 return value;
             }
-
-//            Shaders.popEntity();
-
+            Shaders.popEntity();
             return false;
         }
     }
